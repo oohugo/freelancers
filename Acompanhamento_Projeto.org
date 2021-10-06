@@ -1,7 +1,7 @@
 
-*Projeto final do TreinaDev - Etapa 1*
+* Acompanhamento
 
-** TODOS[%]:
+* TODOS[%]:
 *** TODO Usuário cria uma conta
 *** TODO Usuário cadastra um projeto
 *** TODO Profissional cria uma conta
