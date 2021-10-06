@@ -1,0 +1,19 @@
+
+*Projeto final do TreinaDev - Etapa 1*
+
+** TODOS[%]:
+*** TODO Usuário cria uma conta
+*** TODO Usuário cadastra um projeto
+*** TODO Profissional cria uma conta
+*** TODO Profissional completa seu perfil com informações como área de atuação e experiências
+*** TODO Profissional busca projetos
+*** TODO Profissional faz uma proposta para atuar em um projeto
+*** TODO Usuário vê propostas para seu projeto
+*** TODO Usuário aprova ou reprova proposta
+*** TODO Usuário e profissional aprovado trocam mensagens
+*** TODO Usuário dá feedback sobre o trabalho do profissional
+*** TODO Profissional dá feedback sobre o projeto em que participou
+*** TODO Usuário pode marcar profissionais favoritos
+*** TODO Profissional pode marcar usuários favoritos
+*** TODO Usuário encerra um projeto
+
