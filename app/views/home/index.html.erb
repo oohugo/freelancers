@@ -1,7 +1,16 @@
 <h1>Freelancers</h1>
-<nav>
-	<ul>
-		<li>Entrar como empregador</li>
-		<li>Entrar como freelancer</li>
-	</ul>
-</nav>
+<% if employer_signed_in? %>
+	<p>
+		<%= current_employer.email %>
+	</p>
+	<p>
+		<%= link_to 'Logout', destroy_employer_session_path, method: :delete %>
+	</p>
+<% else %>
+	<nav>
+		<ul>
+			<li><%= link_to 'Entrar como empregador', new_employer_session_path %></li>
+			<li>Entrar como freelancer</li>
+		</ul>
+	</nav>
+<% end %>
