@@ -1,0 +1,8 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      employer: Empregador
+    attributes:
+      employer:
+        password: Senha

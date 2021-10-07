@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'rails_helper'
 
 describe 'Employer registers himself' do
@@ -6,9 +7,9 @@ describe 'Employer registers himself' do
     click_on 'Entrar como empregador'
     click_on 'Sign up'
     fill_in 'Email', with: 'joao@email.com'
-    fill_in 'Password', with: '123456'
-    fill_in 'Password confirmation', with: '123456'
-    click_on 'Sign up'
+    fill_in 'Senha', with: '123456'
+    fill_in 'Confirmação da senha', with: '123456'
+    click_on 'Criar conta'
 
     expect(page).to have_content('joao@email.com')
     expect(page).not_to have_content('Entrar como empregador')
