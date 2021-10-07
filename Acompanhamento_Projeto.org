@@ -4,16 +4,30 @@
 * TODOS[%]:
 *** TODO Usuário cria uma conta
 *** TODO Usuário cadastra um projeto
+*** TODO Criar Projeto:
+O projeto deve conter um título, uma descrição detalhada, uma descrição das habilidades desejadas, o valor máximo por hora que existe disponível para contratação, uma data limite para receber propostas e se o projeto demanda atuação presencial ou remota. Outros campos podem ser adicionados ao projeto caso você julgue necessário.
 *** TODO Profissional cria uma conta
 *** TODO Profissional completa seu perfil com informações como área de atuação e experiências
+Um profissional autenticado na plataforma deve preencher seu perfil completo para
+então poder buscar projetos e se candidatar. O perfil completo deve conter: nome
+completo, nome social, data de nascimento, formação, descrição, experiência e foto.
+Os perfis de todos profissionais devem ser vinculados a uma área de atuação (dev, designer, UX,
+administrador de banco de dados, etc).
+Enquanto o usuário não termina de preencher seu perfil, toda vez que ele fizer login
+deve ser redirecionado para a tela com o formulário do perfil. A qualquer momento após
+isso, ele pode atualizar seu perfil através de um link no menu.
 *** TODO Profissional busca projetos
+*** TODO Criar proposta
+Para isto deve preencher um campo de texto contando porque está aplicando para o projeto. Além disso, o profissional deve informar o valor/hora, quantas horas disponíveis por semana pode atuar no projeto e qual sua expectativa de conclusão do projeto.
 *** TODO Profissional faz uma proposta para atuar em um projeto
 *** TODO Usuário vê propostas para seu projeto
 *** TODO Usuário aprova ou reprova proposta
-*** TODO Usuário e profissional aprovado trocam mensagens
 *** TODO Usuário dá feedback sobre o trabalho do profissional
 *** TODO Profissional dá feedback sobre o projeto em que participou
-*** TODO Usuário pode marcar profissionais favoritos
-*** TODO Profissional pode marcar usuários favoritos
 *** TODO Usuário encerra um projeto
 
+
+* Bonus [%]:
+*** TODO Usuário pode marcar profissionais favoritos
+*** TODO Profissional pode marcar usuários favoritos
+*** TODO Adicionar Bootstrap e visual
