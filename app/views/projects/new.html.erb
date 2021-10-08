@@ -1,0 +1,26 @@
+<h1>Criar Projeto</h1>
+
+<%= form_with(model: @project) do |form| %>
+	<p>
+		<%= form.label :title, 'Título' %>
+		<%= form.text_field :title %></p>
+	<p>
+		<%= form.label :description, 'Descrição' %>
+		<%= form.text_field :description %></p>
+	<p>
+		<%= form.label :max_per_hour, 'Valor máximo por hora' %>
+		<%= form.number_field :max_per_hour %></p>
+	<p>
+		<%= form.label :deadline, 'Data limite' %>
+		<%= form.text_field :deadline %></p>
+	<p>
+		<%= form.label 'Atuação' %>
+		<%= form.radio_button :place, 'remote' %>
+		<%= form.label :place_remote, 'Remoto' %>
+		<%= form.radio_button :place, 'presential' %>
+		<%= form.label :place_presential, 'Presencial' %>
+	</p>
+	<p>
+		<%= form.submit 'Criar' %>
+	</p>
+<% end %>
