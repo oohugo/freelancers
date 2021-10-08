@@ -1,5 +1,9 @@
 <h1>Criar Projeto</h1>
-
+<% unless @project.errors.empty? %>
+	<% @project.errors.full_messages.each do |error| %>
+		<p><%= error %></p>
+		<% end %>
+<% end %>
 <%= form_with(model: @project) do |form| %>
 	<p>
 		<%= form.label :title, 'Título' %>

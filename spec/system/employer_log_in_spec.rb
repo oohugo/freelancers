@@ -15,4 +15,16 @@ describe 'Employer log in' do
     expect(page).to have_content('Criar Projeto')
     expect(page).not_to have_content('Entrar como empregador')
   end
+
+  it 'employer logout' do
+    joao = Employer.create!(email: 'joao@email.com', password: '123456')
+
+    login_as joao, scope: :employer
+    visit root_path
+    click_on 'Logout'
+
+    expect(page).to have_content('Entrar como empregador')
+    expect(page).to have_current_path(root_path)
+    expect(page).not_to have_content(joao.email)
+  end
 end
