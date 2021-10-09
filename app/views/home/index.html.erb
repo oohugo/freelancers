@@ -1,19 +1,22 @@
-<h1>Freelancers</h1>
-<nav>
-	<ul>
-		<% if employer_signed_in? %>
-			<li><%= current_employer.email %></li>
-			<li><%= link_to 'Logout', destroy_employer_session_path, method: :delete %></li>
-			<li><%= link_to 'Criar Projeto', new_project_path %></li>
-			<% unless @projects.empty? %>
-				<% @projects.each do |project| %>
-					<li><%= project.title %></li>
-				<% end %>
-			<% end %>
-		<% else %>
-			<li><%= link_to 'Entrar como empregador', new_employer_session_path %></li>
-			<li>Entrar como freelancer</li>
+<% if employer_signed_in? %>
+	<h3><%= link_to 'Criar Projeto', new_project_path %></h3>
+	<% unless @projects.empty? %>
+		<ul>
+		<% @projects.each do |project| %>
+			<li><%= project.title %></li>
 		<% end %>
-		
-	</ul>
-</nav>
+		</ul>
+	<% end %>
+<% end %>
+
+<% if worker_signed_in? %>
+	<h3>Projetos disponiveis</h3>
+	<% unless @projects.empty? %>
+		<ul>
+		<% @projects.each do |project| %>
+			<li><%= project.title %></li>
+		<% end %>
+		</ul>
+	<% end %>
+<% end %>
+

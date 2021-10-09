@@ -11,6 +11,23 @@
   </head>
 
   <body>
+	  <h1>Freelancers</h1>
+	  <nav>
+		  <ul>
+			  <% if employer_signed_in? %>
+				  <li><%= current_employer.email %></li>
+				  <li><%= link_to 'Logout', destroy_employer_session_path, method: :delete %></li>
+			  <% elsif worker_signed_in?  %>
+				  <li><%= current_worker.email %></li>
+				  <li><%= link_to 'Logout', destroy_worker_session_path, method: :delete %></li>
+			  <% else %>
+				  <li><%= link_to 'Entrar como empregador', new_employer_session_path %></li>
+				  <li><%= link_to 'Entrar como freelancer', new_worker_session_path %></li>
+			  <% end %>
+			  
+		  </ul>
+	  </nav>
+
 	  <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
       <%= yield %>

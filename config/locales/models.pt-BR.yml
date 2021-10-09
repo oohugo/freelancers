@@ -3,6 +3,9 @@ pt-BR:
   activerecord:
     models:
       employer: Empregador
+      worker: Freelancer
     attributes:
       employer:
+        password: Senha
+      worker:
         password: Senha

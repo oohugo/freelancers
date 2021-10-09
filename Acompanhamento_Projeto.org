@@ -1,22 +1,24 @@
 
 * Acompanhamento
 
-* TODOS[7%]:
+* TODOS[23%]:
 *** DONE Usuário cria uma conta
 CLOSED: [2021-10-07 qui 17:01]
 :LOGBOOK:
 - State "DONE"       from "NEXT"       [2021-10-07 qui 17:01]
 :END:
-*** NEXT Criar Projeto:
+*** DONE Criar Projeto:
+CLOSED: [2021-10-08 sex 19:56]
 :LOGBOOK:
-- State "DONE"       from "NEXT"       [2021-10-07 qui 17:01]
+- State "DONE"       from "NEXT"       [2021-10-08 sex 19:56]
 :END:
 O projeto deve conter um título, uma descrição detalhada, uma descrição das habilidades desejadas, o valor máximo por hora que existe disponível para contratação, uma data limite para receber propostas e se o projeto demanda atuação presencial ou remota. Outros campos podem ser adicionados ao projeto caso você julgue necessário.
-*** TODO Usuário cadastra um projeto
+*** DONE Usuário cadastra um projeto
+CLOSED: [2021-10-08 sex 19:57]
 :LOGBOOK:
-- State "DONE"       from "NEXT"       [2021-10-07 qui 17:01]
+- State "DONE"       from "NEXT"       [2021-10-08 sex 19:57]
 :END:
-*** TODO Profissional cria uma conta
+*** NEXT Profissional cria uma conta
 *** TODO Profissional completa seu perfil com informações como área de atuação e experiências
 Um profissional autenticado na plataforma deve preencher seu perfil completo para
 então poder buscar projetos e se candidatar. O perfil completo deve conter: nome
