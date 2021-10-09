@@ -1,0 +1,12 @@
+
+<h4><%= @project.title %></h4>
+<dl>
+		<dt>Descrição: </dt>
+		<dd><%= @project.description %></dd>
+		<dt>Máximo por hora: </dt>
+		<dd><%= number_to_currency(@project.max_per_hour) %></dd>
+		<dt>Data limite:</dt>
+		<dd><%= @project.deadline %></dd>
+		<dt>Atuação: </dt>
+		<dd><%= @project.place %></dd>
+</dl>

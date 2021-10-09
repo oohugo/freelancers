@@ -14,7 +14,7 @@
 	<% unless @projects.empty? %>
 		<ul>
 		<% @projects.each do |project| %>
-			<li><%= project.title %></li>
+			<li><%= link_to project.title, project %></li>
 		<% end %>
 		</ul>
 	<% end %>
