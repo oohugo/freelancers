@@ -1,4 +1,3 @@
-# coding: utf-8
 require 'rails_helper'
 
 describe 'Worker log in' do
@@ -13,7 +12,7 @@ describe 'Worker log in' do
     click_on 'Log in'
 
     expect(page).to have_content('joao@email.com')
-    expect(page).to have_content('Projetos disponíveis')
+    expect(page).to have_content('Criar perfil')
     expect(page).not_to have_content('Entrar como worker')
   end
 

@@ -1,0 +1,17 @@
+
+<h3>Criar perfil</h3>
+<%= form_with(model: @perfil_worker) do |form| %>
+		<%= form.label :full_name, 'Nome completo' %>
+		<%= form.text_field :full_name %>
+		<%= form.label :name, 'Nome social' %>
+		<%= form.text_field :name %>
+		<%= form.label :birthdate, 'Data de nascimento' %>
+		<%= form.date_field :birthdate %>
+		<%= form.label :qualification, 'Formação' %>
+		<%= form.text_field :qualification %>
+		<%= form.label :background, 'Experiência' %>
+		<%= form.text_field :background %>
+		<%= form.label :expertise, 'Área de atuação' %>
+		<%= form.text_field :expertise %>
+		<%= form.submit 'Criar perfil' %>
+<% end %>

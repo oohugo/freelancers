@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   devise_for :employers, path: 'employers'
   root to: 'home#index'
   resources :projects, only: %i[create new]
+  resources :perfil_workers, only: %i[create new]
 end

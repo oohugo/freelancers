@@ -1,4 +1,3 @@
-# coding: utf-8
 require 'rails_helper'
 
 describe 'Freelancer registers himself' do
@@ -14,6 +13,6 @@ describe 'Freelancer registers himself' do
     expect(page).to have_content('joao@email.com')
     expect(page).not_to have_content('Entrar como freelancer')
     expect(page).to have_content('Login efetuado com sucesso')
-    expect(page).to have_content('Projetos disponíveis')
+    expect(page).to have_content('Criar perfil')
   end
 end
