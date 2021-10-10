@@ -7,6 +7,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(params.require(:project).permit(
                              :title, :description, :max_per_hour, :deadline, :place
                            ))
+    @project.employer = current_employer
     if @project.save
       redirect_to root_path
     else
@@ -17,6 +18,6 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @proposal = Proposal.new
-    @has_proposal = Proposal.where("project_id = ? AND worker_id = ?", @project, current_worker)
+    @worker_proposal = Proposal.where('project_id = ? AND worker_id = ?', @project, current_worker) if worker_signed_in?
   end
 end

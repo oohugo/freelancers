@@ -1,7 +1,7 @@
 
 * Acompanhamento
 
-* TODOS[42%]:
+* TODOS[57%]:
 *** DONE Usuário cria uma conta
 CLOSED: [2021-10-07 qui 17:01]
 :LOGBOOK:
@@ -37,9 +37,17 @@ CLOSED: [2021-10-09 sáb 21:38]
 - State "DONE"       from "NEXT"       [2021-10-09 sáb 21:38]
 :END:
 Para isto deve preencher um campo de texto contando porque está aplicando para o projeto. Além disso, o profissional deve informar o valor/hora, quantas horas disponíveis por semana pode atuar no projeto e qual sua expectativa de conclusão do projeto.
-*** TODO Profissional faz uma proposta para atuar em um projeto
-*** TODO Usuário vê propostas para seu projeto
-*** TODO Usuário aprova ou reprova proposta
+*** DONE Profissional faz uma proposta para atuar em um projeto
+CLOSED: [2021-10-10 dom 13:48]
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2021-10-10 dom 13:48]
+:END:
+*** DONE Usuário vê propostas para seu projeto
+CLOSED: [2021-10-10 dom 18:10]
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2021-10-10 dom 18:10]
+:END:
+*** NEXT Usuário aprova ou reprova proposta
 *** TODO Usuário dá feedback sobre o trabalho do profissional
 *** TODO Profissional dá feedback sobre o projeto em que participou
 *** TODO Usuário encerra um projeto

@@ -11,20 +11,46 @@
 		<dd><%= @project.place %></dd>
 </dl>
 
-<% if @has_proposal.empty? %>
-		<%= form_with model: [@project, @proposal] do |form| %>
-				<%= form.label :description, 'Digite uma proposta' %>
-				<%= form.text_field :description %>
-				<%= form.label :hourly_value, 'Valor da hora' %>
-				<%= form.number_field :hourly_value %>
-				<%= form.label :hours_per_week, 'Horas disponível por semana' %>
-				<%= form.number_field :hours_per_week %>
-				<%= form.label :date_close, 'Expectativa de conclusão' %>
-				<%= form.date_field :date_close %>
-				<%= form.submit 'Enviar' %>
+<% if worker_signed_in? %>
+		<% if @worker_proposal.empty? %>
+				<%= form_with model: [@project, @proposal] do |form| %>
+						<%= form.label :description, 'Digite uma proposta' %>
+						<%= form.text_field :description %>
+						<%= form.label :hourly_value, 'Valor da hora' %>
+						<%= form.number_field :hourly_value %>
+						<%= form.label :hours_per_week, 'Horas disponível por semana' %>
+						<%= form.number_field :hours_per_week %>
+						<%= form.label :date_close, 'Expectativa de conclusão' %>
+						<%= form.date_field :date_close %>
+						<%= form.submit 'Enviar' %>
+				<% end %>
+		<% else %>
+				<% proposal =  @worker_proposal.take %>
+				<p><%= proposal.description %></p>
+				<p>Cancelar proposta</p>
 		<% end %>
-<% else %>
-		<p>Cancelar proposta</p>
 <% end %>
 
-<%= link_to('Voltar', root_path) %>
+<% if employer_signed_in? %>
+		<% if @project.proposals.empty? %>
+				<p>Ainda não há propostas</p>
+		<% else %>
+				<% @project.proposals.each do |proposal| %>
+						<dl>
+								<dt>Comentário: </dt>
+								<dd><%= proposal.description %></dd>
+								<dt>Valor da hora</dt>
+								<dd><%= proposal.hourly_value %></dd>
+								<dt>Horas disponíves</dt>
+								<dd><%= proposal.hours_per_week %></dd>
+								<dt>Expectativa de conclusão</dt>
+								<dd><%= proposal.date_close %></dd>
+						</dl>
+						Perfil do freelancer
+						Aceitar proposta
+						Rejeitar proposta
+				<% end %>
+		<% end %>
+<% end %>
+
+<%= link_to('Pagina inicial', root_path) %>

@@ -1,22 +1,15 @@
 <% if employer_signed_in? %>
-	<h3><%= link_to 'Criar Projeto', new_project_path %></h3>
-	<% unless @projects.empty? %>
-		<ul>
-		<% @projects.each do |project| %>
-			<li><%= project.title %></li>
-		<% end %>
-		</ul>
-	<% end %>
+		<h3><%= link_to 'Criar Projeto', new_project_path %></h3>
+<% end %>
+<% if worker_signed_in? %>
+		<h3>Projetos disponíveis</h3>
 <% end %>
 
-<% if worker_signed_in? %>
-	<h3>Projetos disponíveis</h3>
-	<% unless @projects.empty? %>
+<% unless @projects.nil? || @projects.empty? %>
 		<ul>
-		<% @projects.each do |project| %>
-			<li><%= link_to project.title, project %></li>
-		<% end %>
+				<% @projects.each do |project| %>
+						<li><%= link_to project.title, project %></li>
+				<% end %>
 		</ul>
-	<% end %>
 <% end %>
 

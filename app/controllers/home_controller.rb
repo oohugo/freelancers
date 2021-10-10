@@ -6,8 +6,7 @@ class HomeController < ApplicationController
       else
         @projects = Project.where(status: :avaliable)
       end
-    else
-      @projects = Project.all
     end
+    @projects = current_employer.projects if employer_signed_in?
   end
 end

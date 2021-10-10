@@ -6,4 +6,5 @@ Rails.application.routes.draw do
     resources :proposals, shallow: true
   end
   resources :perfil_workers, only: %i[create new]
+  resources :employers, only: :show
 end

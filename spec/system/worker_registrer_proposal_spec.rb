@@ -7,7 +7,8 @@ describe 'Worker register proposal' do
                          birthdate: '12/12/2002', qualification: 'Graduado', background: 'bla bla',
                          expertise: 'Web', worker: worker)
     Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                    max_per_hour: 10.0, deadline: 5.days.from_now, place: 'Remoto', status: :avaliable)
+                    max_per_hour: 10.0, deadline: 5.days.from_now, place: 'Remoto',
+                    employer: Employer.create!(email: 'employer@email.com', password: '123456'))
 
     login_as worker, scope: :worker
     visit root_path
