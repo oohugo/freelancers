@@ -16,5 +16,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    @proposal = Proposal.new
+    @has_proposal = Proposal.where("project_id = ? AND worker_id = ?", @project, current_worker)
   end
 end

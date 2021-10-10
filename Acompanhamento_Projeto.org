@@ -1,7 +1,7 @@
 
 * Acompanhamento
 
-* TODOS[35%]:
+* TODOS[42%]:
 *** DONE Usuário cria uma conta
 CLOSED: [2021-10-07 qui 17:01]
 :LOGBOOK:
@@ -26,14 +26,16 @@ CLOSED: [2021-10-08 sex 21:33]
 *** DONE Profissional completa seu perfil com informações como área de atuação e experiências
 CLOSED: [2021-10-09 sáb 13:46]
 :LOGBOOK:
-- State "DONE"       from "BACKLOG"    [2021-10-09 sáb 13:46]
 - State "DONE"       from "NEXT"       [2021-10-09 sáb 13:46]
 :END:
 Um profissional autenticado na plataforma deve preencher seu perfil completo para
 então poder buscar projetos e se candidatar. O perfil completo deve conter: nome
 completo, nome social, data de nascimento, formação, descrição, experiência e foto. Os perfis de todos profissionais devem ser vinculados a uma área de atuação (dev, designer, UX, administrador de banco de dados, etc). Enquanto o usuário não termina de preencher seu perfil, toda vez que ele fizer login deve ser redirecionado para a tela com o formulário do perfil. A qualquer momento após isso, ele pode atualizar seu perfil através de um link no menu.
-*** NEXT Profissional busca projetos
-*** TODO Criar proposta
+*** DONE Criar proposta
+CLOSED: [2021-10-09 sáb 21:38]
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2021-10-09 sáb 21:38]
+:END:
 Para isto deve preencher um campo de texto contando porque está aplicando para o projeto. Além disso, o profissional deve informar o valor/hora, quantas horas disponíveis por semana pode atuar no projeto e qual sua expectativa de conclusão do projeto.
 *** TODO Profissional faz uma proposta para atuar em um projeto
 *** TODO Usuário vê propostas para seu projeto
@@ -42,8 +44,12 @@ Para isto deve preencher um campo de texto contando porque está aplicando para 
 *** TODO Profissional dá feedback sobre o projeto em que participou
 *** TODO Usuário encerra um projeto
 
-*** TODO Validação de todos formulários
-
+*** TODO Profissional busca projetos
+*** TODO Validação de todos formulários [%]
+**** TODO routes
+**** TODO Projeto
+**** TODO Perfil
+**** TODO proposta
 * Bonus [%]:
 *** TODO Usuário pode marcar profissionais favoritos
 *** TODO Profissional pode marcar usuários favoritos

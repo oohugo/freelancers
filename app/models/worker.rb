@@ -5,4 +5,5 @@ class Worker < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :perfil_worker
+  has_many :proposal
 end

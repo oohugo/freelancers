@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_09_172120) do
+ActiveRecord::Schema.define(version: 2021_10_09_220155) do
 
   create_table "employers", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -48,6 +48,19 @@ ActiveRecord::Schema.define(version: 2021_10_09_172120) do
     t.integer "status", default: 0
   end
 
+  create_table "proposals", force: :cascade do |t|
+    t.string "description"
+    t.decimal "hourly_value"
+    t.integer "hours_per_week"
+    t.date "date_close"
+    t.integer "project_id", null: false
+    t.integer "worker_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_proposals_on_project_id"
+    t.index ["worker_id"], name: "index_proposals_on_worker_id"
+  end
+
   create_table "workers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -61,4 +74,6 @@ ActiveRecord::Schema.define(version: 2021_10_09_172120) do
   end
 
   add_foreign_key "perfil_workers", "workers"
+  add_foreign_key "proposals", "projects"
+  add_foreign_key "proposals", "workers"
 end
