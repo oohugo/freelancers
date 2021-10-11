@@ -32,10 +32,10 @@
 <% end %>
 
 <% if employer_signed_in? %>
-		<% if @project.proposals.empty? %>
+		<% if @not_rejected_proposals.empty? %>
 				<p>Ainda não há propostas</p>
 		<% else %>
-				<% @project.proposals.each do |proposal| %>
+				<% @not_rejected_proposals.each do |proposal| %>
 						<dl>
 								<dt>Comentário: </dt>
 								<dd><%= proposal.description %></dd>
@@ -47,10 +47,11 @@
 								<dd><%= proposal.date_close %></dd>
 								<dt>Status: </dt>
 								<dd><%= proposal.status %></dd>
+								<dt>Perfil do freelancer: </dt>
+								<dd><%= proposal.worker.email %></dd>
 						</dl>
-						Perfil do freelancer
-						Aceitar proposta
-						Rejeitar proposta
+						<%= link_to 'Aceitar proposta', accepted_proposal_path(proposal), method: :post %>
+						<%= link_to 'Rejeitar proposta', rejected_proposal_path(proposal), method: :post %>
 				<% end %>
 		<% end %>
 <% end %>

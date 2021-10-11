@@ -9,4 +9,18 @@ class ProposalsController < ApplicationController
     flash[:notice] = 'Proposta enviada'
     redirect_to @proposal.project
   end
+
+  def accepted
+    @proposal = Proposal.find(params[:id])
+    @proposal.accepted!
+    flash[:notice] = 'Proposta aceita'
+    redirect_to @proposal.project
+  end
+
+  def rejected
+    @proposal = Proposal.find(params[:id])
+    @proposal.rejected!
+    flash[:notice] = 'Proposta rejeitada'
+    redirect_to @proposal.project
+  end
 end

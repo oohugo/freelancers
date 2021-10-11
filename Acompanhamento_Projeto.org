@@ -1,7 +1,7 @@
 
 * Acompanhamento
 
-* TODOS[53%]:
+* TODOS[60%]:
 *** DONE Usuário cria uma conta
 CLOSED: [2021-10-07 qui 17:01]
 :LOGBOOK:
@@ -47,12 +47,15 @@ CLOSED: [2021-10-10 dom 18:10]
 :LOGBOOK:
 - State "DONE"       from "NEXT"       [2021-10-10 dom 18:10]
 :END:
-*** NEXT Usuário aprova ou reprova proposta
-*** TODO Usuário vê perfil do profissional
+*** DONE Usuário aprova ou reprova proposta
+CLOSED: [2021-10-11 seg 14:20]
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2021-10-11 seg 14:20]
+:END:
+*** NEXT Usuário vê perfil do profissional
 *** TODO Usuário dá feedback sobre o trabalho do profissional
 *** TODO Profissional dá feedback sobre o projeto em que participou
 *** TODO Usuário encerra um projeto
-
 *** TODO Profissional busca projetos
 *** TODO Validação de todos formulários [%]
 **** TODO routes
