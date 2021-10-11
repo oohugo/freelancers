@@ -1,0 +1,16 @@
+
+<h4>Perfil do <%= @perfil_worker.worker.email %></h4>
+<dl>
+		<dt>Nome completo: </dt>
+		<dd><%= @perfil_worker.full_name %></dd>
+		<dt>Nome social:</dt>
+		<dd><%= @perfil_worker.name %></dd>
+		<dt>Data de nascimento: </dt>
+		<dd><%= l @perfil_worker.birthdate %></dd>
+		<dt>Formação:</dt>
+		<dd><%= @perfil_worker.qualification %></dd>
+		<dt>Experiência: </dt>
+		<dd><%= @perfil_worker.background %></dd>
+		<dt>Área de atuação: </dt>
+		<dd><%= @perfil_worker.expertise %></dd>
+</dl>

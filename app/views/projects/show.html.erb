@@ -11,6 +11,10 @@
 		<dd><%= @project.place %></dd>
 </dl>
 
+<%= link_to 'Suspender propostas', suspend_project_path(@project), method: :post %>
+Finalizar projeto
+
+
 <% if worker_signed_in? %>
 		<% if @worker_proposal.empty? %>
 				<%= form_with model: [@project, @proposal] do |form| %>
@@ -32,10 +36,10 @@
 <% end %>
 
 <% if employer_signed_in? %>
-		<% if @not_rejected_proposals.empty? %>
+		<% if @employer_proposals.empty? %>
 				<p>Ainda não há propostas</p>
 		<% else %>
-				<% @not_rejected_proposals.each do |proposal| %>
+				<% @employer_proposals.each do |proposal| %>
 						<dl>
 								<dt>Comentário: </dt>
 								<dd><%= proposal.description %></dd>
@@ -47,8 +51,10 @@
 								<dd><%= proposal.date_close %></dd>
 								<dt>Status: </dt>
 								<dd><%= proposal.status %></dd>
-								<dt>Perfil do freelancer: </dt>
-								<dd><%= proposal.worker.email %></dd>
+								<%= link_to proposal.worker.perfil_worker do %>
+										<dt>Perfil do freelancer: </dt>
+										<dd><%= proposal.worker.email %></dd>
+								<% end %>
 						</dl>
 						<%= link_to 'Aceitar proposta', accepted_proposal_path(proposal), method: :post %>
 						<%= link_to 'Rejeitar proposta', rejected_proposal_path(proposal), method: :post %>

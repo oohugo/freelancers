@@ -19,6 +19,13 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @proposal = Proposal.new
     @worker_proposal = Proposal.where('project_id = ? AND worker_id = ?', @project, current_worker) if worker_signed_in?
-    @not_rejected_proposals = @project.proposals.reject(&:rejected?)
+    @project.suspend? ? @employer_proposals = @project.proposals.select(&:accepted?) : @employer_proposals = @project.proposals.reject(&:rejected?)
+  end
+
+  def suspend
+    @project = Project.find(params[:id])
+    @project.suspend!
+    flash[:notice] = 'Propostas suspensas'
+    redirect_to @project
   end
 end

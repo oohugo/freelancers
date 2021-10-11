@@ -11,7 +11,7 @@ describe 'Worker see projects' do
                     max_per_hour: 10.0, deadline: 5.days.from_now, place: 'Remoto', employer: employer)
     Project.create!(title: 'Site de locação', description: 'Site para alugar imóveis',
                     max_per_hour: 10.0, deadline: 5.days.from_now, place: 'Presencial',
-                    status: :canceled, employer: employer)
+                    status: :suspend, employer: employer)
 
     login_as worker, scope: :worker
     visit root_path

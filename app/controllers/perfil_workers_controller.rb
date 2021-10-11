@@ -12,4 +12,8 @@ class PerfilWorkersController < ApplicationController
     perfil_worker.save!
     redirect_to root_path
   end
+
+  def show
+    @perfil_worker = PerfilWorker.find(params[:id])
+  end 
 end
