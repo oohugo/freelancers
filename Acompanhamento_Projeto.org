@@ -1,7 +1,7 @@
 
 * Acompanhamento
 
-* TODOS[57%]:
+* TODOS[53%]:
 *** DONE Usuário cria uma conta
 CLOSED: [2021-10-07 qui 17:01]
 :LOGBOOK:
@@ -48,6 +48,7 @@ CLOSED: [2021-10-10 dom 18:10]
 - State "DONE"       from "NEXT"       [2021-10-10 dom 18:10]
 :END:
 *** NEXT Usuário aprova ou reprova proposta
+*** TODO Usuário vê perfil do profissional
 *** TODO Usuário dá feedback sobre o trabalho do profissional
 *** TODO Profissional dá feedback sobre o projeto em que participou
 *** TODO Usuário encerra um projeto

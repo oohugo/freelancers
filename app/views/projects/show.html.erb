@@ -39,12 +39,14 @@
 						<dl>
 								<dt>Comentário: </dt>
 								<dd><%= proposal.description %></dd>
-								<dt>Valor da hora</dt>
-								<dd><%= proposal.hourly_value %></dd>
-								<dt>Horas disponíves</dt>
+								<dt>Valor por hora:</dt>
+								<dd><%= number_to_currency(proposal.hourly_value) %></dd>
+								<dt>Horas disponíveis por semana:</dt>
 								<dd><%= proposal.hours_per_week %></dd>
-								<dt>Expectativa de conclusão</dt>
+								<dt>Previsão de conclusão:</dt>
 								<dd><%= proposal.date_close %></dd>
+								<dt>Status: </dt>
+								<dd><%= proposal.status %></dd>
 						</dl>
 						Perfil do freelancer
 						Aceitar proposta
