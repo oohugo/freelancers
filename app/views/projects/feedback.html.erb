@@ -1,0 +1,4 @@
+<h4>Feedback do projeto: <%= @project.title %></h4>
+<% @workers.each do |worker| %>
+		<p><%= worker.email %></p>
+<% end %>

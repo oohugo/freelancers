@@ -12,7 +12,7 @@
 </dl>
 
 <%= link_to 'Suspender propostas', suspend_project_path(@project), method: :post %>
-Finalizar projeto
+<%= link_to 'Finalizar projeto', finished_project_path(@project), method: :post %>
 
 
 <% if worker_signed_in? %>
