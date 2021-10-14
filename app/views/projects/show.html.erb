@@ -13,7 +13,7 @@
 
 <%= link_to 'Suspender propostas', suspend_project_path(@project), method: :post %>
 <%= link_to 'Finalizar projeto', finished_project_path(@project), method: :post %>
-
+<%= link_to 'Dar feedback dos freelancers', feedback_project_path %>
 
 <% if worker_signed_in? %>
 		<% if @worker_proposal.empty? %>

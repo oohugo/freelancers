@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :employers, path: 'employers'
   root to: 'home#index'
   resources :projects, only: %i[create new show] do
+    resources :feedback_workers, only: :create
     get 'feedback', on: :member
     post 'suspend', on: :member
     post 'finished', on: :member

@@ -13,4 +13,9 @@
 		<dd><%= @perfil_worker.background %></dd>
 		<dt>Área de atuação: </dt>
 		<dd><%= @perfil_worker.expertise %></dd>
+		<% if employer_signed_in?  %>
+				<% rating = @perfil_worker.feedback_worker.map(&:rating) %>
+				<dt>Avaliação do freelancer:</dt>
+				<dd><%= rating.sum / rating.size %> </dd>
+		<% end %>
 </dl>

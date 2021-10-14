@@ -4,6 +4,7 @@ class Worker < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :feedback_worker
   has_one :perfil_worker
   has_many :proposal
 end
