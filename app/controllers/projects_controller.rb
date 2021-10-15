@@ -40,5 +40,6 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @workers = @project.proposals.select(&:accepted?).map(&:worker)
     @feedback_worker = FeedbackWorker.new
+    @feedback_employer = FeedbackEmployer.new
   end
 end

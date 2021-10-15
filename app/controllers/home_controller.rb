@@ -5,6 +5,7 @@ class HomeController < ApplicationController
         redirect_to new_perfil_worker_path
       else
         @projects = Project.where(status: :avaliable)
+        @projects_worker = current_worker.projects
       end
     end
     @projects = current_employer.projects if employer_signed_in?

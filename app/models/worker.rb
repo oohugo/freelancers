@@ -7,4 +7,5 @@ class Worker < ApplicationRecord
   has_many :feedback_worker
   has_one :perfil_worker
   has_many :proposal
+  has_many :projects, through: :proposal
 end

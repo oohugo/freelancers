@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   resources :projects, only: %i[create new show] do
     resources :feedback_workers, only: :create
+    resources :feedback_employers, only: :create
     get 'feedback', on: :member
     post 'suspend', on: :member
     post 'finished', on: :member

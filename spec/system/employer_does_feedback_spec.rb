@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Employer does feedback or employer' do
+describe 'Employer does feedback of employer' do
   it 'successfully' do
     worker = Worker.create!(email: 'email@email.com', password: '123456')
     employer = Employer.create!(email: 'employer@email.com', password: '123456')
@@ -14,7 +14,7 @@ describe 'Employer does feedback or employer' do
     login_as employer, scope: :employer
     visit root_path
     click_on 'Site de freelancer'
-    click_on 'Dar feedback dos freelancers'
+    click_on 'Dar feedback aos freelancers'
     fill_in 'Nota de 1 a 5', with: 4
     fill_in 'Comentário', with: 'Muito bom profissional'
     click_on 'Enviar'

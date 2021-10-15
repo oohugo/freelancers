@@ -13,3 +13,11 @@
 		</ul>
 <% end %>
 
+<% unless @projects_worker.nil? || @projects_worker.empty? %>
+		<h3>Projetos com propostas</h3>
+		<ul>
+				<% @projects_worker.each do |project| %>
+						<li><%= link_to project.title, project %>, Status: <%= project.status %></li>
+				<% end %>
+		</ul>
+<% end %>

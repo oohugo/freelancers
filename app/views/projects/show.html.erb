@@ -11,31 +11,37 @@
 		<dd><%= @project.place %></dd>
 </dl>
 
-<%= link_to 'Suspender propostas', suspend_project_path(@project), method: :post %>
-<%= link_to 'Finalizar projeto', finished_project_path(@project), method: :post %>
-<%= link_to 'Dar feedback dos freelancers', feedback_project_path %>
 
 <% if worker_signed_in? %>
-		<% if @worker_proposal.empty? %>
-				<%= form_with model: [@project, @proposal] do |form| %>
-						<%= form.label :description, 'Digite uma proposta' %>
-						<%= form.text_field :description %>
-						<%= form.label :hourly_value, 'Valor da hora' %>
-						<%= form.number_field :hourly_value %>
-						<%= form.label :hours_per_week, 'Horas disponível por semana' %>
-						<%= form.number_field :hours_per_week %>
-						<%= form.label :date_close, 'Expectativa de conclusão' %>
-						<%= form.date_field :date_close %>
-						<%= form.submit 'Enviar' %>
-				<% end %>
+		<% if @project.finished? %>
+				<%= link_to 'Dar feedback ao Empregador e ao projeto', feedback_project_path %>
 		<% else %>
-				<% proposal =  @worker_proposal.take %>
-				<p><%= proposal.description %></p>
-				<p>Cancelar proposta</p>
+				<% if @worker_proposal.empty? %>
+						<%= form_with model: [@project, @proposal] do |form| %>
+								<%= form.label :description, 'Digite uma proposta' %>
+								<%= form.text_field :description %>
+								<%= form.label :hourly_value, 'Valor da hora' %>
+								<%= form.number_field :hourly_value %>
+								<%= form.label :hours_per_week, 'Horas disponível por semana' %>
+								<%= form.number_field :hours_per_week %>
+								<%= form.label :date_close, 'Expectativa de conclusão' %>
+								<%= form.date_field :date_close %>
+								<%= form.submit 'Enviar' %>
+						<% end %>
+				<% else %>
+						<% proposal =  @worker_proposal.take %>
+						<p><%= proposal.description %></p>
+						<p>Cancelar proposta</p>
+				<% end %>
 		<% end %>
 <% end %>
 
 <% if employer_signed_in? %>
+		<ul>
+				<li><%= link_to 'Suspender propostas', suspend_project_path(@project), method: :post %></li>
+				<li><%= link_to 'Finalizar projeto', finished_project_path(@project), method: :post %></li>
+				<li><%= link_to 'Dar feedback aos freelancers', feedback_project_path %></li>
+		</ul>
 		<% if @employer_proposals.empty? %>
 				<p>Ainda não há propostas</p>
 		<% else %>
