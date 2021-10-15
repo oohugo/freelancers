@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_15_200520) do
+ActiveRecord::Schema.define(version: 2021_10_15_210033) do
 
   create_table "employers", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(version: 2021_10_15_200520) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["employer_id"], name: "index_feedback_employers_on_employer_id"
+  end
+
+  create_table "feedback_projects", force: :cascade do |t|
+    t.string "comment"
+    t.integer "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_feedback_projects_on_project_id"
   end
 
   create_table "feedback_workers", force: :cascade do |t|
@@ -65,7 +73,6 @@ ActiveRecord::Schema.define(version: 2021_10_15_200520) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status", default: 0
     t.integer "employer_id", null: false
-    t.string "comment"
     t.index ["employer_id"], name: "index_projects_on_employer_id"
   end
 
@@ -96,6 +103,7 @@ ActiveRecord::Schema.define(version: 2021_10_15_200520) do
   end
 
   add_foreign_key "feedback_employers", "employers"
+  add_foreign_key "feedback_projects", "projects"
   add_foreign_key "feedback_workers", "workers"
   add_foreign_key "perfil_workers", "workers"
   add_foreign_key "projects", "employers"

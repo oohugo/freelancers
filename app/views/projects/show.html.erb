@@ -11,8 +11,8 @@
 		<dd><%= @project.place %></dd>
 </dl>
 
-
 <% if worker_signed_in? %>
+		<%= link_to @project.employer.email, @project.employer %>
 		<% if @project.finished? %>
 				<%= link_to 'Dar feedback ao Empregador e ao projeto', feedback_project_path %>
 		<% else %>

@@ -1,0 +1,21 @@
+
+<h4>Perfil do <%= @employer.email %></h4>
+<% if worker_signed_in? && !@rating.empty? %>
+		<p>Avaliação do Empregador: <%= @rating.sum / @rating.size %> </p>
+		<% @projects.each do |project| %>
+				<dl>
+						<dt> <%= link_to project.title, project %> </dt>
+						<dd>Status: <%= project.status %></dd>
+						<% if project.finished? && !project.feedback_projects.nil? %>
+								<% project.feedback_projects.each do |feedback| %>
+								<dt>Comentarios: </dt>
+								<dd>
+										<ul>
+												<li><%= feedback.comment %></li>
+										</ul>
+								</dd>
+								<% end %>
+						<% end %>
+				</dl>
+		<% end %>
+<% end %>

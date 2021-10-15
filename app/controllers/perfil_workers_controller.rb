@@ -15,5 +15,6 @@ class PerfilWorkersController < ApplicationController
 
   def show
     @perfil_worker = PerfilWorker.find(params[:id])
-  end 
+    @rating = @perfil_worker.feedback_worker.map(&:rating)
+  end
 end

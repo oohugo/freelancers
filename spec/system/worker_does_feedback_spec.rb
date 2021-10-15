@@ -26,4 +26,29 @@ describe 'Freelancer does feedback of employer' do
     expect(page).to have_content('Feedback enviado')
   end
 
+  it 'and freelancer see rating of employer' do
+    worker = Worker.create!(email: 'email@email.com', password: '123456')
+    perfil_worker = PerfilWorker.create!(full_name: 'João Severino', name: 'Severino', birthdate: '18/07/1992',
+                                         qualification: 'Graduado em Ciências da Computação',
+                                         background: 'Estágio blabla bla',expertise: 'Desenvolvimento', worker: worker)
+    employer = Employer.create!(email: 'employer@email.com', password: '123456')
+    FeedbackEmployer.create!(comment: 'Fez tudo certo', rating: 5, employer: employer)
+    FeedbackEmployer.create!(comment: 'Fez tudo errado', rating: 2, employer: employer)
+    Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
+                    max_per_hour: 10.0, deadline: 5.days.from_now, place: 'Remoto',
+                    employer: employer)
+    project_finished = Project.create!(title: 'Site de locação', description: 'Site para alugar imóveis',
+                                       max_per_hour: 10.0, deadline: 5.days.from_now, place: 'Presencial',
+                                       status: :finished, employer: employer)
+
+    FeedbackProject.create!(comment: 'Projeto muito bem feito pelo Empregador', project: project_finished)
+    login_as worker, scope: :worker
+    visit root_path
+    click_on 'Site de freelancer'
+    click_on employer.email
+
+    expect(page).to have_content("Avaliação do Empregador: #{(5 + 2) / 2}")
+    expect(page).to have_content('Site de locação')
+    expect(page).to have_content('Projeto muito bem feito pelo Empregador')
+  end
 end

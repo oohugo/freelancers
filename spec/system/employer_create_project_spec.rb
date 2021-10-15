@@ -35,12 +35,8 @@ describe 'Employer create project' do
       expect(page).to have_content 'não pode ficar em branco'
     end
 
-    it 'cannot have less o equal to zero in max_per_hour' do
-      # todo
-    end
+    pending 'cannot have less o equal to zero in max_per_hour'
 
-    it 'cannot have deadline in future' do
-      #todo
-    end
+    pending 'cannot have deadline in future'
   end
 end
