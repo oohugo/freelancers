@@ -5,7 +5,7 @@ describe 'Employer edit a project' do
     worker = Worker.create!(email: 'email@email.com', password: '123456')
     employer = Employer.create!(email: 'employer@email.com', password: '123456')
     project = Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                              max_per_hour: 10.0, deadline: 5.days.from_now, place: 'Remoto', employer: employer)
+                              max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote', employer: employer)
     Proposal.create!(description: 'Sou bom em fazer sites', hourly_value: 7.0,
                      hours_per_week: 20, date_close: 4.days.from_now,
                      project: project, worker: worker)
@@ -30,7 +30,7 @@ describe 'Employer edit a project' do
     worker = Worker.create!(email: 'email@email.com', password: '123456')
     employer = Employer.create!(email: 'employer@email.com', password: '123456')
     project = Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                              max_per_hour: 10.0, deadline: 5.days.from_now, place: 'Remoto', employer: employer)
+                              max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote', employer: employer)
     Proposal.create!(description: 'Sou bom em fazer sites', hourly_value: 7.0,
                      hours_per_week: 20, date_close: 4.days.from_now,
                      project: project, worker: worker, status: :accepted)

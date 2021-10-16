@@ -8,7 +8,7 @@
 		<dt>Data limite:</dt>
 		<dd><%= @project.deadline %></dd>
 		<dt>Atuação: </dt>
-		<dd><%= @project.place %></dd>
+		<dd><%= @project.place == 'remote' ? 'Remoto' : 'Presencial' %></dd>
 </dl>
 
 <% if worker_signed_in? %>

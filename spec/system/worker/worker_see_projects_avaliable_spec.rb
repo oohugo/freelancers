@@ -8,9 +8,9 @@ describe 'Worker see projects' do
                          birthdate: '12/12/2002', qualification: 'Graduado', background: 'bla bla',
                          expertise: 'Web', worker: worker)
     Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                    max_per_hour: 10.0, deadline: 5.days.from_now, place: 'Remoto', employer: employer)
+                    max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote', employer: employer)
     Project.create!(title: 'Site de locação', description: 'Site para alugar imóveis',
-                    max_per_hour: 10.0, deadline: 5.days.from_now, place: 'Presencial',
+                    max_per_hour: 10.0, deadline: 5.days.from_now, place: 'presential',
                     status: :suspend, employer: employer)
 
     login_as worker, scope: :worker
@@ -28,7 +28,7 @@ describe 'Worker see projects' do
                          expertise: 'Web', worker: worker)
     date = 5.days.from_now.to_date
     Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                    max_per_hour: 10.0, deadline: date, place: 'Remoto', status: :avaliable,
+                    max_per_hour: 10.0, deadline: date, place: 'remote', status: :avaliable,
                     employer: Employer.create!(email: 'employer@email.com', password: '123456'))
 
     login_as worker, scope: :worker

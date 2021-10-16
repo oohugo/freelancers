@@ -8,7 +8,7 @@ describe 'Freelancer does feedback of employer' do
                          qualification: 'Graduado em Ciências da Computação', background: 'Estágio blabla bla',
                          expertise: 'Desenvolvimento', worker: worker)
     project = Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                              max_per_hour: 10.0, deadline: 5.days.from_now, place: 'Remoto',
+                              max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote',
                               employer: employer, status: :finished)
     Proposal.create!(description: 'Sou bom em fazer sites', hourly_value: 7.0,
                      hours_per_week: 20, date_close: 4.days.from_now,
@@ -35,10 +35,10 @@ describe 'Freelancer does feedback of employer' do
     FeedbackEmployer.create!(comment: 'Fez tudo certo', rating: 5, employer: employer)
     FeedbackEmployer.create!(comment: 'Fez tudo errado', rating: 2, employer: employer)
     Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                    max_per_hour: 10.0, deadline: 5.days.from_now, place: 'Remoto',
+                    max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote',
                     employer: employer)
     project_finished = Project.create!(title: 'Site de locação', description: 'Site para alugar imóveis',
-                                       max_per_hour: 10.0, deadline: 5.days.from_now, place: 'Presencial',
+                                       max_per_hour: 10.0, deadline: 5.days.from_now, place: 'presential',
                                        status: :finished, employer: employer)
 
     FeedbackProject.create!(comment: 'Projeto muito bem feito pelo Empregador', project: project_finished)

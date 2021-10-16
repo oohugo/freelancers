@@ -6,22 +6,22 @@
 <% end %>
 <%= form_with(model: @project) do |form| %>
 	<p>
-		<%= form.label :title, 'Título' %>
+		<%= form.label :title %>
 		<%= form.text_field :title %></p>
 	<p>
-		<%= form.label :description, 'Descrição' %>
+		<%= form.label :description %>
 		<%= form.text_field :description %></p>
 	<p>
-		<%= form.label :max_per_hour, 'Valor máximo por hora' %>
+		<%= form.label :max_per_hour %>
 		<%= form.number_field :max_per_hour %></p>
 	<p>
-		<%= form.label :deadline, 'Data limite' %>
+		<%= form.label :deadline %>
 		<%= form.date_field :deadline %></p>
 	<p>
-		<%= form.label 'Atuação' %>
-		<%= form.radio_button :place, 'remote' %>
+		<%= form.label :place %>
+		<%= form.radio_button :place, "remote" %>
 		<%= form.label :place_remote, 'Remoto' %>
-		<%= form.radio_button :place, 'presential' %>
+		<%= form.radio_button :place, "presential" %>
 		<%= form.label :place_presential, 'Presencial' %>
 	</p>
 	<p>

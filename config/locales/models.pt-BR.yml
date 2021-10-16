@@ -4,8 +4,15 @@ pt-BR:
     models:
       employer: Empregador
       worker: Freelancer
+      project: Projeto
     attributes:
       employer:
         password: Senha
       worker:
         password: Senha
+      project:
+        title: Título
+        description: Descrição
+        max_per_hour: Valor máximo por hora
+        deadline: Data limite
+        place: Locação
