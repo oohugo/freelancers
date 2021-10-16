@@ -1,7 +1,7 @@
 
 * Acompanhamento
 
-* TODOS[73%]:
+* TODOS[86%]:
 *** DONE Usuário cria uma conta
 CLOSED: [2021-10-07 qui 17:01]
 :LOGBOOK:
@@ -62,16 +62,29 @@ CLOSED: [2021-10-13 qua 17:23]
 :LOGBOOK:
 - State "DONE"       from "NEXT"       [2021-10-13 qua 17:23]
 :END:
-*** NEXT Usuário dá feedback sobre o trabalho do profissional
-*** TODO Profissional dá feedback sobre o projeto em que participou
-*** TODO Profissional busca projetos
-*** TODO Validação de todos formulários [%]
-**** TODO routes
+*** DONE Usuário dá feedback sobre o trabalho do profissional
+CLOSED: [2021-10-16 sáb 00:10]
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2021-10-16 sáb 00:10]
+:END:
+*** DONE Profissional dá feedback sobre o projeto em que participou
+CLOSED: [2021-10-16 sáb 00:10]
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2021-10-16 sáb 00:10]
+:END:
+*** NEXT Validação de todos formulários [25%]
+**** DONE routes
+CLOSED: [2021-10-16 sáb 01:50]
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2021-10-16 sáb 01:50]
+:END:
 **** TODO Projeto
 **** TODO Perfil
 **** TODO proposta
+*** TODO Profissional busca projetos
+*** TODO Add foto para o perfil do profissional
 * Bonus [%]:
+*** TODO I18n
+*** TODO Adicionar Bootstrap e visual
 *** TODO Usuário pode marcar profissionais favoritos
 *** TODO Profissional pode marcar usuários favoritos
-*** TODO Adicionar Bootstrap e visual
-*** TODO I18n

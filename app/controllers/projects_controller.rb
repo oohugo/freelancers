@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_employer!, only: %i[create new suspend finished]
+
   def new
     @project = Project.new
   end

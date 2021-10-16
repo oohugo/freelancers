@@ -1,4 +1,5 @@
 class PerfilWorkersController < ApplicationController
+  before_action :authenticate_worker!, only: %i[new create]
   def new
     @perfil_worker = PerfilWorker
   end

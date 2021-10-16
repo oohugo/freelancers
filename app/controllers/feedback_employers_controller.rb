@@ -1,4 +1,5 @@
 class FeedbackEmployersController < ApplicationController
+  before_action :authenticate_worker!, only: :create
   def create
     @feedback_employer = FeedbackEmployer.new(params.require(:feedback_employer).permit(:rating, :comment))
     project = Project.find(params[:project_id])

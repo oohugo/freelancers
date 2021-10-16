@@ -1,4 +1,6 @@
 class ProposalsController < ApplicationController
+  before_action :authenticate_employer!, only: %i[accepted rejected]
+  before_action :authenticate_worker!, only: %i[create canceled]
   def create
     @proposal = Proposal.new(params.require(:proposal)
                                .permit(:description, :hourly_value,
@@ -22,5 +24,8 @@ class ProposalsController < ApplicationController
     @proposal.rejected!
     flash[:notice] = 'Proposta rejeitada'
     redirect_to @proposal.project
+  end
+
+  def canceled
   end
 end
