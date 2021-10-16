@@ -1,17 +1,33 @@
 
 <h3>Criar perfil</h3>
+<% unless @perfil_worker.errors.empty? %>
+	<% @perfil_worker.errors.full_messages.each do |error| %>
+		<p><%= error %></p>
+		<% end %>
+<% end %>
+
 <%= form_with(model: @perfil_worker) do |form| %>
-		<%= form.label :full_name, 'Nome completo' %>
-		<%= form.text_field :full_name %>
-		<%= form.label :name, 'Nome social' %>
-		<%= form.text_field :name %>
-		<%= form.label :birthdate, 'Data de nascimento' %>
-		<%= form.date_field :birthdate %>
-		<%= form.label :qualification, 'Formação' %>
-		<%= form.text_field :qualification %>
-		<%= form.label :background, 'Experiência' %>
-		<%= form.text_field :background %>
-		<%= form.label :expertise, 'Área de atuação' %>
-		<%= form.text_field :expertise %>
+		<p>
+				<%= form.label :full_name %>
+				<%= form.text_field :full_name %>
+		</p>
+		<p>
+				<%= form.label :name %>
+				<%= form.text_field :name %>
+		</p>
+		<p>
+				<%= form.label :birthdate %>
+				<%= form.date_field :birthdate %>
+		</p>
+		<p>
+				<%= form.label :qualification %>
+				<%= form.text_field :qualification %>
+		</p><p>
+				<%= form.label :background %>
+				<%= form.text_field :background %>
+		</p><p>
+				<%= form.label :expertise %>
+				<%= form.text_field :expertise %>
+		</p>
 		<%= form.submit 'Criar perfil' %>
 <% end %>

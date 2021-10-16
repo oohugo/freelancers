@@ -5,6 +5,7 @@ pt-BR:
       employer: Empregador
       worker: Freelancer
       project: Projeto
+      perfil_worker: Perfil
     attributes:
       employer:
         password: Senha
@@ -16,3 +17,10 @@ pt-BR:
         max_per_hour: Valor máximo por hora
         deadline: Data limite
         place: Locação
+      perfil_worker:
+        full_name: Nome completo
+        name: Nome social
+        birthdate: Data de nascimento
+        qualification: Formação
+        background: Experiência
+        expertise: Área de atuação
