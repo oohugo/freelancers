@@ -1,7 +1,7 @@
 
 <h4>Perfil do <%= @employer.email %></h4>
-<% if worker_signed_in? && !@rating.empty? %>
-		<p>Avaliação do Empregador: <%= @rating.sum / @rating.size %> </p>
+<% if worker_signed_in? %>
+		<p>Avaliação do Empregador: <%= @employer.rating ? @employer.rating : 'Ainda não avaliado' %> </p>
 		<% @projects.each do |project| %>
 				<dl>
 						<dt> <%= link_to project.title, project %> </dt>

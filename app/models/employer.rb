@@ -5,4 +5,9 @@ class Employer < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :projects
   has_many :feedback_employer
+
+  def calculate_rating
+    ratings = feedback_employer.map(&:rating)
+    self.rating = (ratings.sum / ratings.size) unless ratings.empty?
+  end
 end

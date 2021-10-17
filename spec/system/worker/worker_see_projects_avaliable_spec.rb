@@ -40,6 +40,7 @@ describe 'Worker see projects' do
     expect(page).to have_content('Máximo por hora: R$ 10,00')
     expect(page).to have_content("Data limite: #{date}")
     expect(page).to have_content('Atuação: Remoto')
+    expect(page).to have_content('Avaliação do Empregador: Ainda não avaliado')
   end
 
   it 'cannot see if not have perfil' do

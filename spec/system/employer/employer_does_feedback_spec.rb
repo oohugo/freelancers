@@ -30,6 +30,8 @@ describe 'Employer does feedback of employer' do
     employer = Employer.create!(email: 'employer@email.com', password: '123456')
     FeedbackWorker.create!(comment: 'Fez tudo certo', rating: 5, worker: worker)
     FeedbackWorker.create!(comment: 'Fez tudo errado', rating: 2, worker: worker)
+    worker.calculate_rating
+    worker.save!
     login_as employer, scope: :employer
     visit perfil_worker_path(perfil_worker)
 

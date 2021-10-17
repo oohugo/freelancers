@@ -9,6 +9,10 @@
 		<dd><%= @project.deadline %></dd>
 		<dt>Atuação: </dt>
 		<dd><%= @project.place == 'remote' ? 'Remoto' : 'Presencial' %></dd>
+		<% if worker_signed_in? %>
+				<dt>Avaliação do Empregador:</dt>
+				<dd><%= @project.employer.rating.nil? ? 'Ainda não avaliado' : @project.employer.rating %></dd>
+		<% end %>
 </dl>
 
 <% if worker_signed_in? %>

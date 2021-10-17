@@ -1,7 +1,7 @@
 
 * Acompanhamento
 
-* TODOS[93%]:
+* TODOS[100%]:
 *** DONE Usuário cria uma conta
 CLOSED: [2021-10-07 qui 17:01]
 :LOGBOOK:
@@ -102,7 +102,11 @@ CLOSED: [2021-10-17 dom 09:15]
 :LOGBOOK:
 - State "DONE"       from "NEXT"       [2021-10-17 dom 09:15]
 :END:
-*** NEXT Profissional busca projetos
+*** DONE Profissional busca projetos
+CLOSED: [2021-10-17 dom 15:35]
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2021-10-17 dom 15:35]
+:END:
 * Bonus [%]:
 *** TODO I18n
 *** TODO Adicionar Bootstrap e visual

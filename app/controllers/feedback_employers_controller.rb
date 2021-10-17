@@ -6,8 +6,9 @@ class FeedbackEmployersController < ApplicationController
     @feedback_employer.employer = project.employer
     FeedbackProject.create!(comment: params[:comment_project], project: project)
     @feedback_employer.save!
-
-    flash[:alert] = 'Feedback enviado'
-    redirect_to feedback_project_path(params[:project_id])
+    @feedback_employer.employer.calculate_rating
+    @feedback_employer.employer.save!
+    flash[:notice] = 'Feedback enviado'
+    redirect_to project_path(params[:project_id])
   end
 end

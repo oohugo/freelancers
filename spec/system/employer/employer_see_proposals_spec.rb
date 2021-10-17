@@ -61,5 +61,6 @@ describe 'Employer see proposal' do
     expect(page).to have_content('Formação: Graduado em Ciências da Computação')
     expect(page).to have_content('Experiência: Estágio blabla bla')
     expect(page).to have_content('Área de atuação: Desenvolvimento')
+    expect(page).to have_content('Avaliação do freelancer: Ainda não avaliado')
   end
 end

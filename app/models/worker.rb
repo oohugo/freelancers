@@ -8,4 +8,9 @@ class Worker < ApplicationRecord
   has_one :perfil_worker
   has_many :proposal
   has_many :projects, through: :proposal
+
+  def calculate_rating
+    ratings = feedback_worker.map(&:rating)
+    self.rating = (ratings.sum / ratings.size) unless ratings.empty?
+  end
 end
