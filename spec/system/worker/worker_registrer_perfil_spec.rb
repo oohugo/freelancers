@@ -29,6 +29,7 @@ describe 'Freelancer registers perfil' do
       fill_in 'Formação', with: ''
       fill_in 'Experiência', with: ''
       fill_in 'Área de atuação', with: ''
+      attach_file('Foto', "#{Rails.root}/app/assets/images/treinadev.svg")
       click_on 'Criar perfil'
 
       expect(page).not_to have_content('projetos disponíveis')

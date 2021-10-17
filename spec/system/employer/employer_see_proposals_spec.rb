@@ -39,9 +39,10 @@ describe 'Employer see proposal' do
   it 'and see perfil of freelancer' do
     employer = Employer.create!(email: 'joao@email.com', password: '123456')
     worker = Worker.create!(email: 'worker@email.com', password: '123456')
-    PerfilWorker.create!(full_name: 'João Severino', birthdate: '18/07/1992',
-                         qualification: 'Graduado em Ciências da Computação', background: 'Estágio blabla bla',
-                         expertise: 'Desenvolvimento', worker: worker)
+    perfil = PerfilWorker.create!(full_name: 'João Severino', birthdate: '18/07/1992',
+                                  qualification: 'Graduado em Ciências da Computação', background: 'Estágio blabla bla',
+                                  expertise: 'Desenvolvimento', worker: worker)
+    perfil.photo.attach(io: File.open('app/assets/images/treinadev.svg'), filename: 'name.svg')
     site = Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
                            max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote',
                            status: :avaliable, employer: employer)
@@ -54,6 +55,7 @@ describe 'Employer see proposal' do
     click_on 'Perfil do freelancer'
 
     expect(page).to have_content('Perfil do worker@email.com')
+    expect(page).to have_css('img[alt=Foto]')
     expect(page).to have_content('Nome completo: João Severino')
     expect(page).to have_content('Data de nascimento: 18/07/1992')
     expect(page).to have_content('Formação: Graduado em Ciências da Computação')

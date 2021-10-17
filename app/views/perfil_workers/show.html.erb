@@ -1,5 +1,8 @@
 
 <h4>Perfil do <%= @perfil_worker.worker.email %></h4>
+<% if @perfil_worker.photo.attached? %>
+		<img alt="Foto" src="<%= (url_for(@perfil_worker.photo)) %>" >
+<% end %>
 <dl>
 		<dt>Nome completo: </dt>
 		<dd><%= @perfil_worker.full_name %></dd>

@@ -1,7 +1,7 @@
 
 * Acompanhamento
 
-* TODOS[87%]:
+* TODOS[93%]:
 *** DONE Usuário cria uma conta
 CLOSED: [2021-10-07 qui 17:01]
 :LOGBOOK:
@@ -97,8 +97,12 @@ CLOSED: [2021-10-17 dom 06:49]
 :LOGBOOK:
 - State "DONE"       from "NEXT"       [2021-10-17 dom 06:49]
 :END:
-*** TODO Profissional busca projetos
-*** TODO Add foto para o perfil do profissional
+*** DONE Add foto para o perfil do profissional
+CLOSED: [2021-10-17 dom 09:15]
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2021-10-17 dom 09:15]
+:END:
+*** NEXT Profissional busca projetos
 * Bonus [%]:
 *** TODO I18n
 *** TODO Adicionar Bootstrap e visual
