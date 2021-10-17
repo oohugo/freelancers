@@ -31,7 +31,7 @@ RSpec.describe Project, type: :model do
       expect(project.errors.full_messages_for(:max_per_hour)).to include('Valor máximo por hora deve ser maior que 0')
     end
     it 'deadline cannot be in past' do
-      project = Project.new(deadline: 1.days.ago)
+      project = Project.new(deadline: 2.days.ago)
       project.valid?
       expect(project.errors.full_messages_for(:deadline)).to include('Data limite não pode ser em datas passadas')
     end

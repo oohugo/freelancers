@@ -9,7 +9,8 @@ Rails.application.routes.draw do
     post 'suspend', on: :member
     post 'finished', on: :member
     resources :proposals, shallow: true do
-      post 'canceled', on: :member
+      post 'cancel', on: :member
+      post 'cancel_with_justification', on: :member
       post 'accepted', on: :member
       post 'rejected', on: :member
     end

@@ -2,7 +2,7 @@
 		<h3><%= link_to 'Criar Projeto', new_project_path %></h3>
 <% end %>
 <% if worker_signed_in? %>
-		<h3>Projetos disponíveis</h3>
+		<h3>Projetos disponíveis:</h3>
 <% end %>
 
 <% unless @projects.nil? || @projects.empty? %>
@@ -17,7 +17,7 @@
 		<h3>Projetos com propostas</h3>
 		<ul>
 				<% @projects_worker.each do |project| %>
-						<li><%= link_to project.title, project %>, Status: <%= project.status %></li>
+						<li><%= link_to project.title, project %>, Status: <%= t(project.status) %></li>
 				<% end %>
 		</ul>
 <% end %>

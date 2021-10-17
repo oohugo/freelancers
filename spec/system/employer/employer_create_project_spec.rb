@@ -60,7 +60,7 @@ describe 'Employer create project' do
       fill_in 'Título', with: 'Site de freelancer'
       fill_in 'Descrição', with: 'Site para freelancers'
       fill_in 'Valor máximo por hora', with: '10.8'
-      fill_in 'Data limite', with: 1.days.ago
+      fill_in 'Data limite', with: 3.days.ago
       choose 'Remoto'
       click_on 'Criar'
 

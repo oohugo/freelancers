@@ -6,6 +6,7 @@ class HomeController < ApplicationController
       else
         @projects = Project.where(status: :avaliable)
         @projects_worker = current_worker.projects
+        @projects = @projects.to_a.difference(@projects_worker) unless @projects.nil?
       end
     end
     @projects = current_employer.projects if employer_signed_in?

@@ -16,22 +16,45 @@
 		<% if @project.finished? %>
 				<%= link_to 'Dar feedback ao Empregador e ao projeto', feedback_project_path %>
 		<% else %>
-				<% if @worker_proposal.empty? %>
-						<%= form_with model: [@project, @proposal] do |form| %>
-								<%= form.label :description, 'Digite uma proposta' %>
-								<%= form.text_field :description %>
-								<%= form.label :hourly_value, 'Valor da hora' %>
-								<%= form.number_field :hourly_value %>
-								<%= form.label :hours_per_week, 'Horas disponível por semana' %>
-								<%= form.number_field :hours_per_week %>
-								<%= form.label :date_close, 'Expectativa de conclusão' %>
-								<%= form.date_field :date_close %>
-								<%= form.submit 'Enviar' %>
+				<% if @worker_proposal.empty? || @worker_proposal.take.canceled? %>
+						<% if !@project.suspend? %>
+								<%= form_with model: [@project, @proposal] do |form| %>
+										<%= form.label :description %>
+										<%= form.text_field :description %>
+										<%= form.label :hourly_value %>
+										<%= form.number_field :hourly_value %>
+										<%= form.label :hours_per_week %>
+										<%= form.number_field :hours_per_week %>
+										<%= form.label :date_close %>
+										<%= form.date_field :date_close %>
+										<%= form.submit 'Enviar' %>
+								<% end %>
 						<% end %>
 				<% else %>
 						<% proposal =  @worker_proposal.take %>
-						<p><%= proposal.description %></p>
-						<p>Cancelar proposta</p>
+						<dl>
+								<dt>Comentário: </dt>
+								<dd><%= proposal.description %></dd>
+								<dt>Valor por hora:</dt>
+								<dd><%= number_to_currency(proposal.hourly_value) %></dd>
+								<dt>Horas disponíveis por semana:</dt>
+								<dd><%= proposal.hours_per_week %></dd>
+								<dt>Previsão de conclusão:</dt>
+								<dd><%= proposal.date_close %></dd>
+								<dt>Status: </dt>
+								<dd><%= proposal.status %></dd>
+						</dl>
+						<% if proposal.accepted? && proposal.date_accepted < 3.days.ago  %>
+								<%= form_with url:"/proposals/#{proposal.id}/cancel_with_justification", method: :post do |form| %>
+										<p>
+										<%= form.label :comment, 'Justifique o cancelamento' %>
+										<%= form.text_field :comment %>
+										</p>
+										<%= form.submit 'Cancelar a proposta' %>
+								<% end %>
+						<% else %>
+								<p><%= link_to 'Cancelar a proposta', cancel_proposal_path(proposal), method: :post %></p>
+						<% end %>
 				<% end %>
 		<% end %>
 <% end %>

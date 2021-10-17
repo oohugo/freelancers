@@ -20,7 +20,14 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @proposal = Proposal.new
-    @worker_proposal = Proposal.where('project_id = ? AND worker_id = ?', @project, current_worker) if worker_signed_in?
+    if worker_signed_in?
+      if current_worker.perfil_worker.nil?
+        flash[:alert] = 'É necessário criar perfil para ver projetos'
+        redirect_to new_perfil_worker_path
+      else
+        @worker_proposal = Proposal.where('project_id = ? AND worker_id = ?', @project, current_worker)
+      end
+    end
     @employer_proposals = @project.suspend? ? @project.proposals.select(&:accepted?) : @project.proposals.reject(&:rejected?)
   end
 

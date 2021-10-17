@@ -17,7 +17,7 @@ describe 'Worker authentication' do
       expect(response).to redirect_to(new_worker_session_path)
     end
     it 'cannot cancel a proposal without login' do
-      post '/proposals/1/canceled'
+      post '/proposals/1/cancel'
       expect(response).to redirect_to(new_worker_session_path)
     end
   end

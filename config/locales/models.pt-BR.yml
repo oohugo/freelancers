@@ -1,11 +1,15 @@
 ---
 pt-BR:
+  avaliable: Disponível
+  suspend: Suspenso
+  finished: Concluído
   activerecord:
     models:
       employer: Empregador
       worker: Freelancer
       project: Projeto
       perfil_worker: Perfil
+      proposal: Proposta
     attributes:
       employer:
         password: Senha
@@ -24,3 +28,8 @@ pt-BR:
         qualification: Formação
         background: Experiência
         expertise: Área de atuação
+      proposal:
+        description: Descrição da proposta
+        hourly_value: Valor da hora
+        hours_per_week: Horas disponível por semana
+        date_close: Expectativa de conclusão

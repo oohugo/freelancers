@@ -1,7 +1,7 @@
 
 * Acompanhamento
 
-* TODOS[86%]:
+* TODOS[87%]:
 *** DONE Usuário cria uma conta
 CLOSED: [2021-10-07 qui 17:01]
 :LOGBOOK:
@@ -72,15 +72,31 @@ CLOSED: [2021-10-16 sáb 00:10]
 :LOGBOOK:
 - State "DONE"       from "NEXT"       [2021-10-16 sáb 00:10]
 :END:
-*** NEXT Validação de todos formulários [25%]
+*** DONE Validação de todos formulários [100%]
+CLOSED: [2021-10-17 dom 06:49]
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2021-10-17 dom 06:49]
+:END:
 **** DONE routes
 CLOSED: [2021-10-16 sáb 01:50]
 :LOGBOOK:
 - State "DONE"       from "NEXT"       [2021-10-16 sáb 01:50]
 :END:
-**** TODO Projeto
-**** TODO Perfil
-**** TODO proposta
+**** DONE Projeto
+CLOSED: [2021-10-17 dom 06:49]
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2021-10-17 dom 06:49]
+:END:
+**** DONE Perfil
+CLOSED: [2021-10-17 dom 06:49]
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2021-10-17 dom 06:49]
+:END:
+**** DONE proposta
+CLOSED: [2021-10-17 dom 06:49]
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2021-10-17 dom 06:49]
+:END:
 *** TODO Profissional busca projetos
 *** TODO Add foto para o perfil do profissional
 * Bonus [%]:

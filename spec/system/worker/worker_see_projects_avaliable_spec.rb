@@ -41,4 +41,23 @@ describe 'Worker see projects' do
     expect(page).to have_content("Data limite: #{date}")
     expect(page).to have_content('Atuação: Remoto')
   end
+
+  it 'cannot see if not have perfil' do
+    worker = Worker.create!(email: 'email@email.com', password: '123456')
+    date = 5.days.from_now.to_date
+    project = Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
+                              max_per_hour: 10.0, deadline: date, place: 'remote', status: :avaliable,
+                              employer: Employer.create!(email: 'employer@email.com', password: '123456'))
+
+    login_as worker, scope: :worker
+    visit project_path(project)
+
+    expect(page).not_to have_content('Site de freelancer')
+    expect(page).not_to have_content('Descrição: Site para contratar freelancers')
+    expect(page).not_to have_content('Máximo por hora: R$ 10,00')
+    expect(page).not_to have_content("Data limite: #{date}")
+    expect(page).not_to have_content('Atuação: Remoto')
+    expect(page).to have_content('É necessário criar perfil para ver projetos')
+    expect(page).to have_content('Nome completo')
+  end
 end
