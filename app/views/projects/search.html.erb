@@ -1,0 +1,11 @@
+<h4>Projetos com <%= @query %></h4>
+<% if @projects.nil? %>
+		<p>Não há projetos com <%= @query %> </p>
+<% else %>
+		<ul>
+				<% @projects.each do |project| %>
+						<li><%= link_to project.title, project %></li>
+				<% end %>
+		</ul>
+<% end %>
+<%= link_to('Pagina inicial', root_path) %>

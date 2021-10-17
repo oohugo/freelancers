@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :projects, only: %i[create new show] do
     resources :feedback_workers, only: :create
     resources :feedback_employers, only: :create
+    get 'search', on: :collection
     get 'feedback', on: :member
     post 'suspend', on: :member
     post 'finished', on: :member

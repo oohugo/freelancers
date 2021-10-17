@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_employer!, only: %i[create new suspend finished]
-
+  before_action :authenticate_worker!, only: :search
   def new
     @project = Project.new
   end
@@ -50,5 +50,10 @@ class ProjectsController < ApplicationController
     @workers = @project.proposals.select(&:accepted?).map(&:worker)
     @feedback_worker = FeedbackWorker.new
     @feedback_employer = FeedbackEmployer.new
+  end
+
+  def search
+    @query = params[:query].force_encoding('UTF-8')
+    @projects = Project.where("title LIKE ? OR description LIKE ?", '%' + @query + '%', '%' + @query + '%')
   end
 end
