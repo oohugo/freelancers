@@ -6,7 +6,7 @@
 		<dt>Máximo por hora: </dt>
 		<dd><%= number_to_currency(@project.max_per_hour) %></dd>
 		<dt>Data limite:</dt>
-		<dd><%= @project.deadline %></dd>
+		<dd><%= l @project.deadline %></dd>
 		<dt>Atuação: </dt>
 		<dd><%= @project.place == 'remote' ? 'Remoto' : 'Presencial' %></dd>
 		<% if worker_signed_in? %>
@@ -23,14 +23,19 @@
 				<% if @worker_proposal.empty? || @worker_proposal.take.canceled? %>
 						<% if !@project.suspend? %>
 								<%= form_with model: [@project, @proposal] do |form| %>
+										<p>
 										<%= form.label :description %>
 										<%= form.text_field :description %>
+										</p><p>
 										<%= form.label :hourly_value %>
 										<%= form.number_field :hourly_value %>
+										</p><p>
 										<%= form.label :hours_per_week %>
 										<%= form.number_field :hours_per_week %>
+										</p><p>
 										<%= form.label :date_close %>
 										<%= form.date_field :date_close %>
+										</p>
 										<%= form.submit 'Enviar' %>
 								<% end %>
 						<% end %>
@@ -44,7 +49,7 @@
 								<dt>Horas disponíveis por semana:</dt>
 								<dd><%= proposal.hours_per_week %></dd>
 								<dt>Previsão de conclusão:</dt>
-								<dd><%= proposal.date_close %></dd>
+								<dd><%= l proposal.date_close %></dd>
 								<dt>Status: </dt>
 								<dd><%= proposal.status %></dd>
 						</dl>
@@ -81,7 +86,7 @@
 								<dt>Horas disponíveis por semana:</dt>
 								<dd><%= proposal.hours_per_week %></dd>
 								<dt>Previsão de conclusão:</dt>
-								<dd><%= proposal.date_close %></dd>
+								<dd><%= l proposal.date_close %></dd>
 								<dt>Status: </dt>
 								<dd><%= proposal.status %></dd>
 								<%= link_to proposal.worker.perfil_worker do %>

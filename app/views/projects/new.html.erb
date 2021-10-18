@@ -5,26 +5,32 @@
 		<% end %>
 <% end %>
 <%= form_with(model: @project) do |form| %>
-	<p>
-		<%= form.label :title %>
-		<%= form.text_field :title %></p>
-	<p>
-		<%= form.label :description %>
-		<%= form.text_field :description %></p>
-	<p>
-		<%= form.label :max_per_hour %>
-		<%= form.number_field :max_per_hour %></p>
-	<p>
-		<%= form.label :deadline %>
-		<%= form.date_field :deadline %></p>
-	<p>
-		<%= form.label :place %>
-		<%= form.radio_button :place, "remote" %>
-		<%= form.label :place_remote, 'Remoto' %>
-		<%= form.radio_button :place, "presential" %>
-		<%= form.label :place_presential, 'Presencial' %>
-	</p>
-	<p>
-		<%= form.submit 'Criar' %>
-	</p>
+		<div class="mb-3">
+				<%= form.label :title, class:"form-label" %>
+				<%= form.text_field :title, class:"form-control" %>
+		</div>
+		<div class="mb-3">
+				<%= form.label :description, class:"form-label" %>
+				<%= form.text_field :description, class:"form-control" %></p>
+		</div>
+		<div class="mb-3">
+				<%= form.label :max_per_hour, class:"form-label" %>
+				<%= form.number_field :max_per_hour, class:"form-control" %></p>
+		</div>
+		<div class="mb-3">
+				<%= form.label :deadline, class:"form-label" %>
+				<%= form.date_field :deadline, class:"form-control" %></p>
+		</div>
+		<div class="mb-3">
+				<%= form.label :place %>
+				<div class="form-check">
+						<%= form.radio_button :place, "remote", class:"form-check-input" %>
+						<%= form.label :place_remote, 'Remoto', class:"form-check-label" %>
+				</div>
+				<div class="form-check">
+						<%= form.radio_button :place, "presential", class:"form-check-input" %>
+						<%= form.label :place_presential, 'Presencial', class:"form-check-label" %>
+				</div>
+		</div>
+		<%= form.submit 'Criar', class:"btn btn-primary" %>
 <% end %>

@@ -11,6 +11,7 @@ class ProjectsController < ApplicationController
                            ))
     @project.employer = current_employer
     if @project.save
+      flash[:notice] = 'Projeto salvo'
       redirect_to root_path
     else
       render action: 'new'

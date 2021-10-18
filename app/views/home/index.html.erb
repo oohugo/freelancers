@@ -1,3 +1,26 @@
+
+<nav>
+		<ul class="nav nav-tabs">
+				<% unless employer_signed_in? || worker_signed_in? %>
+						<li class="nav-item ">
+								<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Empregador</a>
+								<ul class="dropdown-menu">
+										<li><%= link_to 'Entrar como empregador', new_employer_session_path, class: 'dropdown-item' %></li>
+										<li><%= link_to "Registar como empregador", new_employer_registration_path, class: 'dropdown-item' %></li>
+								</ul>
+						</li>
+						<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"> Freelancer</a>
+								<ul class="dropdown-menu">
+										<li><%= link_to 'Entrar como freelancer', new_worker_session_path, class: "dropdown-item" %></li>
+										<li><%= link_to "Registar como fereelancer", new_worker_registration_path, class: "dropdown-item" %></li>
+								</ul>
+						</li>
+				<% end %>
+		</ul>
+</nav>
+
+
 <% if employer_signed_in? %>
 		<h3><%= link_to 'Criar Projeto', new_project_path %></h3>
 <% end %>
