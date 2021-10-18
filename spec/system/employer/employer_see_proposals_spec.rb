@@ -23,11 +23,11 @@ describe 'Employer see proposal' do
     click_on 'Site de freelancer'
 
     expect(page).to have_content('Sou bom em fazer sites')
-    expect(page).to have_content('Valor por hora: R$ 7,00')
+    expect(page).to have_content('Valor da hora: R$ 7,00')
     expect(page).to have_content('Horas disponíveis por semana: 20')
-    expect(page).to have_content("Previsão de conclusão: #{I18n.l(date)}")
+    expect(page).to have_content("Expectativa de conclusão: #{I18n.l(date)}")
     expect(page).to have_content('Status: pending')
-    expect(page).to have_content('Perfil do freelancer: worker@email.com')
+    expect(page).to have_content('Perfil do Freelancer: worker@email.com')
     expect(page).to have_content('Aceitar proposta')
     expect(page).to have_content('Rejeitar proposta')
     expect(page).not_to have_content('Experiencia em app mobiles')

@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_employer!, only: %i[create new suspend finished]
+  before_action :authenticate_employer!, only: %i[create new suspend finished avaliable]
   before_action :authenticate_worker!, only: :search
   def new
     @project = Project.new

@@ -3,6 +3,10 @@ pt-BR:
   avaliable: Disponível
   suspend: Suspenso
   finished: Concluído
+  accepted: Aceito
+  pending: Pendente
+  rejected: Rejeitado
+  canceled: Cancelado 
   activerecord:
     models:
       employer: Empregador
@@ -32,5 +36,5 @@ pt-BR:
       proposal:
         description: Descrição da proposta
         hourly_value: Valor da hora
-        hours_per_week: Horas disponível por semana
+        hours_per_week: Horas disponíveis por semana
         date_close: Expectativa de conclusão

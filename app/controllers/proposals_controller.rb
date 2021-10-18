@@ -33,8 +33,10 @@ class ProposalsController < ApplicationController
   def cancel
     @proposal = Proposal.find(params[:id])
     @proposal.canceled!
+    project = @proposal.project
+    @proposal.destroy
     flash[:notice] = 'Proposta cancelada'
-    redirect_to @proposal.project
+    redirect_to project
   end
 
   def cancel_with_justification
@@ -46,6 +48,8 @@ class ProposalsController < ApplicationController
     else
       flash[:alert] = @proposal.errors.full_messages.first
     end
-    redirect_to @proposal.project
+    project = @proposal.project
+    @proposal.destroy
+    redirect_to project
   end
 end

@@ -46,7 +46,7 @@ describe 'Employer edit a project' do
     click_on 'Site de freelancer'
     fill_in 'Descrição da proposta', with: 'texto justificando a proposta'
     fill_in 'Valor da hora', with: 7.0
-    fill_in 'Horas disponível por semana', with: 20
+    fill_in 'Horas disponíveis por semana', with: 20
     fill_in 'Expectativa de conclusão', with: 4.days.from_now
     click_on 'Enviar'
 

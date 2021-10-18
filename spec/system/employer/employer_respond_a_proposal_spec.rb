@@ -18,6 +18,7 @@ describe 'Employer respond a proposal' do
     expect(page).to have_content('Sou bom em fazer sites')
     expect(page).to have_content('Proposta aceita')
     expect(page).to have_content('Status: accepted')
+    expect(page).not_to have_content('Aceitar proposta')
   end
   it 'reject' do
     joao = Worker.create!(email: 'joao@email.com', password: '123456')
