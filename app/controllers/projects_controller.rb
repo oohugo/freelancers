@@ -43,7 +43,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @project.finished!
     flash[:notice] = 'Projeto finalizado'
-    redirect_to feedback_project_path
+    redirect_to(@project.proposals.nil? || @project.proposals.empty? ? root_path : feedback_project_path)
   end
 
   def feedback
@@ -56,5 +56,12 @@ class ProjectsController < ApplicationController
   def search
     @query = params[:query].force_encoding('UTF-8')
     @projects = Project.where("title LIKE ? OR description LIKE ?", '%' + @query + '%', '%' + @query + '%')
+  end
+
+  def avaliable
+    @project = Project.find(params[:id])
+    @project.avaliable!
+    flash[:notice] = 'Projeto disponível'
+    redirect_to project_path(@project)
   end
 end
