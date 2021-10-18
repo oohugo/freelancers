@@ -14,7 +14,7 @@ describe 'Freelancer registers perfil' do
     fill_in 'Área de atuação', with: 'Desenvolvimento'
     click_on 'Criar perfil'
 
-    expect(page).to have_content('Projetos disponíveis')
+    expect(page).to have_content('Pesquisar projetos')
     expect(page).not_to have_content('Nome completo')
   end
 

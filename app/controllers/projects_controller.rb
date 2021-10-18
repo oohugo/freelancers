@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
         @worker_proposal = Proposal.where('project_id = ? AND worker_id = ?', @project, current_worker)
       end
     end
-    @employer_proposals = @project.suspend? ? @project.proposals.select(&:accepted?) : @project.proposals.reject(&:rejected?)
+    @employer_proposals = @project.suspend? ? @project.proposals.select(&:accepted?) : @project.proposals.reject(&:rejected?).reject(&:canceled?)
   end
 
   def suspend

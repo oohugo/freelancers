@@ -2,36 +2,40 @@
 <h3>Criar perfil</h3>
 <% unless @perfil_worker.errors.empty? %>
 	<% @perfil_worker.errors.full_messages.each do |error| %>
-		<p><%= error %></p>
+			<div class="alert alert-danger" role="alert">
+					<%= error %>
+			</div>
 		<% end %>
 <% end %>
 
 <%= form_with(model: @perfil_worker) do |form| %>
-		<p>
-				<%= form.label :full_name %>
-				<%= form.text_field :full_name %>
-		</p>
-		<p>
-				<%= form.label :name %>
-				<%= form.text_field :name %>
-		</p>
-		<p>
-				<%= form.label :birthdate %>
-				<%= form.date_field :birthdate %>
-		</p>
-		<p>
-				<%= form.label :qualification %>
-				<%= form.text_field :qualification %>
-		</p><p>
-				<%= form.label :background %>
-				<%= form.text_field :background %>
-		</p><p>
-				<%= form.label :expertise %>
-				<%= form.text_field :expertise %>
-		</p>
-		<p>
-				<%= form.label :photo %>
-				<%= form.file_field :photo %>
-		</p>
+		<div class="mb-3">
+				<%= form.label :full_name, class:"form-label"  %>
+				<%= form.text_field :full_name, class:"form-control" %>
+		</div>
+		<div class="mb-3">
+				<%= form.label :name, class:"form-label"  %>
+				<%= form.text_field :name, class:"form-control" %>
+		</div>
+		<div class="mb-3">
+				<%= form.label :birthdate, class:"form-label"  %>
+				<%= form.date_field :birthdate, class:"form-control" %>
+		</div>
+		<div class="mb-3">
+				<%= form.label :qualification, class:"form-label"  %>
+				<%= form.text_field :qualification, class:"form-control" %>
+		</div>
+		<div class="mb-3">
+				<%= form.label :background, class:"form-label"  %>
+				<%= form.text_field :background, class:"form-control" %>
+		</div>
+		<div class="mb-3">
+				<%= form.label :expertise, class:"form-label"  %>
+				<%= form.text_field :expertise, class:"form-control" %>
+		</div>
+		<div class="mb-3">
+				<%= form.label :photo, class:"form-label" %>
+				<%= form.file_field :photo, class:"form-control form-control-l"  %>
+		</div>
 		<%= form.submit 'Criar perfil' %>
 <% end %>

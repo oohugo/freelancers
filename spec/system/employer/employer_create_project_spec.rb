@@ -11,11 +11,11 @@ describe 'Employer create project' do
     fill_in 'Título', with: 'Site de freelancers'
     fill_in 'Descrição', with: 'Site para freelancers encontrarem projetos'
     fill_in 'Valor máximo por hora', with: 10.50
-    fill_in 'Data limite', with: '17/10/2021'
+    fill_in 'Data limite', with: 1.days.from_now
     choose 'Remoto'
     click_on 'Criar'
 
-    expect(page).to have_content 'Site de freelancers'
+    expect(page).to have_content('Site de freelancers')
   end
 
   context 'Validation' do

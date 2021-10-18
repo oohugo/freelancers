@@ -52,7 +52,7 @@ describe 'Employer see proposal' do
     login_as employer, scope: :employer
     visit root_path
     click_on 'Site de freelancer'
-    click_on 'Perfil do freelancer'
+    click_on worker.email
 
     expect(page).to have_content('Perfil do worker@email.com')
     expect(page).to have_css('img[alt=Foto]')

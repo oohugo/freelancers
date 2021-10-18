@@ -22,7 +22,7 @@
 
 
 <% if employer_signed_in? %>
-		<h3><%= link_to 'Criar Projeto', new_project_path %></h3>
+		<h3><%= link_to 'Criar Projeto', new_project_path, class:"btn btn-primary"%></h3>
 <% end %>
 <% if worker_signed_in? %>
 		<%= form_with url: "/projects/search", method: :get do |form| %>
@@ -30,22 +30,48 @@
 				<%= form.text_field :query %>
 				<%= form.submit "Buscar" %>
 		<% end %>
-		<h3>Projetos disponíveis:</h3>
 <% end %>
 
 <% unless @projects.nil? || @projects.empty? %>
-		<ul>
-				<% @projects.each do |project| %>
-						<li><%= link_to project.title, project %></li>
+		<div class="list-group">
+				<% if worker_signed_in? %>
+						<h3>Projetos disponíveis:</h3>
+				<% elsif employer_signed_in? %>
+						<h3>Meus Projetos</h3>
 				<% end %>
-		</ul>
+				<% @projects.each do |project| %>
+						<%= link_to project, class:"list-group-item list-group-item-action", 'aria-current':"true" do %>
+								<div class="d-flex w-100 justify-content-between">
+										<h5 class="mb-1"><%= project.title %></h5>
+										<% if employer_signed_in? %>
+												<small><%= Proposal.model_name.human + 's pendentes: ' + project.proposals.where(status: :pending).count.to_s %></small>
+										<% else %>
+												<small><%= Project.human_attribute_name('max_per_hour') + ': ' + number_to_currency(project.max_per_hour) %></small>
+										<% end %>
+								</div>
+								<p class="mb-1"><%= project.description %></p>
+								<small><%= Project.human_attribute_name('deadline') + ' : ' + l(project.deadline) %></small>
+						<% end %>
+				<% end %>
+		</div>
 <% end %>
 
 <% unless @projects_worker.nil? || @projects_worker.empty? %>
 		<h3>Projetos com propostas</h3>
-		<ul>
+		<div class="list-group">
 				<% @projects_worker.each do |project| %>
-						<li><%= link_to project.title, project %>, Status: <%= t(project.status) %></li>
+						<%= link_to project, class:"list-group-item list-group-item-action", 'aria-current':"true" do %>
+								<div class="d-flex w-100 justify-content-between">
+										<h5 class="mb-1"><%= project.title %></h5>
+										<% if employer_signed_in? %>
+												<small><%= Proposal.model_name.human + 's pendentes: ' + project.proposals.where(status: :pending).count.to_s %></small>
+										<% else %>
+												<small><%= Project.human_attribute_name('max_per_hour') + ': ' + number_to_currency(project.max_per_hour) %></small>
+										<% end %>
+								</div>
+								<p class="mb-1"><%= project.description %></p>
+								<small><%= Project.human_attribute_name('deadline') + ' : ' + l(project.deadline) %></small>
+						<% end %>
 				<% end %>
-		</ul>
+		</div>
 <% end %>

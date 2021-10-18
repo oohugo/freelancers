@@ -37,9 +37,9 @@ describe 'Worker see projects' do
 
     expect(page).to have_content('Site de freelancer')
     expect(page).to have_content('Descrição: Site para contratar freelancers')
-    expect(page).to have_content('Máximo por hora: R$ 10,00')
+    expect(page).to have_content('Valor máximo por hora: R$ 10,00')
     expect(page).to have_content("Data limite: #{I18n.l(date)}")
-    expect(page).to have_content('Atuação: Remoto')
+    expect(page).to have_content('Locação: Remoto')
     expect(page).to have_content('Avaliação do Empregador: Ainda não avaliado')
   end
 
