@@ -17,6 +17,6 @@ Rails.application.routes.draw do
     post 'finished', on: :member
     post 'avaliable', on: :member
   end
-  resources :perfil_workers, only: %i[create new show]
+  resources :perfil_workers, only: %i[create new show edit update]
   resources :employers, only: :show
 end

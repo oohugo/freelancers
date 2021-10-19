@@ -24,7 +24,10 @@
 													<li class="nav-item"><%= link_to 'Logout', destroy_employer_session_path, method: :delete, class: 'nav-link' %></li>
 											<% elsif worker_signed_in?  %>
 													<li class="nav-text"><%= current_worker.email %></li>
-													<li class="nav-item"><%= link_to PerfilWorker.model_name.human, current_worker.perfil_worker %>
+													<li class="nav-item"><%= link_to PerfilWorker.model_name.human, current_worker.perfil_worker %></li>
+													<% unless current_worker.perfil_worker.nil? || !current_worker.perfil_worker.valid? %>
+															<li class="nav-item"><%= link_to 'Editar perfil', edit_perfil_worker_path(current_worker.perfil_worker) %></li>
+													<% end %>
 													<li class="nav-item"><%= link_to 'Logout', destroy_worker_session_path, method: :delete, class: 'nav-link' %></li>
 											<% end %>	
 									</ul>
