@@ -19,15 +19,16 @@
 				</dl>
 				<% if employer_signed_in? %>
 						<div class="btn-group" role="group">
-								<% if @project.suspend? %>
-										<%= link_to 'Deixar disponível para propostas', avaliable_project_path(@project), method: :post,  class:"btn btn-outline-primary card-link" %>
-								<% else %>
-										<%= link_to 'Suspender propostas', suspend_project_path(@project), method: :post,  class:"btn btn-outline-primary card-link" %>
-								<% end %>
-
+							
 								<% if @project.finished? %>
 										<%= link_to 'Dar feedback aos freelancers', feedback_project_path,  class:"btn btn-outline-primary card-link" %>
 								<% else %>
+										<% if @project.suspend? %>
+												<%= link_to 'Deixar disponível para propostas', avaliable_project_path(@project), method: :post,  class:"btn btn-outline-primary card-link" %>
+										<% else %>
+												<%= link_to 'Suspender propostas', suspend_project_path(@project), method: :post,  class:"btn btn-outline-primary card-link" %>
+										<% end %>
+
 										<%= link_to 'Finalizar projeto', finished_project_path(@project), method: :post,  class:"btn btn-outline-primary card-link" %>
 								<% end %>
 						</div>
@@ -116,10 +117,12 @@
 												<dd class="col-sm-9"><%= link_to proposal.worker.email, proposal.worker.perfil_worker %>
 												</dd>
 										</dl>
-										<div class="btn-group" role="group">
-												<%= link_to 'Aceitar proposta', accepted_proposal_path(proposal), method: :post, class:"btn btn-outline-primary card-link" unless proposal.accepted? %>
-												<%= link_to 'Rejeitar proposta', rejected_proposal_path(proposal), method: :post, class:"btn btn-outline-primary card-link" %>
-										</div>
+										<% unless @project.finished? %>
+												<div class="btn-group" role="group">
+														<%= link_to 'Aceitar proposta', accepted_proposal_path(proposal), method: :post, class:"btn btn-outline-primary card-link" unless proposal.accepted? %>
+														<%= link_to 'Rejeitar proposta', rejected_proposal_path(proposal), method: :post, class:"btn btn-outline-primary card-link" %>
+												</div>
+										<% end %>
 								</div>
 				<% end %>
 		<% end %>

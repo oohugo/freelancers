@@ -7,7 +7,7 @@ class PerfilWorkersController < ApplicationController
   def create
     @perfil_worker = PerfilWorker.new(params.require(:perfil_worker).permit(
                                         :full_name, :name, :birthdate, :qualification,
-                                        :background, :expertise
+                                        :background, :expertise, :photo
                                       ))
     @perfil_worker.worker = current_worker
     if @perfil_worker.save
