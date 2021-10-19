@@ -13,7 +13,6 @@ class PerfilWorkersController < ApplicationController
     if @perfil_worker.save
       redirect_to root_path
     else
-      @perfil_worker.destroy
       render action: 'new'
     end
   end
@@ -30,6 +29,10 @@ class PerfilWorkersController < ApplicationController
     @perfil_worker = PerfilWorker.find(params[:id])
     @perfil_worker.update(params.require(:perfil_worker).permit(:name, :qualification,
                                                                 :background, :expertise, :photo))
-    redirect_to root_path
+    if !@perfil_worker.valid?
+      render action: 'edit'
+    else
+      redirect_to root_path
+    end
   end
 end

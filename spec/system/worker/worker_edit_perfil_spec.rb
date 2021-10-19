@@ -27,4 +27,23 @@ describe 'Freelancer edit perfil' do
     expect(page).to have_content('Área de atuação: Web')
     expect(page).to have_css('img[src*="pexels.jpg"]')
   end
+  it 'cannot have formation, background and expertise in blank' do
+    worker = Worker.create!(email: 'joao@email.com', password: '123456')
+    PerfilWorker.create!(full_name: 'João Severino', birthdate: '18/07/1992',
+                         qualification: 'Graduado em Ciências da Computação', background: 'Estágio blabla bla',
+                         expertise: 'Desenvolvimento', worker: worker)
+    login_as worker, scope: :worker
+    visit root_path
+    click_on 'Editar perfil'
+    fill_in 'Formação', with: ''
+    fill_in 'Experiência', with: ''
+    fill_in 'Área de atuação', with: ''
+    click_on 'Enviar'
+
+    expect(page).not_to have_content('Projetos disponíveis')
+    expect(page).to have_content('Nome social')
+    expect(page).to have_content('Formação não pode ficar em branco')
+    expect(page).to have_content('Experiência não pode ficar em branco')
+    expect(page).to have_content('Área de atuação não pode ficar em branco')
+  end
 end
