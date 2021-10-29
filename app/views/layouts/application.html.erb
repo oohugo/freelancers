@@ -15,18 +15,18 @@
 
   <body>
 			<div class="container">
-					<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+					<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
 							<div class="container-fluid">
 									<%= link_to Freelancers, root_path, class:"navbar-brand display-1" %>
-									<ul class="nav">
+									<ul class="navbar-nav d-flex mb-lg-0">
 											<% if employer_signed_in? %>
-													<li class="nav-text"><%= current_employer.email %></li> 
+													<li class="nav-item"><a class="nav-link disabled"><%= current_employer.email %></a></li> 
 													<li class="nav-item"><%= link_to 'Logout', destroy_employer_session_path, method: :delete, class: 'nav-link' %></li>
 											<% elsif worker_signed_in?  %>
-													<li class="nav-text"><%= current_worker.email %></li>
-													<li class="nav-item"><%= link_to PerfilWorker.model_name.human, current_worker.perfil_worker %></li>
+													<li class="nav-text"><a class="nav-link disabled"><%= current_worker.email %></a></li>
+													<li class="nav-item"><%= link_to PerfilWorker.model_name.human, current_worker.perfil_worker, class: 'nav-link'  %></li>
 													<% unless current_worker.perfil_worker.nil? || !current_worker.perfil_worker.valid? %>
-															<li class="nav-item"><%= link_to 'Editar perfil', edit_perfil_worker_path(current_worker.perfil_worker) %></li>
+															<li class="nav-item"><%= link_to 'Editar perfil', edit_perfil_worker_path(current_worker.perfil_worker), class: 'nav-link' %></li>
 													<% end %>
 													<li class="nav-item"><%= link_to 'Logout', destroy_worker_session_path, method: :delete, class: 'nav-link' %></li>
 											<% end %>	
