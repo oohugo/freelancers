@@ -1,7 +1,7 @@
 
 * Acompanhamento
 
-* TODOS[89%]:
+* TODOS[62%]:
 *** DONE Usuário cria uma conta
 CLOSED: [2021-10-07 qui 17:01]
 :LOGBOOK:
@@ -112,14 +112,34 @@ CLOSED: [2021-10-19 ter 09:40]
 :LOGBOOK:
 - State "DONE"       from "NEXT"       [2021-10-19 ter 09:40]
 :END:
-*** NEXT Editar perfil do profissional
+*** DONE Editar perfil do profissional
+CLOSED: [2021-10-19 ter 16:30]
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2021-10-19 ter 16:30]
+:END:
+*** DONE Atualizar a versão do ruby
+CLOSED: [2021-10-29 sex 09:48]
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2021-10-29 sex 09:48]
+:END:
+*** DONE Config Seeds
+CLOSED: [2021-10-29 sex 10:27]
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2021-10-29 sex 10:27]
+:END:
 *** TODO Arrumar feedback
-* Bonus [0%]:
+*** TODO /error/ - show procjet acessível sem login!!!
+*** TODO Limit photo size
+*** TODO use shoulda _matchers para outros testes
+*** TODO mudar worker _perfil  para ProfileWorker
+*** TODO Data limite é data para inscrições ou data para conclusão?  
+*** TODO Arquivo para propostas e projetos
+*** TODO Arrumar README
 *** TODO Paginação [%]
+    talvez com Kaminari
 **** TODO Home
 **** TODO search
 **** TODO meus projetos
 *** TODO I18n
-*** TODO Adicionar Bootstrap e visual
 *** TODO Usuário pode marcar profissionais favoritos
 *** TODO Profissional pode marcar usuários favoritos
