@@ -5,10 +5,11 @@ class Project < ApplicationRecord
   validate :place_only_valid_options
 
   enum status: { avaliable: 0, suspend: 10, finished: 20 }
+
+  belongs_to :employer
   has_many :proposals
   has_many :feedback_projects
-  has_many :worker, through: :proposals
-  belongs_to :employer
+  has_many :workers, through: :proposals
 
   def deadline_in_the_future
     errors.add(:deadline, 'não pode ser em datas passadas') if deadline && deadline < Date.today

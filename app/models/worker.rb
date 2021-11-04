@@ -4,13 +4,13 @@ class Worker < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :feedback_worker
   has_one :perfil_worker
-  has_many :proposal
-  has_many :projects, through: :proposal
+  has_many :feedback_workers
+  has_many :proposals
+  has_many :projects, through: :proposals
 
   def calculate_rating
-    ratings = feedback_worker.map(&:rating)
+    ratings = feedback_workers.map(&:rating)
     self.rating = (ratings.sum / ratings.size) unless ratings.empty?
   end
 end
