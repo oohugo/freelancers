@@ -27,40 +27,30 @@ describe 'Worker register proposal' do
   context 'validations' do
     it ' cannot in a suspend project' do
       worker = Worker.create!(email: 'email@email.com', password: '123456')
-      employer = Employer.create!(email: 'employer@email.com', password: '123456')
-      project = Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                                max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote',
-                                employer: employer, status: :suspend)
-      PerfilWorker.create!(full_name: 'Nome Completo', name: 'Nome',
-                           birthdate: '12/12/2002', qualification: 'Graduado', background: 'bla bla',
-                           expertise: 'Web', worker: worker)
+      project = create(:project, title: 'Site de freelancer', status: :suspend)
+      create(:perfil_worker, worker: worker)
+
       login_as worker, scope: :worker
       visit project_path(project)
       expect(page).to have_content('Site de freelancer')
       expect(page).not_to have_content('Digite uma proposta')
     end
+
     it 'cannot in a finished a project' do
       worker = Worker.create!(email: 'email@email.com', password: '123456')
-      employer = Employer.create!(email: 'employer@email.com', password: '123456')
-      project = Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                                max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote',
-                                employer: employer, status: :finished)
-      PerfilWorker.create!(full_name: 'Nome Completo', name: 'Nome',
-                           birthdate: '12/12/2002', qualification: 'Graduado', background: 'bla bla',
-                           expertise: 'Web', worker: worker)
+      project = create(:project, title: 'Site de freelancer', status: :finished)
+      create(:perfil_worker, worker: worker)
+
       login_as worker, scope: :worker
       visit project_path(project)
       expect(page).to have_content('Site de freelancer')
       expect(page).not_to have_content('Digite uma proposta')
     end
+
     it 'cannot create a proposal blank' do
       worker = Worker.create!(email: 'email@email.com', password: '123456')
-      PerfilWorker.create!(full_name: 'Nome Completo', name: 'Nome',
-                           birthdate: '12/12/2002', qualification: 'Graduado', background: 'bla bla',
-                           expertise: 'Web', worker: worker)
-      Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                      max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote',
-                      employer: Employer.create!(email: 'employer@email.com', password: '123456'))
+      create(:perfil_worker, worker: worker)
+      create(:project, title: 'Site de freelancer', description: 'Site para contratar freelancers')
 
       login_as worker, scope: :worker
       visit root_path

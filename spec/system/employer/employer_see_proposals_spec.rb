@@ -4,9 +4,7 @@ describe 'Employer see proposal' do
   it 'succefully' do
     employer = Employer.create!(email: 'joao@email.com', password: '123456')
     worker = Worker.create!(email: 'worker@email.com', password: '123456')
-    site = Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                           max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote',
-                           status: :avaliable, employer: employer)
+    site = create(:project, title: 'Site de freelancer', employer: employer)
     app = Project.create!(title: 'Jogo mobile', description: 'Jogo para celulares android',
                           max_per_hour: 40.0, deadline: 50.days.from_now, place: 'remote',
                           status: :avaliable, employer: employer)
@@ -37,18 +35,14 @@ describe 'Employer see proposal' do
   end
 
   it 'and see perfil of freelancer' do
-    employer = Employer.create!(email: 'joao@email.com', password: '123456')
+    employer = create(:employer)
     worker = Worker.create!(email: 'worker@email.com', password: '123456')
     perfil = PerfilWorker.create!(full_name: 'João Severino', birthdate: '18/07/1992',
                                   qualification: 'Graduado em Ciências da Computação', background: 'Estágio blabla bla',
                                   expertise: 'Desenvolvimento', worker: worker)
     perfil.photo.attach(io: File.open('spec/support/hades.png'), filename: 'hades.png')
-    site = Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                           max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote',
-                           status: :avaliable, employer: employer)
-    Proposal.create!(description: 'Sou bom em fazer sites', hourly_value: 7.0,
-                     hours_per_week: 20, date_close: 4.days.from_now,
-                     project: site, worker: worker)
+    create(:proposal, project: create(:project, title: 'Site de freelancer', employer: employer), worker: worker)
+
     login_as employer, scope: :employer
     visit root_path
     click_on 'Site de freelancer'

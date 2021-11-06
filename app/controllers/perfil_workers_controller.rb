@@ -29,10 +29,10 @@ class PerfilWorkersController < ApplicationController
     @perfil_worker = PerfilWorker.find(params[:id])
     @perfil_worker.update(params.require(:perfil_worker).permit(:name, :qualification,
                                                                 :background, :expertise, :photo))
-    if !@perfil_worker.valid?
-      render action: 'edit'
-    else
+    if @perfil_worker.valid?
       redirect_to root_path
+    else
+      render action: 'edit'
     end
   end
 end

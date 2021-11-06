@@ -15,7 +15,7 @@ describe 'Freelancer edit perfil' do
     fill_in 'Formação', with: 'Graduado em Ciências da Computação e pos em Matemática'
     fill_in 'Experiência', with: 'Estágio em web e junior em ruby on rails'
     fill_in 'Área de atuação', with: 'Web'
-    attach_file 'Foto', Rails.root.join('spec', 'support', 'pexels.jpg')
+    attach_file 'Foto', Rails.root.join('spec/support/pexels.jpg')
     click_on 'Enviar'
     click_on 'Perfil'
 
@@ -27,6 +27,7 @@ describe 'Freelancer edit perfil' do
     expect(page).to have_content('Área de atuação: Web')
     expect(page).to have_css('img[src*="pexels.jpg"]')
   end
+
   it 'cannot have formation, background and expertise in blank' do
     worker = Worker.create!(email: 'joao@email.com', password: '123456')
     PerfilWorker.create!(full_name: 'João Severino', birthdate: '18/07/1992',

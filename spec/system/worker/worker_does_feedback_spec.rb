@@ -32,7 +32,7 @@ describe 'Freelancer does feedback of employer' do
     worker = Worker.create!(email: 'email@email.com', password: '123456')
     PerfilWorker.create!(full_name: 'João Severino', name: 'Severino', birthdate: '18/07/1992',
                          qualification: 'Graduado em Ciências da Computação',
-                         background: 'Estágio blabla bla',expertise: 'Desenvolvimento', worker: worker)
+                         background: 'Estágio blabla bla', expertise: 'Desenvolvimento', worker: worker)
     employer = Employer.create!(email: 'employer@email.com', password: '123456')
     FeedbackEmployer.create!(comment: 'Fez tudo certo', rating: 5, employer: employer)
     FeedbackEmployer.create!(comment: 'Fez tudo errado', rating: 2, employer: employer)

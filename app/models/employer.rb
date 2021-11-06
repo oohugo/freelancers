@@ -3,8 +3,8 @@ class Employer < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :projects
-  has_many :feedback_employers
+  has_many :projects, dependent: :destroy
+  has_many :feedback_employers, dependent: :destroy
 
   def calculate_rating
     ratings = feedback_employers.map(&:rating)

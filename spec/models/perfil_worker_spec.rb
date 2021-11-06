@@ -10,7 +10,9 @@ RSpec.describe PerfilWorker, type: :model do
       end
       it 'birthdate must pe present' do
         perfil_worker.valid?
-        expect(perfil_worker.errors.full_messages_for(:birthdate)).to include('Data de nascimento não pode ficar em branco')
+        expect(perfil_worker.errors.full_messages_for(
+                 :birthdate
+               )).to include('Data de nascimento não pode ficar em branco')
       end
       it 'qualification must pe present' do
         perfil_worker.valid?
@@ -22,7 +24,9 @@ RSpec.describe PerfilWorker, type: :model do
       end
       it 'expertise must pe present' do
         perfil_worker.valid?
-        expect(perfil_worker.errors.full_messages_for(:expertise)).to include('Área de atuação não pode ficar em branco')
+        expect(perfil_worker.errors.full_messages_for(
+                 :expertise
+               )).to include('Área de atuação não pode ficar em branco')
       end
     end
   end

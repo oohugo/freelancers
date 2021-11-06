@@ -3,16 +3,8 @@ require 'rails_helper'
 describe 'Worker cancel a proposal' do
   it 'successfully' do
     worker = Worker.create!(email: 'email@email.com', password: '123456')
-    employer = Employer.create!(email: 'employer@email.com', password: '123456')
-    PerfilWorker.create!(full_name: 'João Severino', name: 'Severino', birthdate: '18/07/1992',
-                         qualification: 'Graduado em Ciências da Computação', background: 'Estágio blabla bla',
-                         expertise: 'Desenvolvimento', worker: worker)
-    project = Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                              max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote',
-                              employer: employer)
-    Proposal.create!(description: 'Sou bom em fazer sites', hourly_value: 7.0,
-                     hours_per_week: 20, date_close: 4.days.from_now,
-                     project: project, worker: worker)
+    create(:perfil_worker, worker: worker)
+    create(:proposal, project: create(:project, title: 'Site de freelancer'), worker: worker)
 
     login_as worker, scope: :worker
     visit root_path
@@ -27,17 +19,12 @@ describe 'Worker cancel a proposal' do
 
   it 'justification in cancel a proposal after 3 days confirmed' do
     worker = Worker.create!(email: 'email@email.com', password: '123456')
-    employer = Employer.create!(email: 'employer@email.com', password: '123456')
-    PerfilWorker.create!(full_name: 'João Severino', name: 'Severino', birthdate: '18/07/1992',
-                         qualification: 'Graduado em Ciências da Computação', background: 'Estágio blabla bla',
-                         expertise: 'Desenvolvimento', worker: worker)
-    project = Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                              max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote',
-                              employer: employer)
+    create(:perfil_worker, worker: worker)
+    project = create(:project, title: 'Site de freelancer')
     Proposal.create!(description: 'Sou bom em fazer sites', hourly_value: 7.0,
                      hours_per_week: 20, date_close: 4.days.from_now,
                      project: project, worker: worker, status: :accepted,
-                     date_accepted: 1.days.ago)
+                     date_accepted: 1.day.ago)
     travel 4.days
     login_as worker, scope: :worker
     visit root_path

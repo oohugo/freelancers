@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Employer create project' do
   it 'successfully' do
-    employer = Employer.create!(email: 'joao@email.com', password: '123456')
+    employer = create(:employer)
 
     login_as employer, scope: :employer
     visit root_path
@@ -11,7 +11,7 @@ describe 'Employer create project' do
     fill_in 'Título', with: 'Site de freelancers'
     fill_in 'Descrição', with: 'Site para freelancers encontrarem projetos'
     fill_in 'Valor máximo por hora', with: 10.50
-    fill_in 'Data limite', with: 1.days.from_now
+    fill_in 'Data limite', with: 1.day.from_now
     choose 'Remoto'
     click_on 'Criar'
 
@@ -20,7 +20,7 @@ describe 'Employer create project' do
 
   context 'Validation' do
     it 'cannot have project blank' do
-      employer = Employer.create!(email: 'joao@email.com', password: '123456')
+      employer = create(:employer)
 
       login_as employer, scope: :employer
       visit root_path
@@ -37,7 +37,8 @@ describe 'Employer create project' do
     end
 
     it 'cannot have less o equal to zero in max_per_hour' do
-      employer = Employer.create!(email: 'joao@email.com', password: '123456')
+      employer = create(:employer)
+
       login_as employer, scope: :employer
       visit root_path
       click_on 'Criar Projeto'
@@ -53,7 +54,8 @@ describe 'Employer create project' do
     end
 
     it 'cannot have deadline in past' do
-      employer = Employer.create!(email: 'joao@email.com', password: '123456')
+      employer = create(:employer)
+
       login_as employer, scope: :employer
       visit root_path
       click_on 'Criar Projeto'

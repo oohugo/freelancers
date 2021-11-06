@@ -1,15 +1,9 @@
 require 'rails_helper'
-
 describe 'Employer does feedback of employer' do
   it 'successfully' do
-    worker = Worker.create!(email: 'email@email.com', password: '123456')
     employer = Employer.create!(email: 'employer@email.com', password: '123456')
-    project = Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                              max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote',
-                              employer: employer, status: :finished)
-    Proposal.create!(description: 'Sou bom em fazer sites', hourly_value: 7.0,
-                     hours_per_week: 20, date_close: 4.days.from_now,
-                     project: project, worker: worker, status: :accepted)
+    project = create(:project, title: 'Site de freelancer', employer: employer, status: :finished)
+    create(:proposal, project: project, status: :accepted)
 
     login_as employer, scope: :employer
     visit root_path
@@ -24,9 +18,7 @@ describe 'Employer does feedback of employer' do
 
   it 'and employer see rating of freelancer' do
     worker = Worker.create!(email: 'email@email.com', password: '123456')
-    perfil_worker = PerfilWorker.create!(full_name: 'João Severino', name: 'Severino', birthdate: '18/07/1992',
-                                         qualification: 'Graduado em Ciências da Computação',
-                                         background: 'Estágio blabla bla',expertise: 'Desenvolvimento', worker: worker)
+    perfil_worker = create(:perfil_worker, worker: worker)
     employer = Employer.create!(email: 'employer@email.com', password: '123456')
     FeedbackWorker.create!(comment: 'Fez tudo certo', rating: 5, worker: worker)
     FeedbackWorker.create!(comment: 'Fez tudo errado', rating: 2, worker: worker)

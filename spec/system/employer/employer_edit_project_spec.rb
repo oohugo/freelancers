@@ -2,10 +2,9 @@ require 'rails_helper'
 
 describe 'Employer edit a project' do
   it 'stopping receiving proposals' do
-    worker = Worker.create!(email: 'email@email.com', password: '123456')
-    employer = Employer.create!(email: 'employer@email.com', password: '123456')
-    project = Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                              max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote', employer: employer)
+    worker = create(:worker)
+    employer = create(:employer)
+    project = create(:project, title: 'Site de freelancer', employer: employer)
     Proposal.create!(description: 'Sou bom em fazer sites', hourly_value: 7.0,
                      hours_per_week: 20, date_close: 4.days.from_now,
                      project: project, worker: worker)
@@ -27,14 +26,11 @@ describe 'Employer edit a project' do
   end
 
   it 'returning to receive proposals' do
-    worker = Worker.create!(email: 'email@email.com', password: '123456')
-    employer = Employer.create!(email: 'employer@email.com', password: '123456')
-    Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                    max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote',
-                    employer: employer, status: :suspend)
-    PerfilWorker.create!(full_name: 'Nome Completo', name: 'Nome',
-                         birthdate: '12/12/2002', qualification: 'Graduado', background: 'bla bla',
-                         expertise: 'Web', worker: worker)
+    worker = create(:worker)
+    employer = create(:employer)
+    create(:project, title: 'Site de freelancer', description: 'Site para contratar freelancers',
+                     employer: employer, status: :suspend)
+    create(:perfil_worker, worker: worker)
 
     login_as employer, scope: :employer
     visit root_path
@@ -56,13 +52,10 @@ describe 'Employer edit a project' do
   end
 
   it '... finished a project' do
-    worker = Worker.create!(email: 'email@email.com', password: '123456')
-    employer = Employer.create!(email: 'employer@email.com', password: '123456')
-    project = Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                              max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote', employer: employer)
-    Proposal.create!(description: 'Sou bom em fazer sites', hourly_value: 7.0,
-                     hours_per_week: 20, date_close: 4.days.from_now,
-                     project: project, worker: worker, status: :accepted)
+    worker = Worker.create!(email: 'worker@email.com', password: '123456')
+    employer = create(:employer)
+    project = create(:project, title: 'Site de freelancer', employer: employer)
+    create(:proposal, project: project, worker: worker, status: :accepted)
 
     login_as employer, scope: :employer
     visit root_path
@@ -71,6 +64,6 @@ describe 'Employer edit a project' do
 
     expect(page).to have_content('Projeto finalizado')
     expect(page).to have_content('Feedback')
-    expect(page).to have_content(worker.email)
+    expect(page).to have_content('worker@email.com')
   end
 end

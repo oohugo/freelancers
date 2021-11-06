@@ -14,7 +14,9 @@ RSpec.describe Project, type: :model do
       end
       it 'max per hour must pe present' do
         project.valid?
-        expect(project.errors.full_messages_for(:max_per_hour)).to include('Valor máximo por hora não pode ficar em branco')
+        expect(project.errors.full_messages_for(
+                 :max_per_hour
+               )).to include('Valor máximo por hora não pode ficar em branco')
       end
       it 'deadline must pe present' do
         project.valid?

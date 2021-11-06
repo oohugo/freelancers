@@ -4,9 +4,9 @@ class Worker < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_one :perfil_worker
-  has_many :feedback_workers
-  has_many :proposals
+  has_one :perfil_worker, dependent: :destroy
+  has_many :feedback_workers, dependent: :destroy
+  has_many :proposals, dependent: :nullify
   has_many :projects, through: :proposals
 
   def calculate_rating

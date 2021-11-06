@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Freelancer registers perfil' do
@@ -13,7 +15,7 @@ describe 'Freelancer registers perfil' do
       fill_in 'Formação', with: 'Graduado em Ciências da Computação'
       fill_in 'Experiência', with: 'Estágio blabla bla'
       fill_in 'Área de atuação', with: 'Desenvolvimento'
-      attach_file 'Foto', Rails.root.join('spec', 'support', 'hades.png')
+      attach_file 'Foto', Rails.root.join('spec/support/hades.png')
       click_on 'Criar perfil'
 
       expect(page).to have_content('Pesquisar projetos')
@@ -31,7 +33,7 @@ describe 'Freelancer registers perfil' do
       fill_in 'Formação', with: 'Graduado em Ciências da Computação'
       fill_in 'Experiência', with: 'Estágio blabla bla'
       fill_in 'Área de atuação', with: 'Desenvolvimento'
-      attach_file 'Foto', Rails.root.join('spec', 'support', 'hades.png')
+      attach_file 'Foto', Rails.root.join('spec/support/hades.png')
       click_on 'Criar perfil'
       click_on 'Perfil'
 

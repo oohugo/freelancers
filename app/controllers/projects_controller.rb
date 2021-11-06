@@ -43,7 +43,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @project.finished!
     flash[:notice] = 'Projeto finalizado'
-    redirect_to(@project.proposals.nil? || @project.proposals.empty? ? root_path : feedback_project_path)
+    redirect_to(@project.proposals.blank? ? root_path : feedback_project_path)
   end
 
   def feedback
