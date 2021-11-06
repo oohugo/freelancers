@@ -1,14 +1,18 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Worker register proposal' do
   it 'succefully' do
     worker = Worker.create!(email: 'email@email.com', password: '123456')
-    PerfilWorker.create!(full_name: 'Nome Completo', name: 'Nome',
-                         birthdate: '12/12/2002', qualification: 'Graduado', background: 'bla bla',
-                         expertise: 'Web', worker: worker)
-    Project.create!(title: 'Site de freelancer', description: 'Site para contratar freelancers',
-                    max_per_hour: 10.0, deadline: 5.days.from_now, place: 'remote',
-                    employer: Employer.create!(email: 'employer@email.com', password: '123456'))
+    create(:perfil_worker, worker: worker)
+    create(:project, title: 'Site de freelancer', description: 'Site para contratar freelancers')
+    mailer_spy = class_spy(ProposalMailer)
+    stub_const('ProposalMailer', mailer_spy)
+    mail = double
+    allow(ProposalMailer)
+      .to receive(:notify_new_proposal).and_return(mail)
+    allow(mail).to receive(:deliver_now)
 
     login_as worker, scope: :worker
     visit root_path
@@ -19,6 +23,8 @@ describe 'Worker register proposal' do
     fill_in 'Expectativa de conclusão', with: 4.days.from_now
     click_on 'Enviar'
 
+    expect(ProposalMailer).to have_received(:notify_new_proposal)
+    expect(mail).to have_received(:deliver_now)
     expect(page).to have_content('Proposta enviada')
     expect(page).to have_content('Cancelar a proposta')
     expect(page).not_to have_content('Justifique o cancelamento')

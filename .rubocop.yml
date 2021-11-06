@@ -1,0 +1,26 @@
+require:
+  - rubocop-rails
+
+AllCops:
+ TargetRubyVersion: 3.0
+ NewCops: enable
+ Exclude:
+   - 'bin/**/*'
+   - 'vendor/**/*'
+   - 'db/**/*'
+   - 'config/**/*'
+   - 'script/**/*'
+   - 'spec/rails_helper.rb'
+   - 'Rakefile'
+
+Documentation:
+ Enabled: false
+
+Style/FrozenStringLiteralComment:
+ Enabled: false
+
+Metrics/BlockLength:
+ IgnoredMethods: ['describe', 'context', 'feature', 'scenario', 'let']
+
+AsciiComments:
+  Enabled: false

@@ -11,14 +11,22 @@ class ProposalsController < ApplicationController
                                .permit(:description, :hourly_value, :hours_per_week, :date_close))
     @proposal.project = project
     @proposal.worker = current_worker
-    @proposal.save ? flash[:notice] = 'Proposta enviada' : flash[:alert] = @proposal.errors.full_messages.first
+    if @proposal.save
+      flash[:notice] = 'Proposta enviada'
+      ProposalMailer
+        .with(proposal: @proposal)
+        .notify_new_proposal
+        .deliver_now
+    else
+      flash[:alert] = @proposal.errors.full_messages.first
+    end
     redirect_to @proposal.project
   end
 
   def accepted
     @proposal = Proposal.find(params[:id])
     @proposal.accepted!
-    @proposal.date_accepted = Date.today
+    @proposal.date_accepted = Time.zone.today
     flash[:notice] = 'Proposta aceita'
     redirect_to @proposal.project
   end
