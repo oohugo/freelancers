@@ -12,7 +12,8 @@ describe 'Freelancer registers himself' do
 
     expect(page).to have_content('joao@email.com')
     expect(page).not_to have_content('Entrar como freelancer')
-    expect(page).to have_content('Login efetuado com sucesso')
+    expect(page).to have_content('Logout')
+    expect(page).to have_content('É necessário criar perfil para ver projetos')
     expect(page).to have_content('Criar perfil')
   end
 end

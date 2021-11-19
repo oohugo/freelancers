@@ -1,5 +1,6 @@
 class FeedbackWorkersController < ApplicationController
   before_action :authenticate_employer!, only: :create
+
   def create
     @feedback_worker = FeedbackWorker.new(params.require(:feedback_worker).permit(:rating, :comment, :worker_id))
     @feedback_worker.save!

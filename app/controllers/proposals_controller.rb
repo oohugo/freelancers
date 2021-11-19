@@ -1,25 +1,14 @@
 class ProposalsController < ApplicationController
   before_action :authenticate_employer!, only: %i[accepted rejected]
   before_action :authenticate_worker!, only: %i[create cancel]
+  before_action :project_avaliable!, only: :create
+
   def create
     project = Project.find(params[:project_id])
-    if project.suspend? || project.finished?
-      redirect_to project
-      return
-    end
-    @proposal = Proposal.new(params.require(:proposal)
-                               .permit(:description, :hourly_value, :hours_per_week, :date_close))
+    @proposal = current_worker.proposals.new(params.require(:proposal)
+                              .permit(:description, :hourly_value, :hours_per_week, :date_close))
     @proposal.project = project
-    @proposal.worker = current_worker
-    if @proposal.save
-      flash[:notice] = 'Proposta enviada'
-      ProposalMailer
-        .with(proposal: @proposal)
-        .notify_new_proposal
-        .deliver_now
-    else
-      flash[:alert] = @proposal.errors.full_messages.first
-    end
+    salving_proposal
     redirect_to @proposal.project
   end
 
@@ -52,12 +41,29 @@ class ProposalsController < ApplicationController
     @proposal.comment = params[:comment]
     if @proposal.save
       @proposal.canceled!
+      @proposal.destroy
       flash[:notice] = 'Proposta cancelada'
     else
       flash[:alert] = @proposal.errors.full_messages.first
     end
-    project = @proposal.project
-    @proposal.destroy
+    redirect_to @proposal.project
+  end
+
+  private
+
+  def project_avaliable!
+    project = Project.find(params[:project_id])
+    return unless project.suspend? || project.finished?
+
     redirect_to project
+  end
+
+  def salving_proposal
+    if @proposal.save
+      flash[:notice] = 'Proposta enviada'
+      ProposalMailer.with(proposal: @proposal).notify_new_proposal.deliver_now
+    else
+      flash[:alert] = @proposal.errors.full_messages.first
+    end
   end
 end

@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_employer!, only: %i[create new suspend finished avaliable]
-  before_action :authenticate_worker!, only: :search
+  before_action :authenticate_both!, only: %i[search feedback]
+  before_action :authenticate_perfil, only: :show
+
   def new
     @project = Project.new
   end
@@ -21,15 +23,12 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @proposal = Proposal.new
-    if worker_signed_in?
-      if current_worker.perfil_worker.nil?
-        flash[:alert] = 'É necessário criar perfil para ver projetos'
-        redirect_to new_perfil_worker_path
-      else
-        @worker_proposal = Proposal.where('project_id = ? AND worker_id = ?', @project, current_worker)
-      end
-    end
-    @employer_proposals = @project.suspend? ? @project.proposals.select(&:accepted?) : @project.proposals.reject(&:rejected?).reject(&:canceled?)
+    @worker_proposal = Proposal.where('project_id = ? AND worker_id = ?', @project, current_worker) if worker_signed_in?
+    @employer_proposals = if @project.suspend?
+                            @project.proposals.select(&:accepted?)
+                          else
+                            @project.proposals.reject(&:rejected?).reject(&:canceled?)
+                          end
   end
 
   def suspend
