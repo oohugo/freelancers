@@ -3,8 +3,9 @@ require 'rails_helper'
 describe 'Freelancer does feedback of employer' do
   it 'successfully' do
     worker = create(:worker)
+    employer = create(:employer, email: 'employer@email.com')
     create(:perfil_worker, worker: worker)
-    project = create(:project, title: 'Site de freelancer', status: :finished)
+    project = create(:project, title: 'Site de freelancer', status: :finished, employer: employer)
     create(:proposal, project: project, worker: worker, status: :accepted)
 
     login_as worker, scope: :worker
@@ -25,14 +26,14 @@ describe 'Freelancer does feedback of employer' do
     worker = create(:worker)
     create(:perfil_worker, worker: worker)
     employer = create(:employer)
-    FeedbackEmployer.create!(comment: 'Fez tudo certo', rating: 5, employer: employer)
-    FeedbackEmployer.create!(comment: 'Fez tudo errado', rating: 2, employer: employer)
+    create(:feedback, rating: 5, feedbackable: employer)
+    create(:feedback, rating: 2, feedbackable: employer)
     create(:project, title: 'Site de freelancer', employer: employer)
     project_finished = create(:project, title: 'Site de locação', status: :finished, employer: employer)
     FeedbackProject.create!(comment: 'Projeto muito bem feito pelo Empregador', project: project_finished)
+    employer.reload
+    employer.feedbacks.map(&:save)
 
-    employer.calculate_rating
-    employer.save!
     login_as worker, scope: :worker
     visit root_path
     click_on 'Site de freelancer'

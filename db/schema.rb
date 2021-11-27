@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_17_150758) do
+ActiveRecord::Schema.define(version: 2021_11_27_040702) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -53,15 +53,6 @@ ActiveRecord::Schema.define(version: 2021_10_17_150758) do
     t.index ["reset_password_token"], name: "index_employers_on_reset_password_token", unique: true
   end
 
-  create_table "feedback_employers", force: :cascade do |t|
-    t.integer "rating"
-    t.string "comment"
-    t.integer "employer_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["employer_id"], name: "index_feedback_employers_on_employer_id"
-  end
-
   create_table "feedback_projects", force: :cascade do |t|
     t.string "comment"
     t.integer "project_id", null: false
@@ -70,13 +61,16 @@ ActiveRecord::Schema.define(version: 2021_10_17_150758) do
     t.index ["project_id"], name: "index_feedback_projects_on_project_id"
   end
 
-  create_table "feedback_workers", force: :cascade do |t|
+  create_table "feedbacks", force: :cascade do |t|
     t.integer "rating"
     t.string "comment"
-    t.integer "worker_id", null: false
+    t.string "feedbackable_type", null: false
+    t.integer "feedbackable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["worker_id"], name: "index_feedback_workers_on_worker_id"
+    t.integer "project_id", null: false
+    t.index ["feedbackable_type", "feedbackable_id"], name: "index_feedbacks_on_feedbackable"
+    t.index ["project_id"], name: "index_feedbacks_on_project_id"
   end
 
   create_table "perfil_workers", force: :cascade do |t|
@@ -136,9 +130,8 @@ ActiveRecord::Schema.define(version: 2021_10_17_150758) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "feedback_employers", "employers"
   add_foreign_key "feedback_projects", "projects"
-  add_foreign_key "feedback_workers", "workers"
+  add_foreign_key "feedbacks", "projects"
   add_foreign_key "perfil_workers", "workers"
   add_foreign_key "projects", "employers"
   add_foreign_key "proposals", "projects"

@@ -34,8 +34,8 @@ describe 'Employer authentication' do
 
   context 'feedback' do
     it 'cannot create feedback for freelancer without login' do
-      post '/projects/1/feedback_workers'
-      expect(response).to redirect_to(new_employer_session_path)
+      post '/projects/1/workers/1/feedbacks'
+      expect(response).to redirect_to(root_path)
     end
   end
 end

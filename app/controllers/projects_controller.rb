@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_employer!, only: %i[create new suspend finished avaliable]
   before_action :authenticate_both!, only: %i[search feedback]
   before_action :authenticate_perfil, only: :show
+  before_action :set_project, only: %i[avaliable show suspend finished feedback]
 
   def new
     @project = Project.new
@@ -21,7 +22,6 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
     @proposal = Proposal.new
     @worker_proposal = Proposal.where('project_id = ? AND worker_id = ?', @project, current_worker) if worker_signed_in?
     @employer_proposals = if @project.suspend?
@@ -39,17 +39,14 @@ class ProjectsController < ApplicationController
   end
 
   def finished
-    @project = Project.find(params[:id])
     @project.finished!
     flash[:notice] = 'Projeto finalizado'
     redirect_to(@project.proposals.blank? ? root_path : feedback_project_path)
   end
 
   def feedback
-    @project = Project.find(params[:id])
-    @workers = @project.proposals.select(&:accepted?).map(&:worker)
-    @feedback_worker = FeedbackWorker.new
-    @feedback_employer = FeedbackEmployer.new
+    @workers = @project.proposals.select(&:accepted?).map(&:worker) if employer_signed_in?
+    @feedback = Feedback.new
   end
 
   def search
@@ -58,9 +55,14 @@ class ProjectsController < ApplicationController
   end
 
   def avaliable
-    @project = Project.find(params[:id])
     @project.avaliable!
     flash[:notice] = 'Projeto disponível'
     redirect_to project_path(@project)
+  end
+
+  private
+
+  def set_project
+    @project = Project.find(params[:id])
   end
 end

@@ -17,13 +17,14 @@ describe 'Employer does feedback of employer' do
   end
 
   it 'and employer see rating of freelancer' do
-    worker = Worker.create!(email: 'email@email.com', password: '123456')
+    worker = create(:worker)
     perfil_worker = create(:perfil_worker, worker: worker)
-    employer = Employer.create!(email: 'employer@email.com', password: '123456')
-    FeedbackWorker.create!(comment: 'Fez tudo certo', rating: 5, worker: worker)
-    FeedbackWorker.create!(comment: 'Fez tudo errado', rating: 2, worker: worker)
-    worker.calculate_rating
-    worker.save!
+    employer = create(:employer)
+    create(:feedback, rating: 5, feedbackable: worker)
+    create(:feedback, rating: 2, feedbackable: worker)
+    worker.reload
+    worker.feedbacks.map(&:save)
+
     login_as employer, scope: :employer
     visit perfil_worker_path(perfil_worker)
 

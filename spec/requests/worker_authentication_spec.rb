@@ -23,8 +23,8 @@ describe 'Worker authentication' do
   end
   context 'feedback' do
     it 'cannot create feedback for employer without login' do
-      post '/projects/1/feedback_employers'
-      expect(response).to redirect_to(new_worker_session_path)
+      post '/projects/1/employers/1/feedbacks'
+      expect(response).to redirect_to(root_path)
     end
   end
 end

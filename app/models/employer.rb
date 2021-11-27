@@ -4,10 +4,5 @@ class Employer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :projects, dependent: :destroy
-  has_many :feedback_employers, dependent: :destroy
-
-  def calculate_rating
-    ratings = feedback_employers.map(&:rating)
-    self.rating = (ratings.sum / ratings.size) unless ratings.empty?
-  end
+  has_many :feedbacks, as: :feedbackable, dependent: :destroy
 end

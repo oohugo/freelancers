@@ -2,19 +2,18 @@
 <% if employer_signed_in? %>
 		<% @workers.each do |worker| %>
 				<p><%= worker.email %></p>
-				<%= form_with model: [@project, @feedback_worker] do |form| %> 
+				<%= form_with model:[@project, worker, worker.feedbacks.new] do |form| %> 
 						<%= form.label :rating, 'Nota de 1 a 5' %>
 						<%= form.number_field :rating %>
 						<%= form.label :comment, 'Comentário' %>
 						<%= form.text_field :comment %>
-						<%= form.hidden_field :worker_id, value: worker.id %>
 						<%= form.submit 'Enviar' %>
 				<% end %>
 		<% end %>
 <% end %>
 <% if worker_signed_in? %>
 		<p><%= @project.employer.email %></p>
-		<%= form_with model: [@project, @feedback_employer] do |form| %> 
+		<%= form_with model: [@project, @project.employer, @feedback] do |form| %> 
 				<%= form.label :rating, 'Nota de 1 a 5' %>
 				<%= form.number_field :rating %>
 				<%= form.label :comment, 'Comentário' %>
