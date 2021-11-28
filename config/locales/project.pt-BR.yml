@@ -1,0 +1,10 @@
+---
+pt-BR:
+  projects:
+    show:
+      link1: Projeto
+      link2_worker1: Fazer Proposta
+      link2_worker2: Ver Proposta
+      link2_employer: Ver Propostas
+      link3: Arquivo de Propostas 
+      link4: Dar feedback

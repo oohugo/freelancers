@@ -13,7 +13,9 @@ pt-BR:
       worker: Freelancer
       project: Projeto
       perfil_worker: Perfil
-      proposal: Proposta
+      proposal:
+        one: Proposta
+        other: Propostas
     attributes:
       employer:
         password: Senha

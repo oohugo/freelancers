@@ -127,6 +127,7 @@ CLOSED: [2021-10-29 sex 10:27]
 :LOGBOOK:
 - State "DONE"       from "NEXT"       [2021-10-29 sex 10:27]
 :END:
+*** TODO Fix routes
 *** TODO Arrumar feedback
 *** TODO /error/ - show procjet acessível sem login!!!
 *** TODO Limit photo size
