@@ -4,7 +4,7 @@ describe 'Worker cancel a proposal' do
   it 'successfully' do
     worker = Worker.create!(email: 'email@email.com', password: '123456')
     create(:perfil_worker, worker: worker)
-    create(:proposal, project: create(:project, title: 'Site de freelancer'), worker: worker)
+    create(:proposal, project: create(:project, title: 'Site de freelancer'), worker: worker, status: :pending)
 
     login_as worker, scope: :worker
     visit root_path

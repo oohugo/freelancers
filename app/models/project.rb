@@ -9,7 +9,7 @@ class Project < ApplicationRecord
   belongs_to :employer
   has_many :proposals, dependent: :destroy
   has_many :feedback_projects, dependent: :destroy
-  has_many :feedback, dependent: :nullify
+  has_many :feedbacks, dependent: :nullify
   has_many :workers, through: :proposals
 
   def deadline_in_the_future

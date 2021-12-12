@@ -1,23 +1,23 @@
 
 <h4>Perfil do <%= @perfil_worker.worker.email %></h4>
 <% if @perfil_worker.photo.attached? %>
-		<img alt="Foto" src="<%= (url_for(@perfil_worker.photo)) %>" >
+  <img alt="Foto" src="<%= (url_for(@perfil_worker.photo)) %>" >
 <% end %>
 <dl>
-		<dt>Nome completo: </dt>
-		<dd><%= @perfil_worker.full_name %></dd>
-		<dt>Nome social:</dt>
-		<dd><%= @perfil_worker.name %></dd>
-		<dt>Data de nascimento: </dt>
-		<dd><%= l @perfil_worker.birthdate %></dd>
-		<dt>Formação:</dt>
-		<dd><%= @perfil_worker.qualification %></dd>
-		<dt>Experiência: </dt>
-		<dd><%= @perfil_worker.background %></dd>
-		<dt>Área de atuação: </dt>
-		<dd><%= @perfil_worker.expertise %></dd>
-		<% if employer_signed_in? %>
-				<dt>Avaliação do freelancer:</dt>
-				<dd><%= @perfil_worker.worker.rating ? @perfil_worker.worker.rating : 'Ainda não avaliado' %> </dd>
-		<% end %>
+  <dt><%= "#{PerfilWorker.human_attribute_name(:full_name)}: " %></dt>
+  <dd><%= @perfil_worker.full_name %></dd>
+  <dt><%= "#{PerfilWorker.human_attribute_name(:name)}: " %></dt>
+  <dd><%= @perfil_worker.name %></dd>
+  <dt><%= "#{PerfilWorker.human_attribute_name(:birthdate)}: " %></dt>
+  <dd><%= l @perfil_worker.birthdate %></dd>
+  <dt><%= "#{PerfilWorker.human_attribute_name(:qualification)}: " %></dt>
+  <dd><%= @perfil_worker.qualification %></dd>
+  <dt><%= "#{PerfilWorker.human_attribute_name(:background)}: " %></dt>
+  <dd><%= @perfil_worker.background %></dd>
+  <dt><%= "#{PerfilWorker.human_attribute_name(:expertise)}: " %></dt>
+  <dd><%= @perfil_worker.expertise %></dd>
+  <% if employer_signed_in? %>
+    <dt>Avaliação do freelancer:</dt>
+    <dd><%= @perfil_worker.worker.rating ? @perfil_worker.worker.rating : 'Ainda não avaliado' %> </dd>
+  <% end %>
 </dl>

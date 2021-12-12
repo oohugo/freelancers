@@ -2,6 +2,7 @@ class ProposalsController < ApplicationController
   before_action :authenticate_employer!, only: %i[accepted rejected]
   before_action :authenticate_worker!, only: %i[create cancel]
   before_action :project_avaliable!, only: :create
+  before_action :set_proposal, only: %i[accepted rejected cancel]
 
   def create
     project = Project.find(params[:project_id])
@@ -13,7 +14,6 @@ class ProposalsController < ApplicationController
   end
 
   def accepted
-    @proposal = Proposal.find(params[:id])
     @proposal.accepted!
     @proposal.date_accepted = Time.zone.today
     flash[:notice] = 'Proposta aceita'
@@ -21,30 +21,16 @@ class ProposalsController < ApplicationController
   end
 
   def rejected
-    @proposal = Proposal.find(params[:id])
     @proposal.rejected!
     flash[:notice] = 'Proposta rejeitada'
     redirect_to @proposal.project
   end
 
   def cancel
-    @proposal = Proposal.find(params[:id])
-    @proposal.canceled!
-    project = @proposal.project
-    @proposal.destroy
-    flash[:notice] = 'Proposta cancelada'
-    redirect_to project
-  end
-
-  def cancel_with_justification
-    @proposal = Proposal.find(params[:id])
-    @proposal.comment = params[:comment]
+    @proposal.comment = params[:comment] if params.key? :comment
     if @proposal.save
       @proposal.canceled!
-      @proposal.destroy
       flash[:notice] = 'Proposta cancelada'
-    else
-      flash[:alert] = @proposal.errors.full_messages.first
     end
     redirect_to @proposal.project
   end
@@ -65,5 +51,9 @@ class ProposalsController < ApplicationController
     else
       flash[:alert] = @proposal.errors.full_messages.first
     end
+  end
+
+  def set_proposal
+    @proposal = Proposal.find(params[:id])
   end
 end

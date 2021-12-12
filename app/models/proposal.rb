@@ -8,6 +8,8 @@ class Proposal < ApplicationRecord
   has_one :employer, through: :project
   enum status: { pending: 0, accepted: 10, rejected: 20, canceled: 30 }
 
+  private
+
   def date_close_future_and_less_than_deadline_of_project
     errors.add(:date_close, 'deve estar no futuro') if date_close && date_close < Time.zone.today
     return unless project && date_close && project.deadline < date_close

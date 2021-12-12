@@ -1,0 +1,48 @@
+<% if worker_signed_in? %>
+  <% @worker_proposal.each do |proposal| unless @worker_proposal.empty? %>
+  <dl class="row">
+    <dt class="col-sm-3"><%  %>: </dt>
+    <dd class="col-sm-9"><%= proposal.description %></dd>
+    <dt class="col-sm-3">Valor por hora:</dt>
+    <dd class="col-sm-9"><%= number_to_currency(proposal.hourly_value) %></dd>
+    <dt class="col-sm-3">Horas disponíveis por semana:</dt>
+    <dd class="col-sm-9"><%= proposal.hours_per_week %></dd>
+    <dt class="col-sm-3">Previsão de conclusão:</dt>
+    <dd class="col-sm-9"><%= l proposal.date_close %></dd>
+    <dt class="col-sm-3">Status: </dt>
+    <dd class="col-sm-9"><%= proposal.status %></dd>
+  </dl>
+  <% if !proposal.canceled? && !proposal.rejected? %>
+    <% if proposal.date_accepted && (proposal.date_accepted < 3.days.ago)  %>
+      <%= form_with url:"/proposals/#{proposal.id}/cancel", method: :post do |form| %>
+	<div>
+	  <%= form.label :comment, 'Justifique o cancelamento' %>
+	  <%= form.text_field :comment %>
+	</div>
+	<%= form.submit 'Cancelar a proposta' %>
+      <% end %>
+    <% else %>
+      <p><%= link_to 'Cancelar a proposta', cancel_proposal_path(proposal), method: :post %></p>
+    <% end %>
+  <% end %>
+<% end %>
+<% end %>
+<% end %>
+
+<% if employer_signed_in? %>
+  <% @employer_proposals_archive.each do |proposal| unless @employer_proposals_archive.empty? %>
+ <dl class="row">
+    <dt class="col-sm-3">Comentário: </dt>
+    <dd class="col-sm-9"><%= proposal.description %></dd>
+    <dt class="col-sm-3">Valor por hora:</dt>
+    <dd class="col-sm-9"><%= number_to_currency(proposal.hourly_value) %></dd>
+    <dt class="col-sm-3">Horas disponíveis por semana:</dt>
+    <dd class="col-sm-9"><%= proposal.hours_per_week %></dd>
+    <dt class="col-sm-3">Previsão de conclusão:</dt>
+    <dd class="col-sm-9"><%= l proposal.date_close %></dd>
+    <dt class="col-sm-3">Status: </dt>
+    <dd class="col-sm-9"><%= proposal.status %></dd>
+  </dl>
+  <% end %>
+  <% end %>
+<% end %>

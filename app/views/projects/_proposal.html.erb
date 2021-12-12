@@ -1,0 +1,57 @@
+<% if worker_signed_in? %>
+  <% if can_worker_make_proposal? @project %>
+    <%= form_with model: [@project, @proposal] do |form| %>
+      <div class="form-floating mb-3">
+	<%= form.text_field :description, placeholder: :description, class: "form-control" %>
+	<%= form.label :description %>
+      </div>
+      <div class="form-floating mb-3">
+	<%= form.number_field :hourly_value, placeholder: :hourly_value, class: "form-control" %>
+	<%= form.label :hourly_value %>
+      </div>
+      <div class="form-floating mb-3">
+	<%= form.number_field :hours_per_week, placeholder: :hours_per_week, class: "form-control" %>
+	<%= form.label :hours_per_week %>
+      </div>
+      <div class="form-floating mb-3">
+	<%= form.date_field :date_close, placeholder: :date_closer, class: "form-control" %>
+	<%= form.label :date_close %>
+      </div>
+      <%= form.submit 'Enviar' %>
+    <% end %>
+  <% end %>
+<% end %>
+<% if employer_signed_in? %>
+  <% if @employer_proposals.reject(&:rejected?).reject(&:canceled?).empty? %>
+    <div class="alert alert-info" role="alert">
+      Ainda não há propostas
+    </div>
+  <% else %>
+    <% @employer_proposals.each do |proposal| %>
+      <div class="card w-75">
+	<div class="card-body">
+	  <h5 class="card-title"><%= proposal.description %></h5>
+	  <dl class="row">
+	    <dt class="col-sm-3"><%= Proposal.human_attribute_name('hourly_value') %>:</dt>
+	    <dd class="col-sm-9"><%= number_to_currency(proposal.hourly_value) %></dd>
+	    <dt class="col-sm-3"><%= Proposal.human_attribute_name('hours_per_week') %>:</dt>
+	    <dd class="col-sm-9"><%= proposal.hours_per_week %></dd>
+	    <dt class="col-sm-3"><%= Proposal.human_attribute_name('date_close') %>:</dt>
+	    <dd class="col-sm-9"><%= l proposal.date_close %></dd>
+	    <dt class="col-sm-3"><%= Proposal.human_attribute_name('status') %>: </dt>
+	    <dd class="col-sm-9"><%= proposal.status %></dd>
+	    <dt class="col-sm-3"><%= PerfilWorker.model_name.human %> do Freelancer:</dt>
+	    <dd class="col-sm-9"><%= link_to proposal.worker.email, proposal.worker.perfil_worker %>
+	    </dd>
+	  </dl>
+	  <% unless @project.finished? %>
+	    <div class="btn-group" role="group">
+	      <%= link_to 'Aceitar proposta', accepted_proposal_path(proposal), method: :post, class:"btn btn-outline-primary card-link" unless proposal.accepted? %>
+	      <%= link_to 'Rejeitar proposta', rejected_proposal_path(proposal), method: :post, class:"btn btn-outline-primary card-link" %>
+	    </div>
+	  <% end %>
+	</div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

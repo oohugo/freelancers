@@ -25,10 +25,11 @@ class ProjectsController < ApplicationController
     @proposal = Proposal.new
     @worker_proposal = Proposal.where('project_id = ? AND worker_id = ?', @project, current_worker) if worker_signed_in?
     @employer_proposals = if @project.suspend?
-                            @project.proposals.select(&:accepted?)
+                            @project.proposals.accepted
                           else
                             @project.proposals.reject(&:rejected?).reject(&:canceled?)
                           end
+    @employer_proposals_archive = @project.proposals.select { |proposal| proposal.rejected? || proposal.canceled? }
   end
 
   def suspend

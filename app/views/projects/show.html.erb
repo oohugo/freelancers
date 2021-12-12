@@ -1,150 +1,53 @@
+
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="project" aria-selected="true"><%= t('.link1') %></button>
+    <button class="nav-link active" id="project-tab" data-bs-toggle="tab" data-bs-target="#project" type="button" role="tab" aria-controls="project" aria-selected="true"><%= t('.link1') %></button>
   </li>
   <li class="nav-item" role="presentation">
-		<% if worker_signed_in? && @project.avaliable? %>
-			<% if @worker_proposal.empty? %>
-				<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false"><%= t('.link2_worker1') %></button>
-			<% else %>
-				<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false"><%= t('.link2_worker2') %></button>
-			<% end%>
-		<% else %>
-			<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false"><%= t('.link2_employer') %></button>
-		<% end %>	
+    <% if worker_signed_in? && @project.avaliable? %>
+      <% if @worker_proposal.empty? %>
+	<button class="nav-link" id="proposal-tab" data-bs-toggle="tab" data-bs-target="#proposal" type="button" role="tab" aria-controls="proposal" aria-selected="false"><%= t('.link2_worker1') %></button>
+      <% else %>
+	<button class="nav-link" id="proposal-tab" data-bs-toggle="tab" data-bs-target="#proposal" type="button" role="tab" aria-controls="proposal" aria-selected="false"><%= t('.link2_worker2') %></button>
+      <% end%>
+    <% else %>
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#proposal" type="button" role="tab" aria-controls="proposal" aria-selected="false"><%= t('.link2_employer') %></button>
+    <% end %>	
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false"><%= t('.link3') %></button>
+    <button class="nav-link" id="archive-tab" data-bs-toggle="tab" data-bs-target="#archive" type="button" role="tab" aria-controls="archive" aria-selected="false"><%= t('.link3') %></button>
   </li>
+  <% if @project.finished? %>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="feedback-tab" data-bs-toggle="tab" data-bs-target="#feedback" type="button" role="tab" aria-controls="feedback" aria-selected="false"><%= t('.link4') %></button>
+    </li>
+  <% end %>
 </ul>
+
+
+
 <div class="tab-content" id="myTabContent">
-	<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-		<dl class="row" >
-			<dt class="col-sm-3"><%= Project.human_attribute_name('title') %>:</dt>
-				<dd class="col-sm-9"><%= @project.title %></dd> 
-				<dt class="col-sm-3"><%= Project.human_attribute_name('description') %>:</dt>
-				<dd class="col-sm-9"><%= @project.description %></dd>
-				<dt class="col-sm-3"><%= Project.human_attribute_name('max_per_hour') %>: </dt>
-				<dd class="col-sm-9"><%= number_to_currency(@project.max_per_hour) %></dd>
-				<dt class="col-sm-3"><%= Project.human_attribute_name('deadline') %>:</dt>
-				<dd class="col-sm-9"><%= l @project.deadline %></dd>
-				<dt class="col-sm-3"><%= Project.human_attribute_name('place') %>: </dt>
-				<dd class="col-sm-9"><%= @project.place == 'remote' ? 'Remoto' : 'Presencial' %></dd>
-				<% if worker_signed_in? %>
-					<dt class="col-sm-3"><%= Employer.human_attribute_name('email') %>: </dt>
-					<dd class="col-sm-9"><%= link_to @project.employer.email, @project.employer %></dd>
-					<dt class="col-sm-3">Avaliação do Empregador:</dt>
-					<dd class="col-sm-9"><%= @project.employer.rating.nil? ? 'Ainda não avaliado' : @project.employer.rating %></dd>
-				<% end %>
-		</dl>
-		<% if employer_signed_in? %>
-			<div class="btn-group" role="group">
-				<% if @project.finished? %>
-					<%= link_to 'Dar feedback aos freelancers', feedback_project_path,  class:"btn btn-outline-primary card-link" %>
-				<% else %>
-					<% if @project.suspend? %>
-						<%= link_to 'Deixar disponível para propostas', avaliable_project_path(@project), method: :post,  class:"btn btn-outline-primary card-link" %>
-					<% else %>
-						<%= link_to 'Suspender propostas', suspend_project_path(@project), method: :post,  class:"btn btn-outline-primary card-link" %>
-					<% end %>
-					<%= link_to 'Finalizar projeto', finished_project_path(@project), method: :post,  class:"btn btn-outline-primary card-link" %>
-				<% end %>
-			</div>
-		<% end %>
-	</div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-		<% if worker_signed_in? %>
-			<% if @project.finished? %>
-				<%= link_to 'Dar feedback ao Empregador e ao projeto', feedback_project_path %>
-			<% else %>
-				<% if @worker_proposal.empty? %>
-					<% if !@project.suspend? %>
-						<%= form_with model: [@project, @proposal] do |form| %>
-							<div class="form-floating mb-3">
-								<%= form.text_field :description, placeholder: :description, class: "form-control" %>
-								<%= form.label :description %>
-							</div>
-							<div class="form-floating mb-3">
-								<%= form.number_field :hourly_value, placeholder: :hourly_value, class: "form-control" %>
-								<%= form.label :hourly_value %>
-							</div>
-							<div class="form-floating mb-3">
-								<%= form.number_field :hours_per_week, placeholder: :hours_per_week, class: "form-control" %>
-								<%= form.label :hours_per_week %>
-							</div>
-							<div class="form-floating mb-3">
-								<%= form.date_field :date_close, placeholder: :date_closer, class: "form-control" %>
-								<%= form.label :date_close %>
-							</div>
-							<%= form.submit 'Enviar' %>
-						<% end %>
-					<% end %>
-				<% else %>
-					<% proposal =  @worker_proposal.take %>
-					<dl class="row">
-						<dt class="col-sm-3">Comentário: </dt>
-						<dd class="col-sm-9"><%= proposal.description %></dd>
-						<dt class="col-sm-3">Valor por hora:</dt>
-						<dd class="col-sm-9"><%= number_to_currency(proposal.hourly_value) %></dd>
-						<dt class="col-sm-3">Horas disponíveis por semana:</dt>
-						<dd class="col-sm-9"><%= proposal.hours_per_week %></dd>
-						<dt class="col-sm-3">Previsão de conclusão:</dt>
-						<dd class="col-sm-9"><%= l proposal.date_close %></dd>
-						<dt class="col-sm-3">Status: </dt>
-						<dd class="col-sm-9"><%= proposal.status %></dd>
-					</dl>
-					<% if proposal.date_accepted && (proposal.date_accepted < 3.days.ago)  %>
-						<%= form_with url:"/proposals/#{proposal.id}/cancel_with_justification", method: :post do |form| %>
-							<p>
-								<%= form.label :comment, 'Justifique o cancelamento' %>
-								<%= form.text_field :comment %>
-							</p>
-							<%= form.submit 'Cancelar a proposta' %>
-						<% end %>
-					<% else %>
-						<p><%= link_to 'Cancelar a proposta', cancel_proposal_path(proposal), method: :post %></p>
-					<% end %>
-				<% end %>
-			<% end %>
-		<% end %>
-		<% if employer_signed_in? %>
-			<% if @employer_proposals.empty? %>
-				<div class="alert alert-info" role="alert">
-					Ainda não há propostas
-				</div>
-			<% else %>
-				<% @employer_proposals.each do |proposal| %>
-					<div class="card w-75">
-						<div class="card-body">
-							<h5 class="card-title"><%= proposal.description %></h5>
-							<dl class="row">
-								<dt class="col-sm-3"><%= Proposal.human_attribute_name('hourly_value') %>:</dt>
-								<dd class="col-sm-9"><%= number_to_currency(proposal.hourly_value) %></dd>
-								<dt class="col-sm-3"><%= Proposal.human_attribute_name('hours_per_week') %>:</dt>
-								<dd class="col-sm-9"><%= proposal.hours_per_week %></dd>
-								<dt class="col-sm-3"><%= Proposal.human_attribute_name('date_close') %>:</dt>
-								<dd class="col-sm-9"><%= l proposal.date_close %></dd>
-								<dt class="col-sm-3"><%= Proposal.human_attribute_name('status') %>: </dt>
-								<dd class="col-sm-9"><%= proposal.status %></dd>
-								<dt class="col-sm-3"><%= PerfilWorker.model_name.human %> do Freelancer:</dt>
-								<dd class="col-sm-9"><%= link_to proposal.worker.email, proposal.worker.perfil_worker %>
-								</dd>
-							</dl>
-							<% unless @project.finished? %>
-								<div class="btn-group" role="group">
-									<%= link_to 'Aceitar proposta', accepted_proposal_path(proposal), method: :post, class:"btn btn-outline-primary card-link" unless proposal.accepted? %>
-									<%= link_to 'Rejeitar proposta', rejected_proposal_path(proposal), method: :post, class:"btn btn-outline-primary card-link" %>
-								</div>
-							<% end %>
-						</div>
-					</div>
-				<% end %>
-			<% end %>
-		<% end %>
-	</div>
-	<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-			
-	</div>
+  <div class="tab-pane fade show active" id="project" role="tabpanel" aria-labelledby="project-tab">
+    <%= render 'project' %>
+  </div>
+  <div class="tab-pane fade" id="proposal" role="tabpanel" aria-labelledby="proposal-tab">
+    <%= render 'proposal' %>
+  </div>
+
+  <div class="tab-pane fade" id="archive" role="tabpanel" aria-labelledby="archive-tab">
+    <%= render 'archive' %>
+  </div>
+  <% if @project.finished? %>
+    <% if worker_signed_in? %>
+      <div class="tab-pane fade" id="feedback" role="tabpanel" aria-labelledby="feedback-tab">
+	<%= link_to 'Dar feedback ao Empregador e ao projeto', feedback_project_path %>
+      </div>
+    <% else %>
+      <% if @project.finished? %>
+	<%= link_to 'Dar feedback aos freelancers', feedback_project_path,  class:"btn btn-outline-primary card-link" %>
+      <% end%>
+    <% end %>
+  <% end %>
 </div>
 
 <%= link_to('Pagina inicial', root_path) %>

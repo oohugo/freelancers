@@ -1,0 +1,30 @@
+<dl class="row" >
+	<dt class="col-sm-3"><%= Project.human_attribute_name('title') %>:</dt>
+	<dd class="col-sm-9"><%= @project.title %></dd> 
+	<dt class="col-sm-3"><%= Project.human_attribute_name('description') %>:</dt>
+	<dd class="col-sm-9"><%= @project.description %></dd>
+	<dt class="col-sm-3"><%= Project.human_attribute_name('max_per_hour') %>: </dt>
+	<dd class="col-sm-9"><%= number_to_currency(@project.max_per_hour) %></dd>
+	<dt class="col-sm-3"><%= Project.human_attribute_name('deadline') %>:</dt>
+	<dd class="col-sm-9"><%= l @project.deadline %></dd>
+	<dt class="col-sm-3"><%= Project.human_attribute_name('place') %>: </dt>
+	<dd class="col-sm-9"><%= @project.place == 'remote' ? 'Remoto' : 'Presencial' %></dd>
+	<% if worker_signed_in? %>
+		<dt class="col-sm-3"><%= Employer.human_attribute_name('email') %>: </dt>
+		<dd class="col-sm-9"><%= link_to @project.employer.email, @project.employer %></dd>
+		<dt class="col-sm-3">Avaliação do Empregador:</dt>
+		<dd class="col-sm-9"><%= @project.employer.rating.nil? ? 'Ainda não avaliado' : @project.employer.rating %></dd>
+	<% end %>
+</dl>
+<% if employer_signed_in? %>
+	<div class="btn-group" role="group">
+		<% if @project.suspend? %>
+			<%= link_to 'Deixar disponível para propostas', avaliable_project_path(@project), method: :post,  class:"btn btn-outline-primary card-link" %>
+		<% else %>
+			<%= link_to 'Suspender propostas', suspend_project_path(@project), method: :post,  class:"btn btn-outline-primary card-link" %>
+		<% end %>
+		<% unless @project.finished? %>
+			<%= link_to 'Finalizar projeto', finished_project_path(@project), method: :post,  class:"btn btn-outline-primary card-link" %>
+		<% end %>
+	</div>
+<% end %>
