@@ -9,12 +9,10 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(params.require(:project).permit(
-                             :title, :description, :max_per_hour, :deadline, :place
-                           ))
+    @project = Project.new(params_project)
     @project.employer = current_employer
     if @project.save
-      flash[:notice] = 'Projeto salvo'
+      flash[:notice] = t('.success')
       redirect_to root_path
     else
       render action: 'new'
@@ -33,15 +31,14 @@ class ProjectsController < ApplicationController
   end
 
   def suspend
-    @project = Project.find(params[:id])
     @project.suspend!
-    flash[:notice] = 'Propostas suspensas'
+    flash[:notice] = t('.success')
     redirect_to @project
   end
 
   def finished
     @project.finished!
-    flash[:notice] = 'Projeto finalizado'
+    flash[:notice] = t('.success')
     redirect_to(@project.proposals.blank? ? root_path : feedback_project_path)
   end
 
@@ -57,7 +54,7 @@ class ProjectsController < ApplicationController
 
   def avaliable
     @project.avaliable!
-    flash[:notice] = 'Projeto disponível'
+    flash[:notice] = t('.success')
     redirect_to project_path(@project)
   end
 
@@ -65,5 +62,11 @@ class ProjectsController < ApplicationController
 
   def set_project
     @project = Project.find(params[:id])
+  end
+
+  def params_project
+    params.require(:project).permit(
+      :title, :description, :max_per_hour, :deadline, :place
+    )
   end
 end

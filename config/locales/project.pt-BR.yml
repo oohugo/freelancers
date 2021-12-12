@@ -1,5 +1,15 @@
 ---
 pt-BR:
+  activerecord:
+    models:
+      project: Projeto
+    attributes:
+      project:
+        title: Título
+        description: Descrição
+        max_per_hour: Valor máximo por hora
+        deadline: Data limite
+        place: Locação
   projects:
     show:
       link1: Projeto
@@ -8,3 +18,11 @@ pt-BR:
       link2_employer: Ver Propostas
       link3: Arquivo de Propostas 
       link4: Feedback
+    create:
+      success: Projeto salvo
+    suspend:
+      success: Propostas suspensas
+    finished:
+      success: Projeto finalizado
+    avaliable:
+      success: Projeto disponível
