@@ -14,9 +14,8 @@ describe 'Employer respond a proposal' do
     click_on 'Aceitar proposta'
 
     expect(page).to have_content('Sou bom em fazer sites')
-    expect(page).to have_content('Proposta aceita')
-    expect(page).to have_content('Status: accepted')
-    expect(page).not_to have_content('Status: pending')
+    expect(page).to have_content('Proposta aceita', count: 2)
+    expect(page).not_to have_content('Status: Proposta pendente')
     expect(page).not_to have_content('Aceitar proposta')
   end
   it 'reject' do
@@ -33,13 +32,13 @@ describe 'Employer respond a proposal' do
     find_link('Rejeitar proposta', href: "#{proposal_path(proposal)}/rejected").click
 
     expect(page).to have_content('Sou bom em fazer sites')
-    expect(page).to have_content('Valor por hora: R$ 7,00')
+    expect(page).to have_content('Valor da hora: R$ 7,00')
     expect(page).to have_content('Horas disponíveis por semana: 20')
-    expect(page).to have_content("Previsão de conclusão: #{I18n.l(date)}")
-    expect(page).to have_content('Proposta rejeitada')
+    expect(page).to have_content("Expectativa de conclusão: #{I18n.l(date)}")
+    expect(page).to have_content('Proposta rejeitada', count: 2)
     expect(page).not_to have_content('Rejeitar proposta')
-    expect(page).not_to have_content('Status: pending')
-    expect(page).not_to have_content('Status: accepted')
+    expect(page).not_to have_content('Status: Proposta pendente')
+    expect(page).not_to have_content('Status: Proposta aceita')
     expect(page).not_to have_content('Aceitar proposta')
   end
 end

@@ -17,14 +17,14 @@
 	<%= form.date_field :date_close, placeholder: :date_closer, class: "form-control" %>
 	<%= form.label :date_close %>
       </div>
-      <%= form.submit 'Enviar' %>
+      <%= form.submit t('projects.show._proposal.submit1') %>
     <% end %>
   <% end %>
 <% end %>
 <% if employer_signed_in? %>
   <% if @employer_proposals.reject(&:rejected?).reject(&:canceled?).empty? %>
     <div class="alert alert-info" role="alert">
-      Ainda não há propostas
+      <%= t('projects.show._proposal.nothing') %>
     </div>
   <% else %>
     <% @employer_proposals.each do |proposal| %>
@@ -39,15 +39,16 @@
 	    <dt class="col-sm-3"><%= Proposal.human_attribute_name('date_close') %>:</dt>
 	    <dd class="col-sm-9"><%= l proposal.date_close %></dd>
 	    <dt class="col-sm-3"><%= Proposal.human_attribute_name('status') %>: </dt>
-	    <dd class="col-sm-9"><%= proposal.status %></dd>
-	    <dt class="col-sm-3"><%= PerfilWorker.model_name.human %> do Freelancer:</dt>
+	    <dd class="col-sm-9"><%= Proposal.human_enum_name(:statusus, proposal.status) %></dd>
+  
+	    <dt class="col-sm-3"><%= PerfilWorker.model_name.human %> <%= t('projects.show._proposal.msg1') %>:</dt>
 	    <dd class="col-sm-9"><%= link_to proposal.worker.email, proposal.worker.perfil_worker %>
 	    </dd>
 	  </dl>
 	  <% unless @project.finished? %>
 	    <div class="btn-group" role="group">
-	      <%= link_to 'Aceitar proposta', accepted_proposal_path(proposal), method: :post, class:"btn btn-outline-primary card-link" unless proposal.accepted? %>
-	      <%= link_to 'Rejeitar proposta', rejected_proposal_path(proposal), method: :post, class:"btn btn-outline-primary card-link" %>
+	      <%= link_to t('projects.show._proposal.link1'), accepted_proposal_path(proposal), method: :post, class:"btn btn-outline-primary card-link" unless proposal.accepted? %>
+	      <%= link_to t('projects.show._proposal.link2'), rejected_proposal_path(proposal), method: :post, class:"btn btn-outline-primary card-link" %>
 	    </div>
 	  <% end %>
 	</div>

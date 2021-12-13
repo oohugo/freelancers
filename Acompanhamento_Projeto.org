@@ -1,7 +1,7 @@
 
 * Acompanhamento
 
-* TODOS[62%]:
+* TODOS[65%]:
 *** DONE Usuário cria uma conta
 CLOSED: [2021-10-07 qui 17:01]
 :LOGBOOK:
@@ -127,14 +127,17 @@ CLOSED: [2021-10-29 sex 10:27]
 :LOGBOOK:
 - State "DONE"       from "NEXT"       [2021-10-29 sex 10:27]
 :END:
+*** DONE Arrumar feedback
+CLOSED: [2021-12-12 dom 17:08]
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2021-12-12 dom 17:08]
+:END:
+*** NEXT Arquivo para propostas e projetos
 *** TODO Fix routes
-*** TODO Arrumar feedback
 *** TODO /error/ - show procjet acessível sem login!!!
 *** TODO Limit photo size
-*** TODO use shoulda _matchers para outros testes
 *** TODO mudar worker _perfil  para ProfileWorker
 *** TODO Data limite é data para inscrições ou data para conclusão?  
-*** TODO Arquivo para propostas e projetos
 *** TODO Arrumar README
 *** TODO Paginação [%]
     talvez com Kaminari

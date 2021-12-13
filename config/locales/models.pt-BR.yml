@@ -12,9 +12,6 @@ pt-BR:
       employer: Empregador
       worker: Freelancer
       perfil_worker: Perfil
-      proposal:
-        one: Proposta
-        other: Propostas
     attributes:
       employer:
         password: Senha
@@ -28,8 +25,3 @@ pt-BR:
         background: Experiência
         expertise: Área de atuação
         photo: Foto
-      proposal:
-        description: Descrição da proposta
-        hourly_value: Valor da hora
-        hours_per_week: Horas disponíveis por semana
-        date_close: Expectativa de conclusão

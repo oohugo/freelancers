@@ -1,0 +1,18 @@
+---
+pt-BR:
+  activerecord:
+    models: 
+      proposal:
+        one: Proposta
+        other: Propostas
+    attributes:
+      proposal:
+        description: Descrição da proposta
+        hourly_value: Valor da hora
+        hours_per_week: Horas disponíveis por semana
+        date_close: Expectativa de conclusão
+        statusus:
+          pending: Proposta pendente
+          accepted: Proposta aceita
+          rejected: Proposta rejeitada
+          canceled: Proposta cancelada

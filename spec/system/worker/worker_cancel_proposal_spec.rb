@@ -11,10 +11,11 @@ describe 'Worker cancel a proposal' do
     click_on 'Site de freelancer'
     click_on 'Cancelar a proposta'
 
-    expect(page).to have_content('Proposta cancelada')
+    expect(page).to have_content('Proposta cancelada', count: 2)
     expect(page).to have_content('Site de freelancer')
     expect(page).to have_content('Descrição da proposta')
     expect(page).not_to have_content('Cancelar a proposta')
+    expect(page).not_to have_content('Status: Proposta pendente')
   end
 
   it 'justification in cancel a proposal after 3 days confirmed' do

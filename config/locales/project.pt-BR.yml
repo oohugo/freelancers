@@ -10,6 +10,10 @@ pt-BR:
         max_per_hour: Valor máximo por hora
         deadline: Data limite
         place: Locação
+        status:
+          suspend: Projeto suspenso
+          avaliable: Projeto disponível
+          finished: Projeto finalizado
   projects:
     show:
       link1: Projeto
@@ -18,6 +22,21 @@ pt-BR:
       link2_employer: Ver Propostas
       link3: Arquivo de Propostas 
       link4: Feedback
+      _project:
+        msg1: Avaliação do Empregador
+        msg2: Ainda não avaliado
+        link1: Deixar disponível para propostas
+        link2: Suspender propostas
+        link3: Finalizar projeto
+      _proposal:
+        submit1: Enviar
+        nothing: Ainda não há propostas
+        msg1: do Freelancer
+        link1: Aceitar proposta
+        link2: Rejeitar proposta
+      _archive:
+        label1: Justifique o cancelamento
+        submit1: Cancelar a proposta
     create:
       success: Projeto salvo
     suspend:
