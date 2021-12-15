@@ -36,7 +36,7 @@ describe 'Employer edit a project' do
     visit root_path
     click_on 'Site de freelancer'
     click_on 'Deixar disponível para propostas'
-    logout(:user)
+    logout(:employer)
     login_as worker, scope: :worker
     visit root_path
     click_on 'Site de freelancer'

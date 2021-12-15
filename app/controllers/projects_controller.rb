@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
 
   def show
     @proposal = Proposal.new
-    @worker_proposal = Proposal.where('project_id = ? AND worker_id = ?', @project, current_worker) if worker_signed_in?
+    @worker_proposals = Proposal.where(project: @project, worker: current_worker) if worker_signed_in?
     @employer_proposals = if @project.suspend?
                             @project.proposals.accepted
                           else

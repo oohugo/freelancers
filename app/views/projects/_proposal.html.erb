@@ -1,5 +1,5 @@
 <% if worker_signed_in? %>
-  <% if can_worker_make_proposal? @project %>
+  <% if @worker_proposals.nil? || @worker_proposals.none? { |proposal| proposal.accepted? || proposal.pending? } %>
     <%= form_with model: [@project, @proposal] do |form| %>
       <div class="form-floating mb-3">
 	<%= form.text_field :description, placeholder: :description, class: "form-control" %>
@@ -19,10 +19,13 @@
       </div>
       <%= form.submit t('projects.show._proposal.submit1') %>
     <% end %>
+  <% else %>
+    <%= render 'show_proposal', proposal: @worker_proposals.filter { |proposal| proposal.accepted? || proposal.pending? }.first %>
   <% end %>
 <% end %>
+
 <% if employer_signed_in? %>
-  <% if @employer_proposals.reject(&:rejected?).reject(&:canceled?).empty? %>
+  <% if @employer_proposals.empty? %>
     <div class="alert alert-info" role="alert">
       <%= t('projects.show._proposal.nothing') %>
     </div>
@@ -40,7 +43,7 @@
 	    <dd class="col-sm-9"><%= l proposal.date_close %></dd>
 	    <dt class="col-sm-3"><%= Proposal.human_attribute_name('status') %>: </dt>
 	    <dd class="col-sm-9"><%= Proposal.human_enum_name(:statusus, proposal.status) %></dd>
-  
+
 	    <dt class="col-sm-3"><%= PerfilWorker.model_name.human %> <%= t('projects.show._proposal.msg1') %>:</dt>
 	    <dd class="col-sm-9"><%= link_to proposal.worker.email, proposal.worker.perfil_worker %>
 	    </dd>

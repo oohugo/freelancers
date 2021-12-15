@@ -28,6 +28,7 @@ describe 'Worker register proposal' do
     expect(page).to have_content('Proposta enviada')
     expect(page).to have_content('Cancelar a proposta')
     expect(page).not_to have_content('Justifique o cancelamento')
+    expect(page).not_to have_content('Enviar')
     expect(page).to have_content('Site para contratar freelancers')
   end
   context 'validations' do

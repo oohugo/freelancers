@@ -5,7 +5,7 @@
   </li>
   <li class="nav-item" role="presentation">
     <% if worker_signed_in? && @project.avaliable? %>
-      <% if @worker_proposal.empty? %>
+      <% if @worker_proposals.empty? %>
 	<button class="nav-link" id="proposal-tab" data-bs-toggle="tab" data-bs-target="#proposal" type="button" role="tab" aria-controls="proposal" aria-selected="false"><%= t('.link2_worker1') %></button>
       <% else %>
 	<button class="nav-link" id="proposal-tab" data-bs-toggle="tab" data-bs-target="#proposal" type="button" role="tab" aria-controls="proposal" aria-selected="false"><%= t('.link2_worker2') %></button>

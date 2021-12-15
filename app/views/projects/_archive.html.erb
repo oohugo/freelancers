@@ -1,26 +1,17 @@
-<% if worker_signed_in? %>
-  <% @worker_proposal.each do |proposal| unless @worker_proposal.empty? %>
-  <%= render 'show_proposal', proposal: proposal %>
-  <% if !proposal.canceled? && !proposal.rejected? %>
-    <% if proposal.date_accepted && (proposal.date_accepted < 3.days.ago)  %>
-      <%= form_with url:"/proposals/#{proposal.id}/cancel", method: :post do |form| %>
-	<div>
-	  <%= form.label :comment, t('projects.show._archive.label1') %>
-	  <%= form.text_field :comment %>
-	</div>
-	<%= form.submit t('projects.show._archive.submit1') %>
-      <% end %>
-    <% else %>
-      <p><%= link_to t('projects.show._archive.submit1'), cancel_proposal_path(proposal), method: :post %></p>
-    <% end %>
+<% if worker_signed_in? && !@worker_proposals.empty? %>
+  <% @worker_proposals.select{ |proposal| proposal.canceled? || proposal.canceled? }.each do |proposal| %>
+    <%= render 'show_proposal', proposal: proposal %>
   <% end %>
-<% end %>
-<% end %>
 <% end %>
 
 <% if employer_signed_in? %>
-  <% @employer_proposals_archive.each do |proposal| unless @employer_proposals_archive.empty? %>
-  <%= render 'show_proposal', proposal: proposal %>
-<% end %>
-<% end %>
+  <% if @employer_proposals_archive.empty? %>
+    <div class="alert alert-info" role="alert">
+      <%= t('projects.show._proposal.nothing') %>
+    </div>
+  <% else %>
+    <% @employer_proposals_archive.each do |proposal| %>
+      <%= render 'show_proposal', proposal: proposal %>
+    <% end %>
+  <% end %>
 <% end %>

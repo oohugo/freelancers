@@ -1,4 +1,6 @@
-<dl class="row">
+<% if proposal %>
+  <dl class="row">
+    <dt class="col-sm-3"><%= Proposal.human_attribute_name('description') %>:</dt>
     <dd class="col-sm-9"><%= proposal.description %></dd>
     <dt class="col-sm-3"><%= Proposal.human_attribute_name('hourly_value') %>:</dt>
     <dd class="col-sm-9"><%= number_to_currency(proposal.hourly_value) %></dd>
@@ -8,4 +10,16 @@
     <dd class="col-sm-9"><%= l proposal.date_close %></dd>
     <dt class="col-sm-3"><%= Proposal.human_attribute_name('status') %>: </dt>
     <dd class="col-sm-9"><%= Proposal.human_enum_name(:statusus, proposal.status) %></dd>
-</dl>
+  </dl>
+  <% if proposal.date_accepted && (proposal.date_accepted < 3.days.ago)  %>
+    <%= form_with url:"/proposals/#{proposal.id}/cancel", method: :post do |form| %>
+      <div>
+	<%= form.label :comment, t('projects.show._archive.label1') %>
+	<%= form.text_field :comment %>
+      </div>
+      <%= form.submit t('projects.show._archive.submit1') %>
+    <% end %>
+  <% elsif proposal.accepted? || proposal.pending? %>
+    <p><%= link_to t('projects.show._archive.submit1'), cancel_proposal_path(proposal), method: :post %></p>
+  <% end %>
+<% end %>
