@@ -2,15 +2,15 @@ FactoryBot.define do
   factory :feedback do
     rating { 2 }
     comment { 'Comentário sobre o projeto' }
-    feedbackable { worker }
+    association :feedbackable, factory: :worker
     project
 
     trait :for_worker do
-      feedbackable { worker }
+      association :feedbackable, factory: :worker
     end
 
     trait :for_employer do
-      feedbackable { employer }
+      association :feedbackable, factory: :employer
     end
   end
 end

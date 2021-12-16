@@ -2,6 +2,8 @@ class Feedback < ApplicationRecord
   belongs_to :feedbackable, polymorphic: true
   belongs_to :project
   after_save :calcule_rating_feedbackable
+  validates :rating, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }
+  validates :rating, :comment, :feedbackable, presence: true
 
   private
 

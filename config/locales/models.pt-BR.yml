@@ -12,6 +12,7 @@ pt-BR:
       employer: Empregador
       worker: Freelancer
       perfil_worker: Perfil
+      feedback: Feedback
     attributes:
       employer:
         password: Senha
@@ -25,3 +26,6 @@ pt-BR:
         background: Experiência
         expertise: Área de atuação
         photo: Foto
+      feedback:
+        comment: Comentário
+        rating: Nota
