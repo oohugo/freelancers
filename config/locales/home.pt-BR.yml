@@ -1,0 +1,15 @@
+---
+pt-BR:
+  home:
+    index:
+      link_to_login_employer: Entrar como empregador
+      link_to_signup_employer: Registrar como empregador
+      link_to_login_worker: Entrar como freelancer
+      link_to_signup_worker: Registrar como freelancer
+      link_to_new_project: Criar Projeto
+      label_search: Pesquisar projetos com 
+      button_search: Buscar
+      avaliables_projects: Projetos disponíveis
+      my_projects_title: Meus Projetos
+      pending: pendentes
+      proposals_tilte: Projetos com propostas
