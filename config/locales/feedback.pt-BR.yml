@@ -1,0 +1,13 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      feedback: Feedback
+    attributes:
+      feedback:
+        comment: Comentário
+        rating: Nota
+        comment_project: Comentário do projeto
+  projects:
+    feedback:
+      rating_between: de 1 a 5

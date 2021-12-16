@@ -30,4 +30,23 @@ describe 'Employer does feedback of employer' do
 
     expect(page).to have_content("Avaliação do freelancer: #{(5 + 2) / 2}")
   end
+
+  it 'bank' do
+    employer = Employer.create!(email: 'employer@email.com', password: '123456')
+    project = create(:project, title: 'Site de freelancer', employer: employer, status: :finished)
+    create(:proposal, project: project, status: :accepted)
+
+    login_as employer, scope: :employer
+    visit root_path
+    click_on 'Site de freelancer'
+    click_link 'Dar feedback aos freelancers'
+    fill_in 'Nota de 1 a 5', with: ''
+    fill_in 'Comentário', with: ''
+    click_on 'Enviar'
+
+    expect(page).not_to have_content('Feedback enviado')
+    expect(page).to have_content('Nota de 1 a 5')
+    expect(page).to have_content('Nota não pode ficar em branco')
+    expect(page).to have_content('Comentário não pode ficar em branco')
+  end
 end

@@ -1,25 +1,26 @@
 <h4>Feedback do projeto: <%= @project.title %></h4>
+<%= render "shared/errors", resource: @feedback %>
 <% if employer_signed_in? %>
-		<% @workers.each do |worker| %>
-				<p><%= worker.email %></p>
-				<%= form_with model:[@project, worker, worker.feedbacks.new] do |form| %> 
-						<%= form.label :rating, 'Nota de 1 a 5' %>
-						<%= form.number_field :rating %>
-						<%= form.label :comment, 'Comentário' %>
-						<%= form.text_field :comment %>
-						<%= form.submit 'Enviar' %>
-				<% end %>
-		<% end %>
+  <% @workers.each do |worker| %>
+    <p><%= worker.email %></p>
+    <%= form_with model:[@project, worker, worker.feedbacks.new] do |form| %> 
+      <%= form.label :rating, Feedback.human_attribute_name('rating') + ' ' + t('.rating_between') %>
+      <%= form.number_field :rating %>
+      <%= form.label :comment %>
+      <%= form.text_field :comment %>
+      <%= form.submit 'Enviar' %>
+    <% end %>
+  <% end %>
 <% end %>
 <% if worker_signed_in? %>
-		<p><%= @project.employer.email %></p>
-		<%= form_with model: [@project, @project.employer, @feedback] do |form| %> 
-				<%= form.label :rating, 'Nota de 1 a 5' %>
-				<%= form.number_field :rating %>
-				<%= form.label :comment, 'Comentário' %>
-				<%= form.text_field :comment %>
-				<%= form.label :comment_project, 'Comentário do projeto' %>
-				<%= form.text_field :comment_project %>
-				<%= form.submit 'Enviar' %>
-		<% end %>
+  <p><%= @project.employer.email %></p>
+  <%= form_with model: [@project, @project.employer, @feedback] do |form| %> 
+    <%= form.label :rating, Feedback.human_attribute_name('rating') + ' ' + t('.rating_between') %>
+    <%= form.number_field :rating %>
+    <%= form.label :comment %>
+    <%= form.text_field :comment %>
+    <%= form.label :comment_project %>
+    <%= form.text_field :comment_project %>
+    <%= form.submit 'Enviar' %>
+  <% end %>
 <% end %>
