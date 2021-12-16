@@ -1,18 +1,10 @@
 ---
 pt-BR:
-  avaliable: Disponível
-  suspend: Suspenso
-  finished: Concluído
-  accepted: Aceito
-  pending: Pendente
-  rejected: Rejeitado
-  canceled: Cancelado 
   activerecord:
     models:
       employer: Empregador
       worker: Freelancer
       perfil_worker: Perfil
-      feedback: Feedback
     attributes:
       employer:
         password: Senha
@@ -26,6 +18,3 @@ pt-BR:
         background: Experiência
         expertise: Área de atuação
         photo: Foto
-      feedback:
-        comment: Comentário
-        rating: Nota

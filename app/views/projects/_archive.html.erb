@@ -7,7 +7,7 @@
 <% if employer_signed_in? %>
   <% if @employer_proposals_archive.empty? %>
     <div class="alert alert-info" role="alert">
-      <%= t('projects.show._proposal.nothing') %>
+      <%= t('.nothing') %>
     </div>
   <% else %>
     <% @employer_proposals_archive.each do |proposal| %>

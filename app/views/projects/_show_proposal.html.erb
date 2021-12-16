@@ -14,12 +14,12 @@
   <% if proposal.date_accepted && (proposal.date_accepted < 3.days.ago)  %>
     <%= form_with url:"/proposals/#{proposal.id}/cancel", method: :post do |form| %>
       <div>
-	<%= form.label :comment, t('projects.show._archive.label1') %>
+	<%= form.label :comment, t('.justify_cancel') %>
 	<%= form.text_field :comment %>
       </div>
-      <%= form.submit t('projects.show._archive.submit1') %>
+      <%= form.submit t('.button_cancel') %>
     <% end %>
   <% elsif proposal.accepted? || proposal.pending? %>
-    <p><%= link_to t('projects.show._archive.submit1'), cancel_proposal_path(proposal), method: :post %></p>
+    <p><%= link_to t('.button_cancel'), cancel_proposal_path(proposal), method: :post %></p>
   <% end %>
 <% end %>

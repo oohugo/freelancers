@@ -11,3 +11,4 @@ pt-BR:
   projects:
     feedback:
       rating_between: de 1 a 5
+      button_send: Enviar

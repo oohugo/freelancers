@@ -17,7 +17,7 @@
 	<%= form.date_field :date_close, placeholder: :date_closer, class: "form-control" %>
 	<%= form.label :date_close %>
       </div>
-      <%= form.submit t('projects.show._proposal.submit1') %>
+      <%= form.submit t('.button_send') %>
     <% end %>
   <% else %>
     <%= render 'show_proposal', proposal: @worker_proposals.filter { |proposal| proposal.accepted? || proposal.pending? }.first %>
@@ -27,7 +27,7 @@
 <% if employer_signed_in? %>
   <% if @employer_proposals.empty? %>
     <div class="alert alert-info" role="alert">
-      <%= t('projects.show._proposal.nothing') %>
+      <%= t('nothing') %>
     </div>
   <% else %>
     <% @employer_proposals.each do |proposal| %>
@@ -44,14 +44,14 @@
 	    <dt class="col-sm-3"><%= Proposal.human_attribute_name('status') %>: </dt>
 	    <dd class="col-sm-9"><%= Proposal.human_enum_name(:statusus, proposal.status) %></dd>
 
-	    <dt class="col-sm-3"><%= PerfilWorker.model_name.human %> <%= t('projects.show._proposal.msg1') %>:</dt>
+	    <dt class="col-sm-3"><%= PerfilWorker.model_name.human %> <%= t('.worker') %>:</dt>
 	    <dd class="col-sm-9"><%= link_to proposal.worker.email, proposal.worker.perfil_worker %>
 	    </dd>
 	  </dl>
 	  <% unless @project.finished? %>
 	    <div class="btn-group" role="group">
-	      <%= link_to t('projects.show._proposal.link1'), accepted_proposal_path(proposal), method: :post, class:"btn btn-outline-primary card-link" unless proposal.accepted? %>
-	      <%= link_to t('projects.show._proposal.link2'), rejected_proposal_path(proposal), method: :post, class:"btn btn-outline-primary card-link" %>
+	      <%= link_to t('.accept') + ' ' + Proposal.model_name.human, accepted_proposal_path(proposal), method: :post, class:"btn btn-outline-primary card-link" unless proposal.accepted? %>
+	      <%= link_to t('.reject') + ' ' + Proposal.model_name.human, rejected_proposal_path(proposal), method: :post, class:"btn btn-outline-primary card-link" %>
 	    </div>
 	  <% end %>
 	</div>

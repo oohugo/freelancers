@@ -1,25 +1,25 @@
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="project-tab" data-bs-toggle="tab" data-bs-target="#project" type="button" role="tab" aria-controls="project" aria-selected="true"><%= t('.link1') %></button>
+    <button class="nav-link active" id="project-tab" data-bs-toggle="tab" data-bs-target="#project" type="button" role="tab" aria-controls="project" aria-selected="true"><%= Project.model_name.human %></button>
   </li>
   <li class="nav-item" role="presentation">
     <% if worker_signed_in? && @project.avaliable? %>
       <% if @worker_proposals.empty? %>
-	<button class="nav-link" id="proposal-tab" data-bs-toggle="tab" data-bs-target="#proposal" type="button" role="tab" aria-controls="proposal" aria-selected="false"><%= t('.link2_worker1') %></button>
+	<button class="nav-link" id="proposal-tab" data-bs-toggle="tab" data-bs-target="#proposal" type="button" role="tab" aria-controls="proposal" aria-selected="false"><%= t('.make') + ' ' + Proposal.model_name.human %></button>
       <% else %>
-	<button class="nav-link" id="proposal-tab" data-bs-toggle="tab" data-bs-target="#proposal" type="button" role="tab" aria-controls="proposal" aria-selected="false"><%= t('.link2_worker2') %></button>
+	<button class="nav-link" id="proposal-tab" data-bs-toggle="tab" data-bs-target="#proposal" type="button" role="tab" aria-controls="proposal" aria-selected="false"><%= t('.see') + ' ' + Proposal.model_name.human %></button>
       <% end%>
     <% else %>
-      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#proposal" type="button" role="tab" aria-controls="proposal" aria-selected="false"><%= t('.link2_employer') %></button>
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#proposal" type="button" role="tab" aria-controls="proposal" aria-selected="false"><%= t('.see') + ' ' + Proposal.model_name.human(count: 2) %></button>
     <% end %>	
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="archive-tab" data-bs-toggle="tab" data-bs-target="#archive" type="button" role="tab" aria-controls="archive" aria-selected="false"><%= t('.link3') %></button>
+    <button class="nav-link" id="archive-tab" data-bs-toggle="tab" data-bs-target="#archive" type="button" role="tab" aria-controls="archive" aria-selected="false"><%= t('.archive') + ' ' + Proposal.model_name.human %></button>
   </li>
   <% if @project.finished? %>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="feedback-tab" data-bs-toggle="tab" data-bs-target="#feedback" type="button" role="tab" aria-controls="feedback" aria-selected="false"><%= t('.link4') %></button>
+      <button class="nav-link" id="feedback-tab" data-bs-toggle="tab" data-bs-target="#feedback" type="button" role="tab" aria-controls="feedback" aria-selected="false"><%= t('.feedback') %></button>
     </li>
   <% end %>
 </ul>
@@ -40,14 +40,14 @@
   <% if @project.finished? %>
     <% if worker_signed_in? %>
       <div class="tab-pane fade" id="feedback" role="tabpanel" aria-labelledby="feedback-tab">
-	<%= link_to 'Dar feedback ao Empregador e ao projeto', feedback_project_path %>
+	<%= link_to t('.feedback_link_to_employer'), feedback_project_path %>
       </div>
     <% else %>
       <% if @project.finished? %>
-	<%= link_to 'Dar feedback aos freelancers', feedback_project_path,  class:"btn btn-outline-primary card-link" %>
+	<%= link_to t('.feedback_link_to_worker'), feedback_project_path,  class:"btn btn-outline-primary card-link" %>
       <% end%>
     <% end %>
   <% end %>
 </div>
 
-<%= link_to('Pagina inicial', root_path) %>
+<%= link_to t('links.initial_page'), root_path %>

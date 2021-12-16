@@ -1,11 +1,11 @@
-<h4>Projetos com <%= @query %></h4>
+<h4><%= Project.model_name.human + ' ' + t('.title') + ' ' + @query %></h4>
 <% if @projects.nil? %>
-		<p>Não há projetos com <%= @query %> </p>
+  <p><%= t('.no_projects') + ' ' + @query %> </p>
 <% else %>
-		<ul>
-				<% @projects.each do |project| %>
-						<li><%= link_to project.title, project %></li>
-				<% end %>
-		</ul>
+  <ul>
+    <% @projects.each do |project| %>
+      <li><%= link_to project.title, project %></li>
+    <% end %>
+  </ul>
 <% end %>
-<%= link_to('Pagina inicial', root_path) %>
+<%= link_to t('links.initial_page'), root_path %>

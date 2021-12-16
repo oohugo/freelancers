@@ -1,5 +1,9 @@
 ---
 pt-BR:
+  project:
+    place:
+      remote: Remoto
+      presential: Presencial
   activerecord:
     models:
       project: Projeto
@@ -15,28 +19,30 @@ pt-BR:
           avaliable: Projeto disponível
           finished: Projeto finalizado
   projects:
+    new:
+      create: Criar
     show:
-      link1: Projeto
-      link2_worker1: Fazer Proposta
-      link2_worker2: Ver Proposta
-      link2_employer: Ver Propostas
-      link3: Arquivo de Propostas 
-      link4: Feedback
-      _project:
-        msg1: Avaliação do Empregador
-        msg2: Ainda não avaliado
-        link1: Deixar disponível para propostas
-        link2: Suspender propostas
-        link3: Finalizar projeto
-      _proposal:
-        submit1: Enviar
-        nothing: Ainda não há propostas
-        msg1: do Freelancer
-        link1: Aceitar proposta
-        link2: Rejeitar proposta
-      _archive:
-        label1: Justifique o cancelamento
-        submit1: Cancelar a proposta
+      make: Fazer
+      see: Ver
+      archive: Arquivo de 
+      feedback: Feedback
+      feedback_link_to_employer: Dar feedback ao Empregador e ao projeto
+      feedback_link_to_worker: Dar feedback aos freelancers
+    project:
+      rating_employer: Avaliação do Empregador
+      no_rating: Ainda não avaliado
+      avaliable_project: Deixar disponível para propostas 
+      suspend_project: Suspender propostas
+      finished_project: Finalizar projeto
+    proposal:
+      button_send: Enviar
+      nothing: Ainda não há propostas
+      worker: do Freelancer
+      accept: Aceitar
+      reject: Rejeitar
+    show_proposal:
+      justify_cancel: Justifique o cancelamento
+      button_cancel: Cancelar a proposta
     create:
       success: Projeto salvo
     suspend:
@@ -45,3 +51,6 @@ pt-BR:
       success: Projeto finalizado
     avaliable:
       success: Projeto disponível
+    search:
+      title: com
+      no_projects: Não há projetos com

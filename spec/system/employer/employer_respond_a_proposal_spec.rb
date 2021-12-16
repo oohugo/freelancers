@@ -11,12 +11,12 @@ describe 'Employer respond a proposal' do
     login_as employer, scope: :employer
     visit root_path
     click_on 'Site de freelancer'
-    click_on 'Aceitar proposta'
+    click_on 'Aceitar Proposta'
 
     expect(page).to have_content('Sou bom em fazer sites')
     expect(page).to have_content('Proposta aceita', count: 2)
     expect(page).not_to have_content('Status: Proposta pendente')
-    expect(page).not_to have_content('Aceitar proposta')
+    expect(page).not_to have_content('Aceitar Proposta')
   end
   it 'reject' do
     employer = create(:employer)
@@ -29,16 +29,16 @@ describe 'Employer respond a proposal' do
     login_as employer, scope: :employer
     visit root_path
     click_on 'Site de freelancer'
-    find_link('Rejeitar proposta', href: "#{proposal_path(proposal)}/rejected").click
+    find_link('Rejeitar Proposta', href: "#{proposal_path(proposal)}/rejected").click
 
     expect(page).to have_content('Sou bom em fazer sites')
     expect(page).to have_content('Valor da hora: R$ 7,00')
     expect(page).to have_content('Horas disponíveis por semana: 20')
     expect(page).to have_content("Expectativa de conclusão: #{I18n.l(date)}")
     expect(page).to have_content('Proposta rejeitada', count: 2)
-    expect(page).not_to have_content('Rejeitar proposta')
+    expect(page).not_to have_content('Rejeitar Proposta')
     expect(page).not_to have_content('Status: Proposta pendente')
     expect(page).not_to have_content('Status: Proposta aceita')
-    expect(page).not_to have_content('Aceitar proposta')
+    expect(page).not_to have_content('Aceitar Proposta')
   end
 end

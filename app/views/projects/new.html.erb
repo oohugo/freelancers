@@ -1,36 +1,36 @@
-<h1>Criar Projeto</h1>
+<h1><%= t('.create') + ' ' + Project.model_name.human %></h1>
 <% unless @project.errors.empty? %>
-	<% @project.errors.full_messages.each do |error| %>
-		<p><%= error %></p>
-		<% end %>
+  <% @project.errors.full_messages.each do |error| %>
+    <p><%= error %></p>
+  <% end %>
 <% end %>
 <%= form_with(model: @project) do |form| %>
-		<div class="mb-3">
-				<%= form.label :title, class:"form-label" %>
-				<%= form.text_field :title, class:"form-control" %>
-		</div>
-		<div class="mb-3">
-				<%= form.label :description, class:"form-label" %>
-				<%= form.text_field :description, class:"form-control" %></p>
-		</div>
-		<div class="mb-3">
-				<%= form.label :max_per_hour, class:"form-label" %>
-				<%= form.number_field :max_per_hour, class:"form-control" %></p>
-		</div>
-		<div class="mb-3">
-				<%= form.label :deadline, class:"form-label" %>
-				<%= form.date_field :deadline, class:"form-control" %></p>
-		</div>
-		<div class="mb-3">
-				<%= form.label :place %>
-				<div class="form-check">
-						<%= form.radio_button :place, "remote", class:"form-check-input" %>
-						<%= form.label :place_remote, 'Remoto', class:"form-check-label" %>
-				</div>
-				<div class="form-check">
-						<%= form.radio_button :place, "presential", class:"form-check-input" %>
-						<%= form.label :place_presential, 'Presencial', class:"form-check-label" %>
-				</div>
-		</div>
-		<%= form.submit 'Criar', class:"btn btn-primary" %>
+  <div class="mb-3">
+    <%= form.label :title, class:"form-label" %>
+    <%= form.text_field :title, class:"form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :description, class:"form-label" %>
+    <%= form.text_field :description, class:"form-control" %></p>
+  </div>
+  <div class="mb-3">
+    <%= form.label :max_per_hour, class:"form-label" %>
+    <%= form.number_field :max_per_hour, class:"form-control" %></p>
+  </div>
+  <div class="mb-3">
+    <%= form.label :deadline, class:"form-label" %>
+    <%= form.date_field :deadline, class:"form-control" %></p>
+  </div>
+  <div class="mb-3">
+    <%= form.label :place %>
+    <div class="form-check">
+      <%= form.radio_button :place, "remote", class:"form-check-input" %>
+      <%= form.label :place_remote, t('project.place.remote'), class:"form-check-label" %>
+    </div>
+    <div class="form-check">
+      <%= form.radio_button :place, "presential", class:"form-check-input" %>
+      <%= form.label :place_presential, t('project.place.presential'), class:"form-check-label" %>
+    </div>
+  </div>
+  <%= form.submit t('.create'), class:"btn btn-primary" %>
 <% end %>

@@ -8,23 +8,23 @@
   <dt class="col-sm-3"><%= Project.human_attribute_name('deadline') %>:</dt>
   <dd class="col-sm-9"><%= l @project.deadline %></dd>
   <dt class="col-sm-3"><%= Project.human_attribute_name('place') %>: </dt>
-  <dd class="col-sm-9"><%= @project.place == 'remote' ? 'Remoto' : 'Presencial' %></dd>
+  <dd class="col-sm-9"><%= @project.place == 'remote' ? t('project.place.remote') : t('project.place.presential') %></dd>
   <% if worker_signed_in? %>
     <dt class="col-sm-3"><%= Employer.human_attribute_name('email') %>: </dt>
     <dd class="col-sm-9"><%= link_to @project.employer.email, @project.employer %></dd>
-    <dt class="col-sm-3"><%= t('projects.show._project.msg1') ++ ':'%></dt>
-    <dd class="col-sm-9"><%= @project.employer.rating.nil? ? t('projects.show._project.msg2') : @project.employer.rating %></dd>
+    <dt class="col-sm-3"><%= t('.rating_employer') ++ ':'%></dt>
+    <dd class="col-sm-9"><%= @project.employer.rating.nil? ? t('.no_rating') : @project.employer.rating %></dd>
   <% end %>
 </dl>
 <% if employer_signed_in? %>
   <div class="btn-group" role="group">
     <% if @project.suspend? %>
-      <%= link_to t('projects.show._project.link1'), avaliable_project_path(@project), method: :post,  class:"btn btn-outline-primary card-link" %>
+      <%= link_to t('.avaliable_project'), avaliable_project_path(@project), method: :post,  class:"btn btn-outline-primary card-link" %>
     <% else %>
-      <%= link_to t('projects.show._project.link2'), suspend_project_path(@project), method: :post,  class:"btn btn-outline-primary card-link" %>
+      <%= link_to t('.suspend_project'), suspend_project_path(@project), method: :post,  class:"btn btn-outline-primary card-link" %>
     <% end %>
     <% unless @project.finished? %>
-      <%= link_to t('projects.show._project.link3'), finished_project_path(@project), method: :post,  class:"btn btn-outline-primary card-link" %>
+      <%= link_to t('.finished_project'), finished_project_path(@project), method: :post,  class:"btn btn-outline-primary card-link" %>
     <% end %>
   </div>
 <% end %>
