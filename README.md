@@ -6,9 +6,9 @@ No terminal, clone o projeto.
 
 	git@github.com:oohugo/freelancers.git
    
-Instale as gems necessarias 
+Execute o setup
 
-    bundle install
+	bin/setup
 
 Adicionar seeds
 
@@ -27,4 +27,4 @@ Rodar os testes
 
 ### Versions
 - Ruby version: 3.0.2
-- Rails version: 6.1.4.1
+- Rails version: 7.0.0
