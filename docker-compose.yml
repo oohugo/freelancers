@@ -1,0 +1,19 @@
+version: '1'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: bin/rails server -b 0.0.0.0
+    ports:
+      - '3000:3000'
+    links:
+      - db
+  db:
+    image: nouchka/sqlite3:latest
+    restart: always
+    ports:
+      - '89:89'
+networks:
+  default:

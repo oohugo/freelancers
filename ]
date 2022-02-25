@@ -1,0 +1,27 @@
+FROM ruby:alpine
+RUN apk -U add --no-cache \
+ build-base \
+ git \
+ mysql-dev \
+ mysql-client \
+ libxml2-dev \
+ libxslt-dev \
+ nodejs \
+ yarn \
+ imagemagick \
+ tzdata \
+ less \
+ bash \
+ && rm -rf /var/cache/apk/*
+
+RUN ruby --version
+WORKDIR /app
+COPY Gemfile /app/
+RUN bundle install
+RUN rails new teste_apartment -d mysql
+
+RUN export MYSQL_ROOT_PASSWORD=
+RUN export MYSQL_ALLOW_EMPTY_PASSWORD=true
+# COPY entrypoint.sh /usr/bin/
+# RUN chmod +x /usr/bin/entrypoint.sh
+EXPOSE 2999
