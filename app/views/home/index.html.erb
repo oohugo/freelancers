@@ -1,20 +1,21 @@
-
 <nav>
   <ul class="nav nav-tabs">
     <% unless employer_signed_in? || worker_signed_in? %>
-      <li class="nav-item ">
-	<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Empregador</a>
-	<ul class="dropdown-menu">
-	  <li><%= link_to t('.link_to_login_employer'), new_employer_session_path, class: 'dropdown-item' %></li>
-	  <li><%= link_to t('.link_to_signup_employer'), new_employer_registration_path, class: 'dropdown-item' %></li>
-	</ul>
+      <li class="nav-item">
+        <div data-controller="dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" data-action="onmouseover->dropdown#toggle">Empregador</a>
+          <ul class="dropdown-menu" data-dropdown-target="dropdown">
+            <li><%= link_to t('.link_to_login_employer'), new_employer_session_path, class: 'dropdown-item' %></li>
+            <li><%= link_to t('.link_to_signup_employer'), new_employer_registration_path, class: 'dropdown-item' %></li>
+          </ul>
+        </div>
       </li>
       <li class="nav-item dropdown">
-	<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"> Freelancer</a>
-	<ul class="dropdown-menu">
-	  <li><%= link_to t('.link_to_login_worker'), new_worker_session_path, class: "dropdown-item" %></li>
-	  <li><%= link_to t('.link_to_signup_worker'), new_worker_registration_path, class: "dropdown-item" %></li>
-	</ul>
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"> Freelancer</a>
+        <ul class="dropdown-menu">
+          <li><%= link_to t('.link_to_login_worker'), new_worker_session_path, class: "dropdown-item" %></li>
+          <li><%= link_to t('.link_to_signup_worker'), new_worker_registration_path, class: "dropdown-item" %></li>
+        </ul>
       </li>
     <% end %>
   </ul>
@@ -41,16 +42,16 @@
     <% end %>
     <% @projects.each do |project| %>
       <%= link_to project, class:"list-group-item list-group-item-action", 'aria-current':"true" do %>
-	<div class="d-flex w-100 justify-content-between">
-	  <h5 class="mb-1"><%= project.title %></h5>
-	  <% if employer_signed_in? %>
-	    <small><%= Proposal.model_name.human(count: 2) + ' ' + t('.pending') + ': ' + project.proposals.where(status: :pending).count.to_s %></small>
-	  <% else %>
-	    <small><%= Project.human_attribute_name('max_per_hour') + ': ' + number_to_currency(project.max_per_hour) %></small>
-	  <% end %>
-	</div>
-	<p class="mb-1"><%= project.description %></p>
-	<small><%= Project.human_attribute_name('deadline') + ' : ' + l(project.deadline) %></small>
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1"><%= project.title %></h5>
+          <% if employer_signed_in? %>
+            <small><%= Proposal.model_name.human(count: 2) + ' ' + t('.pending') + ': ' + project.proposals.where(status: :pending).count.to_s %></small>
+          <% else %>
+            <small><%= Project.human_attribute_name('max_per_hour') + ': ' + number_to_currency(project.max_per_hour) %></small>
+          <% end %>
+        </div>
+        <p class="mb-1"><%= project.description %></p>
+        <small><%= Project.human_attribute_name('deadline') + ' : ' + l(project.deadline) %></small>
       <% end %>
     <% end %>
   </div>
@@ -61,17 +62,22 @@
   <div class="list-group">
     <% @projects_worker.each do |project| %>
       <%= link_to project, class:"list-group-item list-group-item-action", 'aria-current':"true" do %>
-	<div class="d-flex w-100 justify-content-between">
-	  <h5 class="mb-1"><%= project.title %></h5>
-	  <% if employer_signed_in? %>
-	    <small><%= Proposal.model_name.human(count: 2) + ' ' + t('.pending') + ': ' + project.proposals.where(status: :pending).count.to_s %></small>
-	  <% else %>
-	    <small><%= Project.human_attribute_name('max_per_hour') + ': ' + number_to_currency(project.max_per_hour) %></small>
-	  <% end %>
-	</div>
-	<p class="mb-1"><%= project.description %></p>
-	<small><%= Project.human_attribute_name('deadline') + ' : ' + l(project.deadline) %></small>
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1"><%= project.title %></h5>
+          <% if employer_signed_in? %>
+            <small><%= Proposal.model_name.human(count: 2) + ' ' + t('.pending') + ': ' + project.proposals.where(status: :pending).count.to_s %></small>
+          <% else %>
+            <small><%= Project.human_attribute_name('max_per_hour') + ': ' + number_to_currency(project.max_per_hour) %></small>
+          <% end %>
+        </div>
+        <p class="mb-1"><%= project.description %></p>
+        <small><%= Project.human_attribute_name('deadline') + ' : ' + l(project.deadline) %></small>
       <% end %>
     <% end %>
   </div>
 <% end %>
+<div data-controller="hello">
+  <h1 data-target="hello.output"></h1>
+  <input type="text">
+  <button>Greet</button>
+</div>
