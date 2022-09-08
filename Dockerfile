@@ -17,11 +17,8 @@ RUN apk -U add --no-cache \
 
 WORKDIR /app
 COPY . /app/
-# COPY Gemfile /app/
 
 RUN yarn install
 RUN bundle install
 
-# COPY entrypoint.sh /usr/bin/
-# RUN chmod +x /usr/bin/entrypoint.sh
-EXPOSE 3000
+EXPOSE 5000

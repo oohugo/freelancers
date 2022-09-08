@@ -7,13 +7,17 @@ services:
       dockerfile: ./Dockerfile
     command: bin/rails server -b 0.0.0.0
     ports:
-      - '3000:3000'
+      - '5000:3000'
     links:
       - db
+    volumes:
+      - ./app:cache
   db:
     image: nouchka/sqlite3:latest
     restart: always
     ports:
       - '89:89'
+    volumes:
+      - ./sqlite3:/docker-entrypoint-initdb.d
 networks:
   default:
